@@ -1,0 +1,10 @@
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;
+--radius-sm:8px;--radius-md:16px;--radius-lg:28px;--radius-xl:40px;--radius-pill:999px;
+--stroke-thin:calc(var(--stroke-weight-1-78) * 1px);
+--shadow-card:0 2px 8px rgba(16,47,31,0.08),0 12px 32px rgba(16,47,31,0.08);
+--shadow-pop:0 8px 24px rgba(16,47,31,0.16);
+--ease-standard:cubic-bezier(.22,.68,0,1); /* @kind other */
+--dur-fast:140ms; /* @kind other */
+--dur-med:260ms; /* @kind other */
+}

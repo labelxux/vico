@@ -1,0 +1,22 @@
+:root{
+/* raw brand palette (also mirrored in fig-tokens.css from Figma Variables) */
+--white:#ffffff;
+--black:#000000;
+--deep-green-ink:rgb(16,47,31);
+/* semantic aliases */
+--surface-page:var(--cream);
+--surface-card:var(--white);
+--surface-inverse:var(--deep-green);
+--surface-tint:var(--pink-salmaon);
+--surface-tint-strong:var(--rose);
+--text-primary:var(--deep-green);
+--text-inverse:var(--cream);
+--text-muted:var(--sage-green);
+--brand-primary:var(--deep-green);
+--brand-primary-ink:var(--deep-green-ink);
+--brand-accent:var(--tomato);
+--brand-secondary:var(--sage-green);
+--border-subtle:var(--light-sage);
+--border-strong:var(--deep-green);
+--focus-ring:var(--tomato);
+}

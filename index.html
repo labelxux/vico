@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>VICO — משהו טוב מתחמם כאן</title>
+<meta name="description" content="איטלקייה שכונתית חדשה ליד הפארק. פיצה, פסטה, יין — כשר. הצטרפו לשולחן הראשון של VICO והיו הראשונים לדעת מתי פותחים." />
+<meta name="theme-color" content="#133932" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="VICO — משהו טוב מתחמם כאן" />
+<meta property="og:description" content="איטלקייה שכונתית חדשה ליד הפארק. Pizza · Pasta · Wine." />
+<link rel="icon" type="image/svg+xml" href="assets/favicon-cream-on-green.svg" />
+
+<!-- VICO design-system tokens -->
+<link rel="stylesheet" href="ds/tokens/fig-tokens.css" />
+<link rel="stylesheet" href="ds/tokens/colors.css" />
+<link rel="stylesheet" href="ds/tokens/typography.css" />
+<link rel="stylesheet" href="ds/tokens/spacing.css" />
+
+<style>
+/* ---------- Reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-body);
+  color:var(--deep-green);
+  background:var(--cream);
+  overflow-x:hidden;
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:var(--deep-green)}
+a:hover{color:var(--tomato)}
+
+/* ---------- Motion ---------- */
+@keyframes vico-drift{from{transform:scale(1.06) translateY(0.6%)}to{transform:scale(1.06) translateY(-1.4%)}}
+@keyframes vico-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.rise{animation:vico-rise .9s var(--ease-standard,ease) both}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* ---------- Design-system components ---------- */
+/* Button */
+.btn{
+  --btn-bg:var(--tomato);
+  --btn-fg:var(--white);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-body);font-weight:800;line-height:1;
+  letter-spacing:.01em;
+  border:none;border-radius:var(--radius-pill);
+  background:var(--btn-bg);color:var(--btn-fg);
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:filter var(--dur-fast,140ms) var(--ease-standard,ease),
+             transform var(--dur-fast,140ms) var(--ease-standard,ease),
+             box-shadow var(--dur-fast,140ms) var(--ease-standard,ease);
+  box-shadow:0 8px 22px rgba(239,64,69,.28);
+}
+.btn:hover{filter:brightness(.92);color:var(--btn-fg)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.btn--lg{font-size:17px;padding:17px 34px}
+.btn--md{font-size:15px;padding:13px 24px}
+.btn--block{width:100%}
+.btn--secondary{
+  --btn-bg:transparent;--btn-fg:var(--deep-green);
+  border:var(--stroke-thin) solid var(--deep-green);
+  box-shadow:none;
+}
+.btn--secondary:hover{--btn-bg:var(--deep-green);--btn-fg:var(--cream);filter:none}
+
+/* Input */
+.field{display:flex;flex-direction:column;gap:8px}
+.field__label{font:700 13px/1.2 var(--font-body);letter-spacing:.02em;color:var(--deep-green)}
+.field__input{
+  width:100%;font:400 17px/1.3 var(--font-body);color:var(--deep-green);
+  background:var(--white);
+  border:var(--stroke-thin) solid var(--light-sage);
+  border-radius:var(--radius-md);
+  padding:15px 16px;
+  transition:border-color var(--dur-fast,140ms) var(--ease-standard,ease),
+             box-shadow var(--dur-fast,140ms) var(--ease-standard,ease);
+}
+.field__input::placeholder{color:var(--sage-green);opacity:.7}
+.field__input:focus{
+  outline:none;border-color:var(--deep-green);
+  box-shadow:0 0 0 3px rgba(19,57,50,.12);
+}
+.field__input[type="tel"]{direction:ltr;text-align:right}
+
+/* Checkbox */
+.check{display:flex;align-items:flex-start;gap:12px;cursor:pointer;user-select:none}
+.check input{position:absolute;opacity:0;width:1px;height:1px}
+.check__box{
+  flex:0 0 auto;width:24px;height:24px;margin-top:1px;
+  border:var(--stroke-thin) solid var(--sage-green);
+  border-radius:var(--radius-sm);
+  background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  transition:background var(--dur-fast,140ms) var(--ease-standard,ease),
+             border-color var(--dur-fast,140ms) var(--ease-standard,ease);
+}
+.check__box svg{width:15px;height:15px;opacity:0;transform:scale(.6);
+  transition:opacity var(--dur-fast,140ms) ease,transform var(--dur-fast,140ms) var(--ease-standard,ease)}
+.check input:checked + .check__box{background:var(--deep-green);border-color:var(--deep-green)}
+.check input:checked + .check__box svg{opacity:1;transform:scale(1)}
+.check input:focus-visible + .check__box{outline:3px solid var(--focus-ring);outline-offset:2px}
+.check__label{font:400 15px/1.45 var(--font-body);color:var(--sage-green)}
+
+/* Image placeholder slot (brand placeholder convention) */
+.slot{
+  position:relative;overflow:hidden;background:var(--deep-green);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.slot::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(103,133,124,.35), transparent 60%),
+    repeating-linear-gradient(135deg, rgba(175,193,187,.06) 0 14px, transparent 14px 28px);
+}
+.slot__inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:24px;max-width:82%}
+.slot__mark{font:400 34px/1 var(--font-wordmark);color:var(--light-sage);opacity:.85;letter-spacing:.04em}
+.slot__tag{font:700 11px/1 var(--font-body);letter-spacing:.28em;text-transform:uppercase;color:var(--light-sage);opacity:.85}
+.slot__cap{font:400 15px/1.5 var(--font-body);color:var(--cream);opacity:.9}
+.slot--light{background:var(--pink-salmaon)}
+.slot--light::before{background:
+    radial-gradient(120% 90% at 50% 0%, rgba(251,203,205,.6), transparent 60%),
+    repeating-linear-gradient(135deg, rgba(103,133,124,.07) 0 14px, transparent 14px 28px)}
+.slot--light .slot__mark{color:var(--tomato);opacity:.55}
+.slot--light .slot__tag{color:var(--sage-green)}
+.slot--light .slot__cap{color:var(--sage-green)}
+
+/* ---------- Layout helpers ---------- */
+.section{position:relative}
+.wrap{max-width:780px;margin:0 auto}
+
+/* ===== 01 · Hero ===== */
+.hero{
+  position:relative;min-height:100dvh;display:flex;flex-direction:column;
+  background:var(--deep-green);overflow:hidden;
+}
+.hero__media{position:absolute;inset:0;animation:vico-drift 22s ease-in-out infinite alternate}
+.hero__media .slot{position:absolute;inset:0;align-items:flex-start;justify-content:center}
+.hero__media .slot__inner{margin-top:clamp(96px,20vh,220px)}
+.hero__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(19,57,50,.30) 0%,rgba(19,57,50,.04) 42%,rgba(19,57,50,.62) 100%)}
+.hero__topbar{
+  position:absolute;top:0;right:0;left:0;z-index:3;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 22px;pointer-events:none;
+}
+.hero__logo{height:38px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.35))}
+.hero__labels{display:flex;flex-direction:row;align-items:center;gap:10px;direction:ltr}
+.hero__labels .lab{font:700 15px/1 var(--font-body);letter-spacing:.22em;color:var(--cream);opacity:.92;text-transform:uppercase}
+.hero__labels .lab--serif{font:400 22px/1 var(--font-serif);font-style:italic;letter-spacing:.02em;text-transform:none;opacity:.95}
+.hero__labels .star{color:var(--cream);opacity:.8;font-size:12px}
+.hero__content{
+  position:relative;z-index:2;margin-top:auto;
+  padding:0 24px calc(56px + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:flex-start;gap:16px;
+  color:var(--cream);
+}
+.hero__eyebrow{font:700 13px/1 var(--font-body);letter-spacing:.12em;opacity:.92}
+.hero__title{margin:0;font-family:var(--font-body);font-weight:900;
+  font-size:clamp(52px,13vw,124px);line-height:.98;letter-spacing:-.01em;text-wrap:balance}
+.hero__cta{margin-top:6px}
+
+/* ===== 02 · The feeling ===== */
+.feel{padding:clamp(88px,16vw,150px) 24px clamp(72px,12vw,120px);background:var(--cream)}
+.feel__copy{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:4px}
+.feel__line{font-family:var(--font-body);font-weight:700;color:var(--sage-green);
+  font-size:clamp(24px,5.8vw,40px);line-height:1.45}
+.feel__note{margin-top:26px;font:400 18px/1.6 var(--font-body);color:var(--sage-green)}
+.feel__rail{
+  width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  margin-top:56px;display:flex;gap:14px;overflow-x:auto;padding:0 14px 6px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.feel__rail::-webkit-scrollbar{display:none}
+.feel__rail .slot{
+  flex:0 0 auto;width:min(78vw,620px);height:min(60vw,460px);
+  border-radius:var(--radius-lg);scroll-snap-align:center;
+}
+
+/* ===== Wave divider ===== */
+.wave{height:120px;background:var(--cream);position:relative;overflow:hidden}
+.wave__band{position:absolute;inset:0;
+  background:url("assets/bottom-bg-with-waves-sage-green.svg") center bottom / auto 100% repeat-x}
+
+/* ===== 03 · A taste ===== */
+.taste{position:relative;background:var(--sage-green);color:var(--cream);
+  padding:clamp(84px,14vw,130px) 40px;overflow:hidden;min-height:520px}
+.taste__watermark{position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;gap:0;opacity:1}
+.taste__wm-line{font-family:var(--font-wordmark);color:var(--deep-green);opacity:.16;
+  font-size:clamp(84px,17vw,170px);line-height:.92;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.02em;direction:ltr}
+.taste__wm-line:nth-child(1){align-self:flex-start;margin-inline-start:2vw}
+.taste__wm-line:nth-child(2){align-self:center}
+.taste__wm-line:nth-child(3){align-self:flex-start;margin-inline-start:8vw}
+.taste__wm-line:nth-child(4){align-self:flex-end;margin-inline-end:4vw}
+.taste__list{position:relative;z-index:1;max-width:580px;margin:0 auto;
+  display:flex;flex-direction:column;gap:38px;align-items:flex-start}
+.taste__item{display:flex;flex-direction:column;gap:8px}
+.taste__name{font-family:var(--font-body);font-weight:900;
+  font-size:clamp(26px,6vw,34px);line-height:1.1}
+.taste__status{font:700 13px/1 var(--font-body);letter-spacing:.06em;color:var(--light-sage)}
+
+/* ===== 04 · Signup ===== */
+.signup{position:relative;background:var(--deep-green);color:var(--cream);
+  padding:clamp(88px,15vw,140px) 24px;overflow:hidden}
+.signup__wrap{position:relative;max-width:560px;margin:0 auto;
+  display:flex;flex-direction:column;gap:18px;text-align:center}
+.signup__eyebrow{font:600 13px/1 var(--font-body);letter-spacing:.34em;text-transform:uppercase;color:var(--rose);direction:ltr}
+.signup__title{margin:0;font-family:var(--font-body);font-weight:900;
+  font-size:clamp(36px,9vw,60px);line-height:1.05;text-wrap:balance}
+.signup__sub{margin:0;font:400 18px/1.6 var(--font-body);color:var(--light-sage)}
+.signup__card{
+  margin-top:14px;background:var(--white);color:var(--deep-green);
+  border-radius:var(--radius-xl);padding:30px 26px;
+  box-shadow:var(--shadow-card);text-align:start;
+}
+.form{display:flex;flex-direction:column;gap:16px}
+.form__err{font:700 14px/1.4 var(--font-body);color:var(--tomato)}
+.done{display:flex;flex-direction:column;gap:12px;text-align:center;padding:8px 0}
+.done__title{font-family:var(--font-body);font-weight:900;
+  font-size:clamp(28px,7vw,40px);line-height:1.1}
+.done__sub{margin:0;font:400 17px/1.6 var(--font-body);color:var(--sage-green)}
+.done__share{margin-top:10px;display:flex;justify-content:center}
+[hidden]{display:none !important}
+
+/* ===== 05 · Jobs ===== */
+.jobs{background:var(--cream);padding:clamp(64px,10vw,96px) 24px}
+.jobs__wrap{max-width:560px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:10px}
+.jobs__title{font-family:var(--font-body);font-weight:900;
+  font-size:clamp(22px,5.5vw,28px);line-height:1.25}
+.jobs__text{margin:0;font:400 17px/1.6 var(--font-body);color:var(--sage-green)}
+.jobs__text--dark{color:var(--deep-green)}
+.jobs__tel{font-weight:700;color:var(--tomato);text-decoration-thickness:1.5px;text-underline-offset:4px}
+
+/* ===== Footer ===== */
+.footer{background:var(--deep-green);color:var(--cream);
+  padding:44px 24px calc(52px + env(safe-area-inset-bottom));
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px}
+.footer__mark{width:52px;height:52px;border-radius:14px}
+.footer__meta{display:flex;flex-direction:column;gap:2px}
+.footer__meta div{font:400 14px/1.7 var(--font-body);color:var(--light-sage)}
+.footer__links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font:700 14px/1 var(--font-body)}
+.footer__links a{color:var(--cream);text-underline-offset:4px}
+
+@media (max-width:520px){
+  .hero__topbar{padding:15px 16px}
+  .hero__logo{height:30px}
+  .hero__labels .lab{font-size:11px;letter-spacing:.08em}
+  .hero__labels .lab--serif{font-size:16px}
+  .hero__labels .star{font-size:10px}
+  .hero__labels{gap:6px}
+  .taste{padding-left:24px;padding-right:24px}
+}
+@media (max-width:360px){
+  .hero__labels .lab--pizza,.hero__labels .star--pizza{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 01 · Hero ============ -->
+<section class="hero section" aria-label="VICO — נפתחים בקרוב">
+  <div class="hero__media" aria-hidden="true">
+    <div class="slot">
+      <div class="slot__inner">
+        <div class="slot__mark">VICO</div>
+        <div class="slot__tag">צילום אווירה</div>
+        <div class="slot__cap">שעת זהב, נורות תלויות, אנשים באמצע שיחה</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__topbar">
+    <img class="hero__logo" src="assets/logo-clean-color.svg" alt="VICO" />
+    <div class="hero__labels" aria-hidden="true">
+      <span class="lab">כשר</span>
+      <span class="star">✦</span>
+      <span class="lab lab--serif">wine</span>
+      <span class="star">✦</span>
+      <span class="lab">PASTA</span>
+      <span class="star star--pizza">✦</span>
+      <span class="lab lab--pizza">PIZZA</span>
+    </div>
+  </div>
+
+  <div class="hero__content rise">
+    <div class="hero__eyebrow">נפתחים בקרוב · ליד הפארק</div>
+    <h1 class="hero__title">משהו טוב<br>מתחמם כאן.</h1>
+    <div class="hero__cta">
+      <button type="button" class="btn btn--primary btn--lg" data-goto-signup>שומרים לי מקום</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · The feeling ============ -->
+<section class="feel section" aria-labelledby="feel-copy">
+  <div class="feel__copy" id="feel-copy">
+    <div class="feel__line">מקום לקפוץ אליו לפיצה.</div>
+    <div class="feel__line">לפתוח שולחן עם פסטה ויין.</div>
+    <div class="feel__line">להגיע עם הילדים אחר הצהריים.</div>
+    <div class="feel__line">ולהישאר לעוד כוס בערב.</div>
+    <div class="feel__note">עוד לא פתחנו. אבל כבר מחממים מנועים.</div>
+  </div>
+
+  <div class="feel__rail" role="list" aria-label="גלריית אווירה">
+    <div class="slot" role="listitem">
+      <div class="slot__inner"><div class="slot__tag">צילום</div><div class="slot__cap">השולחן, אור נרות</div></div>
+    </div>
+    <div class="slot" role="listitem">
+      <div class="slot__inner"><div class="slot__tag">צילום</div><div class="slot__cap">פיצה יוצאת מהתנור</div></div>
+    </div>
+    <div class="slot" role="listitem">
+      <div class="slot__inner"><div class="slot__tag">צילום</div><div class="slot__cap">כוסות יין נצבעות</div></div>
+    </div>
+    <div class="slot" role="listitem">
+      <div class="slot__inner"><div class="slot__tag">צילום</div><div class="slot__cap">הטרסה בשעת בין הערביים</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Wave divider ============ -->
+<div class="wave" aria-hidden="true"><div class="wave__band"></div></div>
+
+<!-- ============ 03 · A taste ============ -->
+<section class="taste section" aria-label="מה מחכה לכם">
+  <div class="taste__watermark" aria-hidden="true">
+    <div class="taste__wm-line">Love</div>
+    <div class="taste__wm-line">at</div>
+    <div class="taste__wm-line">First</div>
+    <div class="taste__wm-line">Slice</div>
+  </div>
+  <div class="taste__list">
+    <div class="taste__item">
+      <div class="taste__name">מהטאבון</div>
+      <div class="taste__status">✦ עוד רגע</div>
+    </div>
+    <div class="taste__item">
+      <div class="taste__name">פסטה טרייה</div>
+      <div class="taste__status">✦ בעבודה</div>
+    </div>
+    <div class="taste__item">
+      <div class="taste__name">יין</div>
+      <div class="taste__status">✦ נבחר בקפידה</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · The first table (signup) ============ -->
+<section class="signup section" id="vico-signup" aria-labelledby="signup-title">
+  <div class="signup__wrap">
+    <div class="signup__eyebrow">The First Table</div>
+    <h2 class="signup__title" id="signup-title">מצטרפים לשולחן הראשון</h2>
+    <p class="signup__sub">הראשונים לדעת מתי פותחים, הראשונים לטעום.</p>
+
+    <div class="signup__card">
+      <!-- Form state -->
+      <form class="form" id="signup-form" novalidate>
+        <label class="field" for="f-first">
+          <span class="field__label">שם פרטי</span>
+          <input class="field__input" id="f-first" name="firstName" type="text"
+                 autocomplete="given-name" placeholder="איך קוראים לכם?" />
+        </label>
+        <label class="field" for="f-phone">
+          <span class="field__label">טלפון</span>
+          <input class="field__input" id="f-phone" name="phone" type="tel"
+                 inputmode="tel" autocomplete="tel" placeholder="050-0000000" />
+        </label>
+        <label class="check">
+          <input type="checkbox" id="f-consent" checked />
+          <span class="check__box" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="check__label">שלחו לי עדכון בוואטסאפ או במסרון כשמשהו קורה</span>
+        </label>
+        <div class="form__err" id="form-err" role="alert" hidden></div>
+        <button type="submit" class="btn btn--primary btn--lg btn--block">אני בפנים</button>
+      </form>
+
+      <!-- Success state -->
+      <div class="done" id="signup-done" hidden>
+        <div class="done__title" id="done-title">אתם בפנים.</div>
+        <p class="done__sub" id="done-sub">כשיהיה מה לטעום, אתם תהיו הראשונים לדעת.</p>
+        <div class="done__share">
+          <button type="button" class="btn btn--secondary btn--md" id="share-wa">מי עוד צריך לדעת? שיתוף בוואטסאפ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · Jobs ============ -->
+<section class="jobs section" id="vico-jobs" aria-labelledby="jobs-title">
+  <div class="jobs__wrap">
+    <div class="jobs__title" id="jobs-title">אנחנו בונים מקום. וגם צוות.</div>
+    <p class="jobs__text">מחפשים אנשים שאוהבים את מה שהם עושים שיבואו לבנות אותו יחד איתנו. טבחים ומלצרים.</p>
+    <p class="jobs__text jobs__text--dark">מתאים לכם? התקשרו:
+      <a class="jobs__tel" id="jobs-tel" dir="ltr" href="tel:0506545363">050-654-5363</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="footer" aria-label="פרטי VICO">
+  <img class="footer__mark" src="assets/favicon-cream-on-green.svg" alt="VICO" />
+  <div class="footer__meta">
+    <div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>
+    <div>אבן עזרא 17, הרצליה</div>
+  </div>
+  <div class="footer__links">
+    <a id="ig-link" href="https://www.instagram.com/" target="_blank" rel="noopener">אינסטגרם</a>
+    <a href="#">הצהרת נגישות</a>
+    <a href="#">מדיניות פרטיות</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var STORE_KEY = "vico_first_table_signup";
+
+  // ---- config (mirrors the design-composer props/defaults) ----
+  var CONFIG = {
+    jobsPhone: "0506545363",
+    instagramUrl: "https://www.instagram.com/",
+    waText: "משהו טוב מתחמם בשכונה 🍕"
+  };
+
+  // ---- analytics: push to dataLayer, same event names as the DC source ----
+  var campaign = { source: "direct", campaign: "" };
+  try {
+    var p = new URLSearchParams(window.location.search);
+    campaign.source = p.get("source") || "direct";
+    campaign.campaign = p.get("campaign") || "";
+  } catch (e) {}
+  function track(name, data){
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: name }, campaign, data || {}));
+    } catch (e) {}
+  }
+
+  // ---- element refs ----
+  var form   = document.getElementById("signup-form");
+  var done   = document.getElementById("signup-done");
+  var elFirst= document.getElementById("f-first");
+  var elPhone= document.getElementById("f-phone");
+  var elConsent = document.getElementById("f-consent");
+  var elErr  = document.getElementById("form-err");
+  var doneTitle = document.getElementById("done-title");
+  var doneSub   = document.getElementById("done-sub");
+
+  function showError(msg){
+    elErr.textContent = msg;
+    elErr.hidden = false;
+  }
+  function clearError(){ elErr.hidden = true; elErr.textContent = ""; }
+
+  function showDone(already){
+    form.hidden = true;
+    done.hidden = false;
+    doneTitle.textContent = already ? "כבר שמור לכם מקום." : "אתם בפנים.";
+    doneSub.textContent = "כשיהיה מה לטעום, אתם תהיו הראשונים לדעת.";
+  }
+
+  // ---- restore prior signup ----
+  try {
+    if (localStorage.getItem(STORE_KEY)) showDone(true);
+  } catch (e) {}
+  track("landing_view");
+
+  // ---- hero CTA → smooth scroll to signup ----
+  Array.prototype.forEach.call(document.querySelectorAll("[data-goto-signup]"), function(btn){
+    btn.addEventListener("click", function(){
+      track("hero_cta_click");
+      var el = document.getElementById("vico-signup");
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
+      setTimeout(function(){ try { elFirst.focus({ preventScroll: true }); } catch(e){} }, 500);
+    });
+  });
+
+  // ---- submit ----
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var name = (elFirst.value || "").trim();
+    var digits = (elPhone.value || "").replace(/\D/g, "");
+    if (!name){
+      return showError("רק שם פרטי — כדי שנדע למי שומרים מקום.");
+    }
+    if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0)){
+      return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
+    }
+    var payload = {
+      firstName: name,
+      phone: digits,
+      marketingConsent: !!elConsent.checked,
+      source: campaign.source,
+      campaign: campaign.campaign,
+      createdAt: new Date().toISOString()
+    };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
+    track("signup_success");
+    clearError();
+    showDone(false);
+  });
+  elFirst.addEventListener("input", clearError);
+  elPhone.addEventListener("input", clearError);
+
+  // ---- whatsapp share ----
+  document.getElementById("share-wa").addEventListener("click", function(){
+    track("whatsapp_share");
+    window.open("https://wa.me/?text=" + encodeURIComponent(CONFIG.waText), "_blank", "noopener");
+  });
+
+  // ---- jobs + instagram wiring from config ----
+  var telHref = "tel:" + CONFIG.jobsPhone.replace(/[^\d+]/g, "");
+  document.getElementById("jobs-tel").setAttribute("href", telHref);
+  document.getElementById("jobs-tel").addEventListener("click", function(){ track("jobs_phone_click"); });
+  document.getElementById("ig-link").setAttribute("href", CONFIG.instagramUrl);
+})();
+</script>
+</body>
+</html>
