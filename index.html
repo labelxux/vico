@@ -170,34 +170,30 @@ a:hover{color:var(--tomato)}
 .feel__kicker{font:700 clamp(14px,2.4vw,16px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato)}
 .feel__heading{margin:0;font-family:var(--font-body);font-weight:900;color:var(--deep-green);
   font-size:clamp(30px,7vw,52px);line-height:1.08;text-wrap:balance}
-.feel__lead{margin:0;font:400 clamp(17px,2.6vw,21px)/1.55 var(--font-body);color:var(--sage-green);text-wrap:balance}
+.feel__lead{margin:0;font:400 clamp(17px,2.6vw,21px)/1.55 var(--font-body);color:var(--deep-green);text-wrap:balance}
+.feel__art{width:clamp(180px,34vw,320px);height:auto;display:block;margin:0 auto clamp(24px,4vw,36px)}
 .feel__line{font-family:var(--font-body);font-weight:700;color:var(--sage-green);
   font-size:clamp(24px,5.8vw,40px);line-height:1.45}
 .feel__note{margin-top:26px;font:400 18px/1.6 var(--font-body);color:var(--sage-green)}
-/* ===== Gallery bento wall (inside the Love-at-First-Slice section) ===== */
-.bento{
-  position:relative;z-index:1;max-width:1080px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(130px,18vw,224px);gap:14px;
+/* ===== Big hero gallery (Love at First Slice) ===== */
+.hgallery{position:relative;z-index:1;margin-inline:calc(-1 * clamp(20px,5vw,48px))}
+.hgallery__track{
+  display:flex;gap:16px;overflow-x:auto;
+  padding:0 clamp(16px,5vw,64px) 14px;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
 }
-.bento__item{
-  margin:0;overflow:hidden;border-radius:var(--radius-lg);background:var(--deep-green);
-  box-shadow:var(--shadow-card);
-  opacity:0;transform:translateY(26px) scale(.98);
+.hgallery__track::-webkit-scrollbar{display:none}
+.hgallery__item{
+  flex:0 0 auto;width:min(88vw,1000px);height:clamp(340px,58vh,640px);
+  margin:0;overflow:hidden;border-radius:var(--radius-xl);background:var(--deep-green);
+  box-shadow:var(--shadow-card);scroll-snap-align:center;
+  opacity:0;transform:translateY(28px) scale(.985);
   transition:opacity .7s var(--ease-standard,ease),transform .7s var(--ease-standard,ease);
 }
-.bento__item.in{opacity:1;transform:none}
-.bento__item:nth-child(1){grid-column:span 2;grid-row:span 2;transition-delay:0s}
-.bento__item:nth-child(2){grid-column:span 2;grid-row:span 1;transition-delay:.09s}
-.bento__item:nth-child(3){grid-column:span 1;grid-row:span 1;transition-delay:.18s}
-.bento__item:nth-child(4){grid-column:span 1;grid-row:span 1;transition-delay:.27s}
-.bento__item img{width:100%;height:100%;object-fit:cover;display:block;
+.hgallery__item.in{opacity:1;transform:none}
+.hgallery__item img{width:100%;height:100%;object-fit:cover;display:block;
   transition:transform .6s var(--ease-standard,ease)}
-.bento__item:hover img{transform:scale(1.06)}
-@media (max-width:640px){
-  .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(120px,30vw,200px)}
-  .bento__item:nth-child(1){grid-column:span 2;grid-row:span 2}
-  .bento__item:nth-child(2){grid-column:span 2}
-}
+.hgallery__item:hover img{transform:scale(1.05)}
 
 /* ===== Wave divider ===== */
 .wave{height:120px;background:var(--cream);position:relative;overflow:hidden}
@@ -207,9 +203,16 @@ a:hover{color:var(--tomato)}
 /* ===== 03 · Love at First Slice (gallery) ===== */
 .taste{position:relative;background:var(--sage-green);color:var(--cream);
   padding:clamp(72px,12vw,120px) clamp(20px,5vw,48px)}
-.taste__title{margin:0 0 clamp(36px,6vw,64px);text-align:center;
-  font-family:var(--font-wordmark);color:var(--cream);
-  font-size:clamp(52px,13vw,132px);line-height:.92;letter-spacing:.01em;text-wrap:balance}
+.taste__title{margin:0 0 clamp(40px,6vw,68px);direction:ltr;
+  font-family:var(--font-wordmark);color:var(--cream);line-height:.82;letter-spacing:.01em;
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.04em .26em}
+.taste__title .tw{display:inline-block;font-size:clamp(52px,13vw,134px);will-change:transform;
+  transition:transform var(--dur-med,260ms) var(--ease-standard,ease)}
+.taste__title .tw--1{transform:rotate(-5deg)}
+.taste__title .tw--2{transform:rotate(6deg);color:var(--tomato);font-size:clamp(36px,8vw,88px)}
+.taste__title .tw--3{transform:rotate(-2deg)}
+.taste__title .tw--4{transform:rotate(4deg);color:var(--rose);font-size:clamp(58px,14vw,148px)}
+.taste__title .tw:hover{transform:rotate(0) scale(1.06)}
 
 /* ===== 04 · Signup ===== */
 .signup{position:relative;background:var(--deep-green);color:var(--cream);
@@ -220,21 +223,18 @@ a:hover{color:var(--tomato)}
 .signup__title{margin:0;font-family:var(--font-body);font-weight:900;
   font-size:clamp(36px,9vw,60px);line-height:1.05;text-wrap:balance}
 .signup__sub{margin:0;font:400 18px/1.6 var(--font-body);color:var(--light-sage)}
-.signup__sub--lead{font-size:16px;color:var(--light-sage);opacity:.92;max-width:46ch;margin:0 auto}
-.perks{
-  margin-top:22px;text-align:start;
+.perks{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.perk{
   background:rgba(254,243,235,.05);
   border:var(--stroke-thin) solid rgba(175,193,187,.32);
   border-radius:var(--radius-lg);
-  padding:26px 24px;
-  display:flex;flex-direction:column;gap:18px;
+  padding:24px 16px;
+  display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;
 }
-.perks__title{font:900 clamp(19px,4.6vw,23px)/1.15 var(--font-body);color:var(--cream)}
-.perks__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:15px}
-.perk{display:flex;align-items:flex-start;gap:12px}
-.perk__mark{flex:0 0 auto;color:var(--rose);font-size:18px;line-height:1.45}
-.perk__text{font:400 16px/1.45 var(--font-body);color:var(--light-sage)}
-.perk__text b{color:var(--cream);font-weight:800}
+.perk__mark{color:var(--rose);font-size:18px;line-height:1}
+.perk__title{font:900 clamp(17px,2.4vw,20px)/1.15 var(--font-body);color:var(--cream)}
+.perk__desc{font:400 14px/1.45 var(--font-body);color:var(--light-sage)}
+@media (max-width:560px){.perks{grid-template-columns:1fr}}
 .signup__card{
   margin-top:14px;background:var(--white);color:var(--deep-green);
   border-radius:var(--radius-xl);padding:30px 26px;
@@ -317,10 +317,11 @@ a:hover{color:var(--tomato)}
 <!-- ============ 02 · The feeling ============ -->
 <section class="feel section" aria-labelledby="feel-copy">
   <div class="feel__copy" id="feel-copy">
+    <img class="feel__art" src="assets/cheers.png" alt="" />
     <div class="feel__intro">
-      <div class="feel__kicker">תכיר את VICO</div>
+      <div class="feel__kicker">תכירו את VICO</div>
       <h2 class="feel__heading">האיטלקייה השכונתית החדשה שלכם.</h2>
-      <p class="feel__lead">הטעמים שאתם אוהבים ומכירים — עם טוויסט חדש.</p>
+      <p class="feel__lead">הטעמים שאתם אוהבים ומכירים עם טוויסט חדש.</p>
     </div>
     <div class="feel__line">מקום לקפוץ אליו לפיצה.</div>
     <div class="feel__line">לפתוח שולחן עם פסטה ויין.</div>
@@ -335,12 +336,19 @@ a:hover{color:var(--tomato)}
 
 <!-- ============ 03 · Love at First Slice ============ -->
 <section class="taste section" aria-label="Love at First Slice">
-  <h2 class="taste__title">Love at First Slice</h2>
-  <div class="bento" id="bento">
-    <figure class="bento__item"><img src="assets/gallery-img-1.png" alt="" loading="lazy"></figure>
-    <figure class="bento__item"><img src="assets/gallery-img-2.jpeg" alt="" loading="lazy"></figure>
-    <figure class="bento__item"><img src="assets/gallery-img-3.jpeg" alt="" loading="lazy"></figure>
-    <figure class="bento__item"><img src="assets/gallery-img-4.jpeg" alt="" loading="lazy"></figure>
+  <h2 class="taste__title">
+    <span class="tw tw--1">Love</span>
+    <span class="tw tw--2">at</span>
+    <span class="tw tw--3">First</span>
+    <span class="tw tw--4">Slice</span>
+  </h2>
+  <div class="hgallery" id="gallery">
+    <div class="hgallery__track" role="list" aria-label="גלריית VICO">
+      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-1.png" alt="" loading="lazy"></figure>
+      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-2.jpeg" alt="" loading="lazy"></figure>
+      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-3.jpeg" alt="" loading="lazy"></figure>
+      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-4.jpeg" alt="" loading="lazy"></figure>
+    </div>
   </div>
 </section>
 
@@ -349,8 +357,7 @@ a:hover{color:var(--tomato)}
   <div class="signup__wrap">
     <div class="signup__eyebrow">Friends of VICO</div>
     <h2 class="signup__title" id="signup-title">מצטרפים לשולחן הראשון</h2>
-    <p class="signup__sub">הראשונים לדעת מתי פותחים, הראשונים לטעום.</p>
-    <p class="signup__sub signup__sub--lead">הצטרפו לחבר מועדון שלנו ותהנו מהטבות בלעדיות, ערבי קונספט ועדכונים חשובים לפני כולם.</p>
+    <p class="signup__sub">הראשונים לדעת מתי פותחים, הראשונים לטעום. הצטרפו לחבר מועדון שלנו ותהנו מהטבות בלעדיות, ערבי קונספט ועדכונים חשובים לפני כולם.</p>
 
     <div class="signup__card">
       <!-- Form state -->
@@ -387,21 +394,21 @@ a:hover{color:var(--tomato)}
     </div>
 
     <div class="perks">
-      <div class="perks__title">ההטבות שלכם כחברי מועדון</div>
-      <ul class="perks__list">
-        <li class="perk">
-          <span class="perk__mark" aria-hidden="true">✦</span>
-          <span class="perk__text"><b>10% הנחה</b> בישיבה במקום או ב־takeaway</span>
-        </li>
-        <li class="perk">
-          <span class="perk__mark" aria-hidden="true">✦</span>
-          <span class="perk__text"><b>מתנת יום הולדת</b> — מנה ראשונה + כוס יין</span>
-        </li>
-        <li class="perk">
-          <span class="perk__mark" aria-hidden="true">✦</span>
-          <span class="perk__text"><b>מתנת הצטרפות</b> — 15% הנחה בהזמנה הראשונה</span>
-        </li>
-      </ul>
+      <div class="perk">
+        <span class="perk__mark" aria-hidden="true">✦</span>
+        <div class="perk__title">10% הנחה</div>
+        <div class="perk__desc">בישיבה במקום או ב־takeaway</div>
+      </div>
+      <div class="perk">
+        <span class="perk__mark" aria-hidden="true">✦</span>
+        <div class="perk__title">מתנת יום הולדת</div>
+        <div class="perk__desc">מנה ראשונה + כוס יין</div>
+      </div>
+      <div class="perk">
+        <span class="perk__mark" aria-hidden="true">✦</span>
+        <div class="perk__title">מתנת הצטרפות</div>
+        <div class="perk__desc">15% הנחה בהזמנה הראשונה</div>
+      </div>
     </div>
   </div>
 </section>
@@ -537,18 +544,18 @@ a:hover{color:var(--tomato)}
   document.getElementById("jobs-tel").addEventListener("click", function(){ track("jobs_phone_click"); });
   document.getElementById("ig-link").setAttribute("href", CONFIG.instagramUrl);
 
-  // ---- reveal the gallery bento tiles as they scroll into view ----
-  var bentoItems = document.querySelectorAll(".bento__item");
-  if (bentoItems.length) {
+  // ---- reveal the gallery tiles as they scroll into view ----
+  var galleryItems = document.querySelectorAll(".hgallery__item");
+  if (galleryItems.length) {
     if (!("IntersectionObserver" in window)) {
-      Array.prototype.forEach.call(bentoItems, function (el) { el.classList.add("in"); });
+      Array.prototype.forEach.call(galleryItems, function (el) { el.classList.add("in"); });
     } else {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
         });
-      }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-      Array.prototype.forEach.call(bentoItems, function (el) { io.observe(el); });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+      Array.prototype.forEach.call(galleryItems, function (el) { io.observe(el); });
     }
   }
 })();
