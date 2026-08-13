@@ -175,25 +175,18 @@ a:hover{color:var(--tomato)}
 .feel__line{font-family:var(--font-body);font-weight:700;color:var(--sage-green);
   font-size:clamp(24px,5.8vw,40px);line-height:1.45}
 .feel__note{margin-top:26px;font:400 18px/1.6 var(--font-body);color:var(--sage-green)}
-/* ===== Big hero gallery (Love at First Slice) ===== */
-.hgallery{position:relative;z-index:1;margin-inline:calc(-1 * clamp(20px,5vw,48px))}
-.hgallery__track{
-  display:flex;gap:16px;overflow-x:auto;
-  padding:0 clamp(16px,5vw,64px) 14px;
-  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-}
-.hgallery__track::-webkit-scrollbar{display:none}
-.hgallery__item{
-  flex:0 0 auto;width:min(88vw,1000px);height:clamp(340px,58vh,640px);
+/* ===== Love at First Slice — seamless auto-scrolling carousel ===== */
+.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin-inline:calc(-1 * clamp(20px,5vw,48px))}
+.carousel__track{display:flex;gap:16px;width:max-content;will-change:transform}
+.carousel__item{
+  flex:0 0 auto;width:clamp(260px,38vw,480px);height:clamp(300px,50vh,540px);
   margin:0;overflow:hidden;border-radius:var(--radius-xl);background:var(--deep-green);
-  box-shadow:var(--shadow-card);scroll-snap-align:center;
-  opacity:0;transform:translateY(28px) scale(.985);
-  transition:opacity .7s var(--ease-standard,ease),transform .7s var(--ease-standard,ease);
+  box-shadow:var(--shadow-card);
 }
-.hgallery__item.in{opacity:1;transform:none}
-.hgallery__item img{width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .6s var(--ease-standard,ease)}
-.hgallery__item:hover img{transform:scale(1.05)}
+.carousel__item img{width:100%;height:100%;object-fit:cover;display:block}
+/* reduced-motion fallback: no auto-scroll, let users swipe instead */
+.carousel.is-scrollable{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.carousel.is-scrollable::-webkit-scrollbar{display:none}
 
 /* ===== Wave divider ===== */
 .wave{height:120px;background:var(--cream);position:relative;overflow:hidden}
@@ -342,12 +335,12 @@ a:hover{color:var(--tomato)}
     <span class="tw tw--3">First</span>
     <span class="tw tw--4">Slice</span>
   </h2>
-  <div class="hgallery" id="gallery">
-    <div class="hgallery__track" role="list" aria-label="גלריית VICO">
-      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-1.png" alt="" loading="lazy"></figure>
-      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-2.jpeg" alt="" loading="lazy"></figure>
-      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-3.jpeg" alt="" loading="lazy"></figure>
-      <figure class="hgallery__item" role="listitem"><img src="assets/gallery-img-4.jpeg" alt="" loading="lazy"></figure>
+  <div class="carousel" id="gallery" aria-label="גלריית VICO">
+    <div class="carousel__track">
+      <figure class="carousel__item"><img src="assets/gallery-img-1.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-2.jpeg" alt=""></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-3.jpeg" alt=""></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-4.jpeg" alt=""></figure>
     </div>
   </div>
 </section>
@@ -396,8 +389,8 @@ a:hover{color:var(--tomato)}
     <div class="perks">
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
-        <div class="perk__title">10% הנחה</div>
-        <div class="perk__desc">בישיבה במקום או ב־takeaway</div>
+        <div class="perk__title">מתנת הצטרפות</div>
+        <div class="perk__desc">15% הנחה בהזמנה הראשונה</div>
       </div>
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
@@ -406,8 +399,8 @@ a:hover{color:var(--tomato)}
       </div>
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
-        <div class="perk__title">מתנת הצטרפות</div>
-        <div class="perk__desc">15% הנחה בהזמנה הראשונה</div>
+        <div class="perk__title">הנחה קבועה</div>
+        <div class="perk__desc">5% הנחה בישיבה במקום או Takeaway</div>
       </div>
     </div>
   </div>
@@ -449,7 +442,10 @@ a:hover{color:var(--tomato)}
   var CONFIG = {
     jobsPhone: "0506545363",
     instagramUrl: "https://www.instagram.com/",
-    waText: "משהו טוב מתחמם בשכונה 🍕"
+    waText: "משהו טוב מתחמם בשכונה 🍕",
+    // Google Apps Script Web App URL (…/exec) that appends each signup to the club sheet.
+    // Empty = store locally only (no send). Paste the deployed /exec URL here to go live.
+    signupEndpoint: "https://script.google.com/macros/s/AKfycbycIZ-BnyO7kdnKUyOxrItirYfSax1jfhDtu9kljsQUvRnq1xLTFiGfqNjjArVja34WOw/exec"
   };
 
   // ---- analytics: push to dataLayer, same event names as the DC source ----
@@ -525,9 +521,31 @@ a:hover{color:var(--tomato)}
       createdAt: new Date().toISOString()
     };
     try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
-    track("signup_success");
     clearError();
-    showDone(false);
+
+    // No endpoint configured yet → keep the local-only behaviour.
+    if (!CONFIG.signupEndpoint) {
+      track("signup_success");
+      return showDone(false);
+    }
+
+    // Send the lead to the Google Sheet (Apps Script) endpoint.
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var origLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "רגע…"; }
+
+    fetch(CONFIG.signupEndpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function () {
+      track("signup_success");
+      showDone(false);
+    }).catch(function () {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+      showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
+    });
   });
   elFirst.addEventListener("input", clearError);
   elPhone.addEventListener("input", clearError);
@@ -544,20 +562,57 @@ a:hover{color:var(--tomato)}
   document.getElementById("jobs-tel").addEventListener("click", function(){ track("jobs_phone_click"); });
   document.getElementById("ig-link").setAttribute("href", CONFIG.instagramUrl);
 
-  // ---- reveal the gallery tiles as they scroll into view ----
-  var galleryItems = document.querySelectorAll(".hgallery__item");
-  if (galleryItems.length) {
-    if (!("IntersectionObserver" in window)) {
-      Array.prototype.forEach.call(galleryItems, function (el) { el.classList.add("in"); });
-    } else {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
-      Array.prototype.forEach.call(galleryItems, function (el) { io.observe(el); });
+  // ---- Love-at-First-Slice: seamless auto-scrolling carousel ----
+  (function () {
+    var carousel = document.querySelector(".carousel");
+    var track = carousel && carousel.querySelector(".carousel__track");
+    if (!track) return;
+
+    // Respect reduced-motion: no auto-scroll, allow manual swipe instead.
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      carousel.classList.add("is-scrollable");
+      return;
     }
-  }
+
+    var originals = Array.prototype.slice.call(track.children);
+
+    // Clone the set until the track is comfortably wider than the viewport + one set,
+    // so the loop never reveals an empty edge. Returns the exact width of one set.
+    function build() {
+      while (track.children.length > originals.length) track.removeChild(track.lastChild);
+      originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+      var period = track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+      while (track.scrollWidth < window.innerWidth + period + 80) {
+        originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+      }
+      return period;
+    }
+
+    var period = build();
+    var x = 0, last = null, paused = false;
+    var PX_PER_SEC = 42;
+
+    function frame(ts) {
+      if (last === null) last = ts;
+      var dt = (ts - last) / 1000; last = ts;
+      if (!paused) {
+        x -= PX_PER_SEC * dt;
+        if (x <= -period) x += period;   // seamless wrap
+        track.style.transform = "translateX(" + x + "px)";
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    carousel.addEventListener("mouseenter", function () { paused = true; });
+    carousel.addEventListener("mouseleave", function () { paused = false; });
+
+    var rt;
+    window.addEventListener("resize", function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () { x = 0; last = null; period = build(); }, 200);
+    });
+  })();
 })();
 </script>
 </body>
