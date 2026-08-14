@@ -147,36 +147,50 @@ a:hover{color:var(--tomato)}
   display:flex;justify-content:space-between;align-items:center;
   padding:18px 22px;pointer-events:none;
 }
-.hero__logo{height:38px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.35))}
-.hero__labels{display:flex;flex-direction:row;align-items:center;gap:10px;direction:ltr}
-.hero__labels .lab{font:700 15px/1 var(--font-body);letter-spacing:.22em;color:var(--cream);opacity:.92;text-transform:uppercase}
-.hero__labels .lab--serif{font:400 22px/1 var(--font-serif);font-style:italic;letter-spacing:.02em;text-transform:none;opacity:.95}
-.hero__labels .star{color:var(--cream);opacity:.8;font-size:12px}
+.hero__logo{height:46px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.35))}
+.hero__labels{display:flex;flex-direction:row;align-items:center;gap:11px;direction:ltr}
+.hero__labels .lab{font:700 17px/1 var(--font-body);letter-spacing:.22em;color:var(--cream);opacity:.92;text-transform:uppercase}
+.hero__labels .lab--serif{font:400 25px/1 var(--font-serif);font-style:italic;letter-spacing:.02em;text-transform:none;opacity:.95}
+.hero__labels .star{color:var(--cream);opacity:.8;font-size:13px}
 .hero__content{
   position:relative;z-index:2;margin-top:auto;
-  padding:0 24px calc(56px + env(safe-area-inset-bottom));
+  padding:0 24px calc(104px + env(safe-area-inset-bottom));
   display:flex;flex-direction:column;align-items:flex-start;gap:16px;
   color:var(--cream);
 }
-.hero__eyebrow{font:700 13px/1 var(--font-body);letter-spacing:.12em;opacity:.92}
+.hero__scroll{
+  position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));
+  transform:translateX(-50%);z-index:3;
+  width:92px;height:92px;color:var(--cream);text-decoration:none;
+  display:flex;align-items:center;justify-content:center;
+  filter:drop-shadow(0 2px 12px rgba(19,57,50,.5));
+}
+.hero__scroll-ring{position:absolute;inset:0;animation:vico-spin 10s linear infinite}
+.hero__scroll-ring span{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;
+  transform-origin:center;padding-top:4px;
+  font:800 10px/1 var(--font-body);letter-spacing:.02em;text-transform:uppercase;color:var(--cream)}
+.hero__scroll-arrow{position:relative;width:24px;height:24px;stroke:currentColor;stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+@keyframes vico-spin{to{transform:rotate(360deg)}}
+.hero__eyebrow{font:700 clamp(16px,3.4vw,24px)/1.1 var(--font-body);letter-spacing:.1em;opacity:.95}
 .hero__title{margin:0;font-family:var(--font-body);font-weight:900;
-  font-size:clamp(52px,13vw,124px);line-height:.98;letter-spacing:-.01em;text-wrap:balance}
-.hero__cta{margin-top:6px}
+  font-size:clamp(34px,11vw,116px);line-height:1.0;letter-spacing:-.015em;white-space:nowrap}
+.hero__cta{margin-top:6px;max-width:100%}
+.hero__cta .btn{white-space:normal;max-width:100%;text-align:center;line-height:1.25}
 
 /* ===== 02 · The feeling ===== */
 .feel{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,120px) 24px;background:var(--cream)}
 .feel__copy{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:4px}
-.feel__intro{display:flex;flex-direction:column;gap:14px;margin-bottom:44px}
+.feel__intro{display:flex;flex-direction:column;gap:12px}
 .feel__kicker{font:700 clamp(14px,2.4vw,16px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato)}
 .feel__heading{margin:0;font-family:var(--font-body);font-weight:900;color:var(--deep-green);
   font-size:clamp(30px,7vw,52px);line-height:1.08;text-wrap:balance}
-.feel__lead{margin:0;font:400 clamp(17px,2.6vw,21px)/1.55 var(--font-body);color:var(--deep-green);text-wrap:balance}
+.feel__heading--accent{color:var(--tomato)}
 .feel__art{width:clamp(180px,34vw,320px);height:auto;display:block;margin:0 auto clamp(24px,4vw,36px)}
-.feel__line{font-family:var(--font-body);font-weight:700;color:var(--sage-green);
-  font-size:clamp(24px,5.8vw,40px);line-height:1.45}
-.feel__note{margin-top:26px;font:400 18px/1.6 var(--font-body);color:var(--sage-green)}
+.feel__body{margin:clamp(28px,4.5vw,40px) auto 0;max-width:620px;
+  font:400 clamp(17px,2.4vw,20px)/1.7 var(--font-body);color:var(--deep-green)}
 /* ===== Love at First Slice — seamless auto-scrolling carousel ===== */
-.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin-inline:calc(-1 * clamp(20px,5vw,48px))}
+.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin:clamp(40px,6vw,60px) -24px 0}
 .carousel__track{display:flex;gap:16px;width:max-content;will-change:transform}
 .carousel__item{
   flex:0 0 auto;width:clamp(260px,38vw,480px);height:clamp(300px,50vh,540px);
@@ -188,24 +202,6 @@ a:hover{color:var(--tomato)}
 .carousel.is-scrollable{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .carousel.is-scrollable::-webkit-scrollbar{display:none}
 
-/* ===== Wave divider ===== */
-.wave{height:120px;background:var(--cream);position:relative;overflow:hidden}
-.wave__band{position:absolute;inset:0;
-  background:url("assets/bottom-bg-with-waves-sage-green.svg") center bottom / auto 100% repeat-x}
-
-/* ===== 03 · Love at First Slice (gallery) ===== */
-.taste{position:relative;background:var(--sage-green);color:var(--cream);
-  padding:clamp(72px,12vw,120px) clamp(20px,5vw,48px)}
-.taste__title{margin:0 0 clamp(40px,6vw,68px);direction:ltr;
-  font-family:var(--font-wordmark);color:var(--cream);line-height:.82;letter-spacing:.01em;
-  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.04em .26em}
-.taste__title .tw{display:inline-block;font-size:clamp(52px,13vw,134px);will-change:transform;
-  transition:transform var(--dur-med,260ms) var(--ease-standard,ease)}
-.taste__title .tw--1{transform:rotate(-5deg)}
-.taste__title .tw--2{transform:rotate(6deg);color:var(--tomato);font-size:clamp(36px,8vw,88px)}
-.taste__title .tw--3{transform:rotate(-2deg)}
-.taste__title .tw--4{transform:rotate(4deg);color:var(--rose);font-size:clamp(58px,14vw,148px)}
-.taste__title .tw:hover{transform:rotate(0) scale(1.06)}
 
 /* ===== 04 · Signup ===== */
 .signup{position:relative;background:var(--deep-green);color:var(--cream);
@@ -264,11 +260,12 @@ a:hover{color:var(--tomato)}
 
 @media (max-width:520px){
   .hero__topbar{padding:15px 16px}
-  .hero__logo{height:30px}
-  .hero__labels .lab{font-size:11px;letter-spacing:.08em}
-  .hero__labels .lab--serif{font-size:16px}
-  .hero__labels .star{font-size:10px}
+  .hero__logo{height:34px}
+  .hero__labels .lab{font-size:12px;letter-spacing:.06em}
+  .hero__labels .lab--serif{font-size:18px}
+  .hero__labels .star{font-size:11px}
   .hero__labels{gap:6px}
+  .hero__scroll{width:78px;height:78px}
   .taste{padding-left:24px;padding-right:24px}
 }
 @media (max-width:360px){
@@ -299,12 +296,16 @@ a:hover{color:var(--tomato)}
   </div>
 
   <div class="hero__content rise">
-    <div class="hero__eyebrow">פותחים בקרוב · ליד הפארק</div>
-    <h1 class="hero__title">משהו טוב<br>מתחמם כאן.</h1>
+    <div class="hero__eyebrow">פותחים בקרוב</div>
+    <h1 class="hero__title">עוד רגע יוצא<br>מהטאבון</h1>
     <div class="hero__cta">
-      <button type="button" class="btn btn--primary btn--lg" data-goto-signup>שומרים לי מקום</button>
+      <button type="button" class="btn btn--primary btn--lg" data-goto-signup>להצטרפות למשפחה האיטלקית</button>
     </div>
   </div>
+  <a class="hero__scroll" href="#feel-copy" aria-label="גלול למטה" data-scroll-text="Scroll Down ✦ Scroll Down ✦ ">
+    <span class="hero__scroll-ring" aria-hidden="true"></span>
+    <svg class="hero__scroll-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"></path></svg>
+  </a>
 </section>
 
 <!-- ============ 02 · The feeling ============ -->
@@ -314,27 +315,11 @@ a:hover{color:var(--tomato)}
     <div class="feel__intro">
       <div class="feel__kicker">תכירו את VICO</div>
       <h2 class="feel__heading">האיטלקייה השכונתית החדשה שלכם.</h2>
-      <p class="feel__lead">הטעמים שאתם אוהבים ומכירים עם טוויסט חדש.</p>
+      <p class="feel__heading">הטעמים שאתם אוהבים ומכירים, <span class="feel__heading--accent">עם טוויסט חדש.</span></p>
     </div>
-    <div class="feel__line">מקום לקפוץ אליו לפיצה.</div>
-    <div class="feel__line">לפתוח שולחן עם פסטה ויין.</div>
-    <div class="feel__line">להגיע עם הילדים אחר הצהריים.</div>
-    <div class="feel__line">ולהישאר לעוד כוס בערב.</div>
-    <div class="feel__note">עוד לא פתחנו. אבל כבר מחממים מנועים.</div>
+    <p class="feel__body">פיצה חמה ישר מהטאבון, פסטה טרייה שמכינים כאן, מנות שכיף לפתוח איתן שולחן וכוס יין שתמיד מובילה לעוד אחת. מקום לבוא אליו רעבים, לפגוש את מי שאוהבים, ולהישאר קצת יותר ממה שתכננתם.</p>
   </div>
-</section>
 
-<!-- ============ Wave divider ============ -->
-<div class="wave" aria-hidden="true"><div class="wave__band"></div></div>
-
-<!-- ============ 03 · Love at First Slice ============ -->
-<section class="taste section" aria-label="Love at First Slice">
-  <h2 class="taste__title">
-    <span class="tw tw--1">Love</span>
-    <span class="tw tw--2">at</span>
-    <span class="tw tw--3">First</span>
-    <span class="tw tw--4">Slice</span>
-  </h2>
   <div class="carousel" id="gallery" aria-label="גלריית VICO">
     <div class="carousel__track">
       <figure class="carousel__item"><img src="assets/gallery-img-1.jpg" alt=""></figure>
@@ -348,9 +333,9 @@ a:hover{color:var(--tomato)}
 <!-- ============ 04 · The first table (signup) ============ -->
 <section class="signup section" id="vico-signup" aria-labelledby="signup-title">
   <div class="signup__wrap">
-    <div class="signup__eyebrow">Friends of VICO</div>
-    <h2 class="signup__title" id="signup-title">מצטרפים לשולחן הראשון</h2>
-    <p class="signup__sub">הראשונים לדעת מתי פותחים, הראשונים לטעום. הצטרפו לחבר מועדון שלנו ותהנו מהטבות בלעדיות, ערבי קונספט ועדכונים חשובים לפני כולם.</p>
+    <div class="signup__eyebrow">VICO'S Friends</div>
+    <h2 class="signup__title" id="signup-title">כמו באיטליה, אבל VIP</h2>
+    <p class="signup__sub">מצטרפים עכשיו למועדון החברים של VICO ונהנים מהטבות, מתנת ימי הולדת וגישה ראשונה לכל האירועים שיהפכו כל ארוחה לחוויה איטלקית אמיתית.</p>
 
     <div class="signup__card">
       <!-- Form state -->
@@ -390,12 +375,12 @@ a:hover{color:var(--tomato)}
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת הצטרפות</div>
-        <div class="perk__desc">15% הנחה בהזמנה הראשונה</div>
+        <div class="perk__desc">12% הנחה בהזמנה הראשונה</div>
       </div>
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת יום הולדת</div>
-        <div class="perk__desc">מנה ראשונה + כוס יין</div>
+        <div class="perk__desc">מנה ראשונה / כוס יין הבית</div>
       </div>
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
@@ -410,9 +395,9 @@ a:hover{color:var(--tomato)}
 <section class="jobs section" id="vico-jobs" aria-labelledby="jobs-title">
   <div class="jobs__wrap">
     <span class="jobs__star" aria-hidden="true">✦</span>
-    <div class="jobs__title" id="jobs-title">אנחנו בונים מקום. וגם צוות.</div>
-    <p class="jobs__text">מחפשים אנשים שאוהבים את מה שהם עושים שיבואו לבנות אותו יחד איתנו.</p>
-    <p class="jobs__text jobs__text--dark">טבחים ומלצרים מעל גיל 18?<br>דברו איתנו:
+    <div class="jobs__title" id="jobs-title">באים לבשל איתנו? VICO מגייסת</div>
+    <p class="jobs__text">אנחנו מחפשים אנשים עם תשוקה לאוכל, לאירוח ולחיוכים. אם אתם רוצים להיות חלק מצוות ההקמה של המקום הכי חם בעיר, מעל גיל 18 ומתאימה לכם עבודה במשמרות — דברו איתנו.</p>
+    <p class="jobs__text jobs__text--dark">התקשרו או שלחו הודעה:
       <a class="jobs__tel" id="jobs-tel" dir="ltr" href="tel:0506545363">050-654-5363</a>
     </p>
     <span class="jobs__star" aria-hidden="true">✦</span>
@@ -561,6 +546,21 @@ a:hover{color:var(--tomato)}
   document.getElementById("jobs-tel").setAttribute("href", telHref);
   document.getElementById("jobs-tel").addEventListener("click", function(){ track("jobs_phone_click"); });
   document.getElementById("ig-link").setAttribute("href", CONFIG.instagramUrl);
+
+  // ---- hero scroll cue: lay the circular label out as rotated letters ----
+  (function () {
+    var badge = document.querySelector(".hero__scroll");
+    var ring = badge && badge.querySelector(".hero__scroll-ring");
+    if (!ring) return;
+    var chars = (badge.getAttribute("data-scroll-text") || "").split("");
+    var step = 360 / chars.length;
+    chars.forEach(function (ch, i) {
+      var s = document.createElement("span");
+      s.textContent = ch === " " ? " " : ch;
+      s.style.transform = "rotate(" + (i * step) + "deg)";
+      ring.appendChild(s);
+    });
+  })();
 
   // ---- Love-at-First-Slice: seamless auto-scrolling carousel ----
   (function () {
