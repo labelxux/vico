@@ -174,9 +174,9 @@ a:hover{color:var(--tomato)}
 @keyframes vico-spin{to{transform:rotate(360deg)}}
 .hero__eyebrow{font:700 clamp(16px,3.4vw,24px)/1.1 var(--font-body);letter-spacing:.1em;opacity:.95}
 .hero__title{margin:0;font-family:var(--font-body);font-weight:900;
-  font-size:clamp(34px,11vw,116px);line-height:1.0;letter-spacing:-.015em;white-space:nowrap}
+  font-size:clamp(30px,7.2vw,88px);line-height:1.06;letter-spacing:-.015em;text-wrap:balance}
 .hero__cta{margin-top:6px;max-width:100%}
-.hero__cta .btn{white-space:normal;max-width:100%;text-align:center;line-height:1.25}
+.hero__cta .btn{white-space:nowrap;font-size:clamp(15px,3.8vw,18px);padding:15px 30px}
 
 /* ===== 02 · The feeling ===== */
 .feel{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,120px) 24px;background:var(--cream)}
@@ -191,11 +191,10 @@ a:hover{color:var(--tomato)}
   font:400 clamp(17px,2.4vw,20px)/1.7 var(--font-body);color:var(--deep-green)}
 /* ===== Love at First Slice — seamless auto-scrolling carousel ===== */
 .carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin:clamp(40px,6vw,60px) -24px 0}
-.carousel__track{display:flex;gap:16px;width:max-content;will-change:transform}
+.carousel__track{display:flex;gap:6px;width:max-content;will-change:transform}
 .carousel__item{
-  flex:0 0 auto;width:clamp(260px,38vw,480px);height:clamp(300px,50vh,540px);
-  margin:0;overflow:hidden;border-radius:var(--radius-xl);background:var(--deep-green);
-  box-shadow:var(--shadow-card);
+  flex:0 0 auto;width:clamp(260px,38vw,440px);height:clamp(300px,50vh,540px);
+  margin:0;overflow:hidden;border-radius:0;background:var(--deep-green);
 }
 .carousel__item img{width:100%;height:100%;object-fit:cover;display:block}
 /* reduced-motion fallback: no auto-scroll, let users swipe instead */
@@ -296,10 +295,10 @@ a:hover{color:var(--tomato)}
   </div>
 
   <div class="hero__content rise">
-    <div class="hero__eyebrow">פותחים בקרוב</div>
-    <h1 class="hero__title">עוד רגע יוצא<br>מהטאבון</h1>
+    <div class="hero__eyebrow">הפתיחה בקרוב</div>
+    <h1 class="hero__title">האיטלקייה השכונתית החדשה שלכם</h1>
     <div class="hero__cta">
-      <button type="button" class="btn btn--primary btn--lg" data-goto-signup>להצטרפות למשפחה האיטלקית</button>
+      <button type="button" class="btn btn--primary btn--lg" data-goto-signup>להצטרפות למשפחה</button>
     </div>
   </div>
   <a class="hero__scroll" href="#feel-copy" aria-label="גלול למטה" data-scroll-text="Scroll Down ✦ Scroll Down ✦ ">
@@ -314,10 +313,9 @@ a:hover{color:var(--tomato)}
     <img class="feel__art" src="assets/cheers.png" alt="" />
     <div class="feel__intro">
       <div class="feel__kicker">תכירו את VICO</div>
-      <h2 class="feel__heading">האיטלקייה השכונתית החדשה שלכם.</h2>
-      <p class="feel__heading">הטעמים שאתם אוהבים ומכירים, <span class="feel__heading--accent">עם טוויסט חדש.</span></p>
+      <h2 class="feel__heading">השכונה מתחדשת ואנחנו מתרגשים לפתוח אתכם פרק חדש!</h2>
     </div>
-    <p class="feel__body">פיצה חמה ישר מהטאבון, פסטה טרייה שמכינים כאן, מנות שכיף לפתוח איתן שולחן וכוס יין שתמיד מובילה לעוד אחת. מקום לבוא אליו רעבים, לפגוש את מי שאוהבים, ולהישאר קצת יותר ממה שתכננתם.</p>
+    <p class="feel__body">שינינו את השם והכנסנו אווירה חדשה אבל הבצק, הרוטב והטעמים שאתם אוהבים נשארים בדיוק אותו דבר. לצד הפיצות האייקוניות, מחכים לכם שדרוגים מרעננים, מנות חדשות ואווירה ביתית ומזמינה.</p>
   </div>
 
   <div class="carousel" id="gallery" aria-label="גלריית VICO">
@@ -335,15 +333,20 @@ a:hover{color:var(--tomato)}
   <div class="signup__wrap">
     <div class="signup__eyebrow">VICO'S Friends</div>
     <h2 class="signup__title" id="signup-title">כמו באיטליה, אבל VIP</h2>
-    <p class="signup__sub">מצטרפים עכשיו למועדון החברים של VICO ונהנים מהטבות, מתנת ימי הולדת וגישה ראשונה לכל האירועים שיהפכו כל ארוחה לחוויה איטלקית אמיתית.</p>
+    <p class="signup__sub">כדי שתמיד תרגישו חלק מהמשפחה, אנחנו מזמינים אתכם להצטרף למועדון החברים השכונתי שלנו! נרשמים עכשיו ומקבלים הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות, מתנת יום הולדת ופינוקים ששמורים רק לחברים שלנו.</p>
 
     <div class="signup__card">
       <!-- Form state -->
       <form class="form" id="signup-form" novalidate>
-        <label class="field" for="f-first">
-          <span class="field__label">שם פרטי</span>
-          <input class="field__input" id="f-first" name="firstName" type="text"
-                 autocomplete="given-name" placeholder="איך קוראים לכם?" />
+        <label class="field" for="f-name">
+          <span class="field__label">שם מלא</span>
+          <input class="field__input" id="f-name" name="fullName" type="text"
+                 autocomplete="name" placeholder="השם המלא שלכם" />
+        </label>
+        <label class="field" for="f-email">
+          <span class="field__label">אימייל</span>
+          <input class="field__input" id="f-email" name="email" type="email"
+                 inputmode="email" autocomplete="email" placeholder="you@email.com" />
         </label>
         <label class="field" for="f-phone">
           <span class="field__label">טלפון</span>
@@ -355,7 +358,7 @@ a:hover{color:var(--tomato)}
           <span class="check__box" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <span class="check__label">צרפו אותי לחבר מועדון ועדכנו כשמשהו קורה</span>
+          <span class="check__label">אני מאשר/ת קבלת עדכונים, מבצעים, הטבות ותוכן שיווקי מ-Vico באמצעות דוא"ל, SMS, או אמצעי תקשורת אחרים. ידוע לי כי אוכל להסיר את עצמי מרשימת התפוצה בכל עת.</span>
         </label>
         <div class="form__err" id="form-err" role="alert" hidden></div>
         <button type="submit" class="btn btn--primary btn--lg btn--block">אני בפנים</button>
@@ -430,7 +433,7 @@ a:hover{color:var(--tomato)}
     waText: "משהו טוב מתחמם בשכונה 🍕",
     // Google Apps Script Web App URL (…/exec) that appends each signup to the club sheet.
     // Empty = store locally only (no send). Paste the deployed /exec URL here to go live.
-    signupEndpoint: "https://script.google.com/macros/s/AKfycbycIZ-BnyO7kdnKUyOxrItirYfSax1jfhDtu9kljsQUvRnq1xLTFiGfqNjjArVja34WOw/exec"
+    signupEndpoint: "https://script.google.com/macros/s/AKfycbz9GsPRooDKvUQAWHnkBdZQ3AcUBJtvUvBkkAT-eoRQmES4NuouVCWNYcboZTFWoMpGnw/exec"
   };
 
   // ---- analytics: push to dataLayer, same event names as the DC source ----
@@ -450,7 +453,8 @@ a:hover{color:var(--tomato)}
   // ---- element refs ----
   var form   = document.getElementById("signup-form");
   var done   = document.getElementById("signup-done");
-  var elFirst= document.getElementById("f-first");
+  var elName = document.getElementById("f-name");
+  var elEmail = document.getElementById("f-email");
   var elPhone= document.getElementById("f-phone");
   var elConsent = document.getElementById("f-consent");
   var elErr  = document.getElementById("form-err");
@@ -482,23 +486,28 @@ a:hover{color:var(--tomato)}
       track("hero_cta_click");
       var el = document.getElementById("vico-signup");
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
-      setTimeout(function(){ try { elFirst.focus({ preventScroll: true }); } catch(e){} }, 500);
+      setTimeout(function(){ try { elName.focus({ preventScroll: true }); } catch(e){} }, 500);
     });
   });
 
   // ---- submit ----
   form.addEventListener("submit", function(ev){
     ev.preventDefault();
-    var name = (elFirst.value || "").trim();
+    var name = (elName.value || "").trim();
+    var email = (elEmail.value || "").trim();
     var digits = (elPhone.value || "").replace(/\D/g, "");
     if (!name){
-      return showError("רק שם פרטי — כדי שנדע למי שומרים מקום.");
+      return showError("נשמח לשם המלא שלכם.");
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      return showError("האימייל לא נראה תקין — נסו שוב.");
     }
     if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0)){
       return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
     }
     var payload = {
-      firstName: name,
+      fullName: name,
+      email: email,
       phone: digits,
       marketingConsent: !!elConsent.checked,
       source: campaign.source,
@@ -532,7 +541,8 @@ a:hover{color:var(--tomato)}
       showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
     });
   });
-  elFirst.addEventListener("input", clearError);
+  elName.addEventListener("input", clearError);
+  elEmail.addEventListener("input", clearError);
   elPhone.addEventListener("input", clearError);
 
   // ---- whatsapp share ----
