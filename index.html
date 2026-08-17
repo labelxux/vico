@@ -315,7 +315,7 @@ a:hover{color:var(--tomato)}
       <div class="feel__kicker">תכירו את VICO</div>
       <h2 class="feel__heading">השכונה מתחדשת ואנחנו מתרגשים לפתוח אתכם פרק חדש!</h2>
     </div>
-    <p class="feel__body">שינינו את השם והכנסנו אווירה חדשה אבל הבצק, הרוטב והטעמים שאתם אוהבים נשארים בדיוק אותו דבר. לצד הפיצות האייקוניות, מחכים לכם שדרוגים מרעננים, מנות חדשות ואווירה ביתית ומזמינה.</p>
+    <p class="feel__body">שינינו את השם, הכנסנו אווירה חדשה אבל הבצק, הרוטב והטעמים המוכרים והאהובים נשארו בדיוק אותו דבר. לצד הפיצות האייקוניות, מחכות מנות חדשות, שדרוגים מרעננים ואווירה ביתית מפנקת.</p>
   </div>
 
   <div class="carousel" id="gallery" aria-label="גלריית VICO">
@@ -339,7 +339,7 @@ a:hover{color:var(--tomato)}
   <div class="signup__wrap">
     <div class="signup__eyebrow">VICO'S Friends</div>
     <h2 class="signup__title" id="signup-title">כמו באיטליה, אבל VIP</h2>
-    <p class="signup__sub">כדי שתמיד תרגישו חלק מהמשפחה, אנחנו מזמינים אתכם להצטרף למועדון החברים השכונתי שלנו! נרשמים עכשיו ומקבלים הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות, מתנת יום הולדת ופינוקים ששמורים רק לחברים שלנו.</p>
+    <p class="signup__sub">כדי שתמיד תרגישו חלק מהמשפחה, הצטרפו למועדון החברים השכונתי שלנו! הירשמו עכשיו וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות, מתנת יום הולדת ופינוקים ששמורים רק לחברים ולחברות שלנו.</p>
 
     <div class="signup__card">
       <!-- Form state -->
@@ -502,6 +502,11 @@ a:hover{color:var(--tomato)}
     var name = (elName.value || "").trim();
     var email = (elEmail.value || "").trim();
     var digits = (elPhone.value || "").replace(/\D/g, "");
+    // Normalize Israeli country-code prefixes (972 / +972, with or without a
+    // leading 0 after it) — autofill frequently inserts these — back to 05X.
+    if (digits.indexOf("972") === 0) {
+      digits = "0" + digits.slice(3).replace(/^0/, "");
+    }
     if (!name){
       return showError("נשמח לשם המלא שלכם.");
     }
