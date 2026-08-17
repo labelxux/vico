@@ -2,9 +2,16 @@
  * VICO — "Friends of VICO" club signups → Google Sheet
  * ----------------------------------------------------
  * Runs on Google's servers via Apps Script and appends one row per signup.
- * This version is field-agnostic: it writes whatever keys the website sends
- * and adds a new column automatically the first time it sees a new field —
- * so you should never have to touch this again when the form changes.
+ * Field-agnostic: it writes whatever keys the website sends and adds a new
+ * column automatically the first time it sees a new field.
+ *
+ * Also enforces, server-side (in addition to the site's own client-side
+ * checks):
+ *   - Both consent checkboxes (marketingConsent + termsAccepted) must be
+ *     true, or the signup is rejected.
+ *   - One signup per phone number — a repeat phone doesn't add a new row;
+ *     it returns { ok:true, duplicate:true } so the site can show an
+ *     "already a member" message instead of silently double-adding.
  *
  * Setup / update:
  *   1. In your Google Sheet: Extensions ▸ Apps Script.
@@ -13,8 +20,12 @@
  *      (Keep Execute as: Me, Who has access: Anyone. The /exec URL stays the same.)
  *
  * Current fields sent by the site:
- *   createdAt · fullName · email · phone · marketingConsent · source · campaign
+ *   createdAt · fullName · email · phone · marketingConsent · termsAccepted · source · campaign
  */
+
+function normalizePhone_(v) {
+  return String(v || '').replace(/\D/g, '').replace(/^0*/, '');
+}
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -24,6 +35,11 @@ function doPost(e) {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ss.getSheetByName('Leads') || ss.getSheets()[0];
     var data = JSON.parse(e.postData.contents);
+
+    if (!data.marketingConsent || !data.termsAccepted) {
+      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: 'consent_required' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
     // Read (or create) the header row.
     var headers = sheet.getLastRow() > 0
@@ -41,16 +57,29 @@ function doPost(e) {
       }
     });
 
+    // Duplicate check: same normalized phone already in the sheet.
+    var phoneCol = headers.indexOf('phone');
+    if (phoneCol !== -1 && sheet.getLastRow() > 1) {
+      var incoming = normalizePhone_(data.phone);
+      var existing = sheet.getRange(2, phoneCol + 1, sheet.getLastRow() - 1, 1).getValues();
+      for (var i = 0; i < existing.length; i++) {
+        if (incoming && normalizePhone_(existing[i][0]) === incoming) {
+          return ContentService.createTextOutput(JSON.stringify({ ok: true, duplicate: true }))
+            .setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+    }
+
     // Build the row in header order.
     var row = headers.map(function (h) {
       if (h === 'createdAt') return data.createdAt || new Date().toISOString();
-      if (h === 'marketingConsent') return data.marketingConsent ? 'כן' : 'לא';
+      if (h === 'marketingConsent' || h === 'termsAccepted') return data[h] ? 'כן' : 'לא';
       if (h === 'phone') return data.phone ? "'" + data.phone : '';   // keep leading 0 as text
       return data[h] != null ? data[h] : '';
     });
     sheet.appendRow(row);
 
-    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, duplicate: false }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))

@@ -116,7 +116,9 @@ a:hover{color:var(--tomato)}
 .check input:checked + .check__box{background:var(--deep-green);border-color:var(--deep-green)}
 .check input:checked + .check__box svg{opacity:1;transform:scale(1)}
 .check input:focus-visible + .check__box{outline:3px solid var(--focus-ring);outline-offset:2px}
-.check__label{font:400 15px/1.45 var(--font-body);color:var(--sage-green)}
+.check__label{font:400 12px/1.4 var(--font-body);color:var(--sage-green)}
+.check__label a{color:var(--deep-green);font-weight:700;text-decoration-thickness:1.5px;text-underline-offset:2px}
+.check__label a:hover{color:var(--tomato)}
 
 /* Image placeholder slot (brand placeholder convention) */
 .slot{
@@ -232,6 +234,7 @@ a:hover{color:var(--tomato)}
 .perk__title{font:900 clamp(17px,2.4vw,20px)/1.15 var(--font-body);color:var(--cream)}
 .perk__desc{font:400 14px/1.45 var(--font-body);color:var(--light-sage)}
 @media (max-width:560px){.perks{grid-template-columns:1fr}}
+.perks__note{margin:16px 0 0;text-align:center;font:400 14px/1.5 var(--font-body);color:var(--light-sage)}
 .signup__card{
   margin-top:14px;background:var(--white);color:var(--deep-green);
   border-radius:var(--radius-xl);padding:30px 26px;
@@ -375,6 +378,13 @@ a:hover{color:var(--tomato)}
           </span>
           <span class="check__label">אני מאשר/ת קבלת עדכונים, מבצעים, הטבות ותוכן שיווקי מ-Vico באמצעות דוא"ל, SMS, או אמצעי תקשורת אחרים. ידוע לי כי אוכל להסיר את עצמי מרשימת התפוצה בכל עת.</span>
         </label>
+        <label class="check">
+          <input type="checkbox" id="f-terms" />
+          <span class="check__box" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="check__label">קראתי והבנתי את <a href="assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="assets/VICO-privacy-policy.docx" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
+        </label>
         <div class="form__err" id="form-err" role="alert" hidden></div>
         <button type="submit" class="btn btn--primary btn--lg btn--block">אני בפנים</button>
       </form>
@@ -393,19 +403,20 @@ a:hover{color:var(--tomato)}
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת הצטרפות</div>
-        <div class="perk__desc">12% הנחה בהזמנה הראשונה</div>
+        <div class="perk__desc">10% הנחה בהזמנה הראשונה</div>
       </div>
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת יום הולדת</div>
-        <div class="perk__desc">מנה ראשונה / כוס יין הבית</div>
+        <div class="perk__desc">קינוח מתנה לבחירה</div>
       </div>
       <div class="perk">
         <span class="perk__mark" aria-hidden="true">✦</span>
-        <div class="perk__title">הנחה קבועה</div>
-        <div class="perk__desc">5% הנחה בישיבה במקום או Takeaway</div>
+        <div class="perk__title">מתנת יום נישואין</div>
+        <div class="perk__desc">2 כוסות יין הבית / בירה מהחבית</div>
       </div>
     </div>
+    <p class="perks__note">ובנוסף צבירת נקודות בכל הזמנה למימוש בהזמנות הבאות.</p>
   </div>
 </section>
 
@@ -473,6 +484,7 @@ a:hover{color:var(--tomato)}
   var elEmail = document.getElementById("f-email");
   var elPhone= document.getElementById("f-phone");
   var elConsent = document.getElementById("f-consent");
+  var elTerms = document.getElementById("f-terms");
   var elErr  = document.getElementById("form-err");
   var doneTitle = document.getElementById("done-title");
   var doneSub   = document.getElementById("done-sub");
@@ -486,8 +498,8 @@ a:hover{color:var(--tomato)}
   function showDone(already){
     form.hidden = true;
     done.hidden = false;
-    doneTitle.textContent = already ? "כבר שמור לכם מקום." : "אתם בפנים.";
-    doneSub.textContent = "כשיהיה מה לטעום, אתם תהיו הראשונים לדעת.";
+    doneTitle.textContent = already ? "כבר חברים אצלנו!" : "אתם בפנים.";
+    doneSub.textContent = already ? "המספר הזה כבר רשום למועדון — נתראה בקרוב." : "כשיהיה מה לטעום, אתם תהיו הראשונים לדעת.";
   }
 
   // ---- restore prior signup ----
@@ -526,20 +538,24 @@ a:hover{color:var(--tomato)}
     if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0)){
       return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
     }
+    if (!elConsent.checked || !elTerms.checked){
+      return showError("צריך לאשר את שני הסעיפים — קבלת עדכונים ותקנון המועדון — כדי להצטרף.");
+    }
     var payload = {
       fullName: name,
       email: email,
       phone: digits,
       marketingConsent: !!elConsent.checked,
+      termsAccepted: !!elTerms.checked,
       source: campaign.source,
       campaign: campaign.campaign,
       createdAt: new Date().toISOString()
     };
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
     clearError();
 
     // No endpoint configured yet → keep the local-only behaviour.
     if (!CONFIG.signupEndpoint) {
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
       track("signup_success");
       return showDone(false);
     }
@@ -551,20 +567,33 @@ a:hover{color:var(--tomato)}
 
     fetch(CONFIG.signupEndpoint, {
       method: "POST",
-      mode: "no-cors",
+      mode: "cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
-    }).then(function () {
-      track("signup_success");
-      showDone(false);
-    }).catch(function () {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
-      showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
-    });
+    }).then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || res.ok !== true) {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+          return showError("משהו השתבש בשליחה. נסו שוב או צרו קשר איתנו ישירות.");
+        }
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
+        if (res.duplicate) {
+          track("signup_duplicate");
+          showDone(true);
+        } else {
+          track("signup_success");
+          showDone(false);
+        }
+      })
+      .catch(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+        showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
+      });
   });
   elName.addEventListener("input", clearError);
   elEmail.addEventListener("input", clearError);
   elPhone.addEventListener("input", clearError);
+  elTerms.addEventListener("change", clearError);
 
   // ---- whatsapp share ----
   document.getElementById("share-wa").addEventListener("click", function(){
