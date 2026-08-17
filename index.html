@@ -3,13 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>VICO — משהו טוב מתחמם כאן</title>
+<title>VICO האיטלקייה החדשה בשכונה</title>
 <meta name="description" content="איטלקייה שכונתית חדשה ליד הפארק. פיצה, פסטה, יין — כשר. הצטרפו לשולחן הראשון של VICO והיו הראשונים לדעת מתי פותחים." />
 <meta name="theme-color" content="#133932" />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://vico.ltd/" />
 <meta property="og:title" content="VICO — משהו טוב מתחמם כאן" />
 <meta property="og:description" content="איטלקייה שכונתית חדשה ליד הפארק. Pizza · Pasta · Wine." />
-<link rel="icon" type="image/svg+xml" href="assets/favicon-cream-on-green.svg" />
+<meta property="og:image" content="https://vico.ltd/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="628" />
+<meta property="og:locale" content="he_IL" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="VICO — משהו טוב מתחמם כאן" />
+<meta name="twitter:description" content="איטלקייה שכונתית חדשה ליד הפארק. Pizza · Pasta · Wine." />
+<meta name="twitter:image" content="https://vico.ltd/assets/og-image.jpg" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon-cream-tomato.svg" />
 
 <!-- VICO design-system tokens -->
 <link rel="stylesheet" href="ds/tokens/fig-tokens.css" />
@@ -436,7 +445,8 @@ a:hover{color:var(--tomato)}
   var CONFIG = {
     jobsPhone: "0506545363",
     instagramUrl: "https://www.instagram.com/",
-    waText: "משהו טוב מתחמם בשכונה 🍕",
+    waText: "יש איטלקייה חדשה בשכונה!",
+    siteUrl: "https://vico.ltd",
     // Google Apps Script Web App URL (…/exec) that appends each signup to the club sheet.
     // Empty = store locally only (no send). Paste the deployed /exec URL here to go live.
     signupEndpoint: "https://script.google.com/macros/s/AKfycbz9GsPRooDKvUQAWHnkBdZQ3AcUBJtvUvBkkAT-eoRQmES4NuouVCWNYcboZTFWoMpGnw/exec"
@@ -559,7 +569,8 @@ a:hover{color:var(--tomato)}
   // ---- whatsapp share ----
   document.getElementById("share-wa").addEventListener("click", function(){
     track("whatsapp_share");
-    window.open("https://wa.me/?text=" + encodeURIComponent(CONFIG.waText), "_blank", "noopener");
+    var msg = CONFIG.waText + "\n" + CONFIG.siteUrl;
+    window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
 
   // ---- jobs + instagram wiring from config ----
