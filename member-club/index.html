@@ -103,7 +103,6 @@ a:hover{color:var(--tomato)}
   padding:clamp(28px,4vw,56px) clamp(20px,4vw,40px) calc(28px + env(safe-area-inset-bottom));}
 .kiosk__logo{height:44px;width:auto;margin-bottom:clamp(20px,3vw,32px);filter:drop-shadow(0 4px 14px rgba(0,0,0,.25))}
 .kiosk__wrap{width:100%;max-width:1040px;color:var(--cream);text-align:center}
-.kiosk__eyebrow{font:600 13px/1 var(--font-body);letter-spacing:.34em;text-transform:uppercase;color:var(--rose);direction:ltr}
 .kiosk__title{margin:10px 0 0;font-family:var(--font-body);font-weight:900;
   font-size:clamp(30px,4.6vw,48px);line-height:1.1;text-wrap:balance}
 .kiosk__sub{margin:12px auto 0;max-width:640px;font:400 17px/1.6 var(--font-body);color:var(--light-sage)}
@@ -136,7 +135,14 @@ a:hover{color:var(--tomato)}
 .done__sub{margin:0;max-width:44ch;font:400 16px/1.55 var(--font-body);color:var(--sage-green)}
 .done__timer{margin-top:6px;font:400 13px/1.4 var(--font-body);color:var(--light-sage)}
 
-.kiosk__foot{margin-top:24px;font:400 13px/1.6 var(--font-body);color:var(--light-sage)}
+.footer{background:var(--deep-green);color:var(--cream);
+  padding:44px 24px calc(52px + env(safe-area-inset-bottom));
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px}
+.footer__mark{width:52px;height:52px;border-radius:14px}
+.footer__meta{display:flex;flex-direction:column;gap:2px}
+.footer__meta div{font:400 14px/1.7 var(--font-body);color:var(--light-sage)}
+.footer__links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font:700 14px/1 var(--font-body)}
+.footer__links a{color:var(--cream);text-underline-offset:4px}
 </style>
 </head>
 <body>
@@ -145,9 +151,8 @@ a:hover{color:var(--tomato)}
   <img class="kiosk__logo" src="../assets/logo-clean-color.svg" alt="VICO" />
 
   <div class="kiosk__wrap">
-    <div class="kiosk__eyebrow">VICO'S Friends</div>
     <h1 class="kiosk__title">מועדון החברים של VICO</h1>
-    <p class="kiosk__sub">הצטרפו עכשיו — זה לוקח דקה — וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות ופינוקים ששמורים רק למשפחה שלנו.</p>
+    <p class="kiosk__sub">הצטרפו עכשיו וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות ופינוקים ששמורים רק למשפחה שלנו.</p>
 
     <div class="perks">
       <div class="perk">
@@ -226,9 +231,21 @@ a:hover{color:var(--tomato)}
       </div>
     </div>
 
-    <p class="kiosk__foot">VICO — אבן עזרא 17, הרצליה</p>
   </div>
 </div>
+
+<footer class="footer" aria-label="פרטי VICO">
+  <img class="footer__mark" src="../assets/favicon-cream-on-green.svg" alt="VICO" />
+  <div class="footer__meta">
+    <div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>
+    <div>אבן עזרא 17, הרצליה</div>
+  </div>
+  <div class="footer__links">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">אינסטגרם</a>
+    <a href="#">הצהרת נגישות</a>
+    <a href="#">מדיניות פרטיות</a>
+  </div>
+</footer>
 
 <script>
 (function(){

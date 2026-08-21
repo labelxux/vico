@@ -89,6 +89,11 @@ function doPost(e) {
   }
 }
 
+// Bump this string whenever you deploy, so a plain GET to the /exec URL
+// (e.g. in a browser tab) tells you which version is actually live —
+// no form submission needed to check.
+var SCRIPT_VERSION = 'v2 — consent-required + phone-dedupe';
+
 function doGet() {
-  return ContentService.createTextOutput('VICO club endpoint is live.');
+  return ContentService.createTextOutput('VICO club endpoint is live. (' + SCRIPT_VERSION + ')');
 }
