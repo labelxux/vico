@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+<title>מועדון החברים של VICO — הצטרפות</title>
+<meta name="description" content="הצטרפו למועדון החברים של VICO וקבלו הנחות קבועות, מתנת יום הולדת, מתנת יום נישואין ועדכונים על מנות חדשות." />
+<meta name="theme-color" content="#133932" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="../assets/favicon-cream-tomato.svg" />
+
+<!-- VICO design-system tokens -->
+<link rel="stylesheet" href="../ds/tokens/fig-tokens.css" />
+<link rel="stylesheet" href="../ds/tokens/colors.css" />
+<link rel="stylesheet" href="../ds/tokens/typography.css" />
+<link rel="stylesheet" href="../ds/tokens/spacing.css" />
+
+<style>
+/* ---------- Reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-body);
+  color:var(--deep-green);
+  background:var(--deep-green);
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+.form input{user-select:text}
+img{max-width:100%;display:block}
+a{color:var(--deep-green)}
+a:hover{color:var(--tomato)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* ---------- Components (shared with main site) ---------- */
+.btn{
+  --btn-bg:var(--tomato);--btn-fg:var(--white);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-body);font-weight:700;line-height:1;letter-spacing:.01em;
+  border:none;border-radius:var(--radius-pill);
+  background:var(--btn-bg);color:var(--btn-fg);
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:filter var(--dur-fast,140ms) var(--ease-standard,ease),
+             transform var(--dur-fast,140ms) var(--ease-standard,ease);
+  box-shadow:0 8px 22px rgba(239,64,69,.28);
+}
+.btn:hover{filter:brightness(.92);color:var(--btn-fg)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.btn--xl{font-size:19px;padding:22px 34px}
+.btn--md{font-size:15px;padding:14px 24px}
+.btn--block{width:100%}
+.btn--secondary{--btn-bg:transparent;--btn-fg:var(--deep-green);
+  border:var(--stroke-thin) solid var(--deep-green);box-shadow:none}
+.btn--secondary:hover{--btn-bg:var(--deep-green);--btn-fg:var(--cream);filter:none}
+
+.field{display:flex;flex-direction:column;gap:8px}
+.field__label{font:700 14px/1.2 var(--font-body);letter-spacing:.02em;color:var(--deep-green)}
+.field__label small{font-weight:400;color:var(--sage-green);letter-spacing:0}
+.field__input{
+  width:100%;font:400 18px/1.3 var(--font-body);color:var(--deep-green);
+  background:var(--white);
+  border:var(--stroke-thin) solid var(--light-sage);
+  border-radius:var(--radius-md);
+  padding:17px 16px;
+  transition:border-color var(--dur-fast,140ms) var(--ease-standard,ease),
+             box-shadow var(--dur-fast,140ms) var(--ease-standard,ease);
+}
+.field__input::placeholder{color:var(--sage-green);opacity:.7}
+.field__input:focus{outline:none;border-color:var(--deep-green);box-shadow:0 0 0 3px rgba(19,57,50,.12)}
+.field__input[type="tel"]{direction:ltr;text-align:right}
+.field__input[type="date"]{text-align:start}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.field-row{grid-template-columns:1fr}}
+
+.check{display:flex;align-items:flex-start;gap:12px;cursor:pointer;user-select:none}
+.check input{position:absolute;opacity:0;width:1px;height:1px}
+.check__box{
+  flex:0 0 auto;width:26px;height:26px;margin-top:1px;
+  border:var(--stroke-thin) solid var(--sage-green);border-radius:var(--radius-sm);
+  background:var(--white);display:flex;align-items:center;justify-content:center;
+  transition:background var(--dur-fast,140ms) var(--ease-standard,ease),
+             border-color var(--dur-fast,140ms) var(--ease-standard,ease);
+}
+.check__box svg{width:16px;height:16px;opacity:0;transform:scale(.6);
+  transition:opacity var(--dur-fast,140ms) ease,transform var(--dur-fast,140ms) var(--ease-standard,ease)}
+.check input:checked + .check__box{background:var(--deep-green);border-color:var(--deep-green)}
+.check input:checked + .check__box svg{opacity:1;transform:scale(1)}
+.check input:focus-visible + .check__box{outline:3px solid var(--focus-ring);outline-offset:2px}
+.check__label{font:400 13px/1.45 var(--font-body);color:var(--sage-green)}
+.check__label a{color:var(--deep-green);font-weight:700;text-decoration-thickness:1.5px;text-underline-offset:2px}
+.check__label a:hover{color:var(--tomato)}
+
+/* ---------- Page layout ---------- */
+.kiosk{min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+  padding:clamp(28px,4vw,56px) clamp(20px,4vw,40px) calc(28px + env(safe-area-inset-bottom));}
+.kiosk__logo{height:44px;width:auto;margin-bottom:clamp(20px,3vw,32px);filter:drop-shadow(0 4px 14px rgba(0,0,0,.25))}
+.kiosk__wrap{width:100%;max-width:1040px;color:var(--cream);text-align:center}
+.kiosk__eyebrow{font:600 13px/1 var(--font-body);letter-spacing:.34em;text-transform:uppercase;color:var(--rose);direction:ltr}
+.kiosk__title{margin:10px 0 0;font-family:var(--font-body);font-weight:900;
+  font-size:clamp(30px,4.6vw,48px);line-height:1.1;text-wrap:balance}
+.kiosk__sub{margin:12px auto 0;max-width:640px;font:400 17px/1.6 var(--font-body);color:var(--light-sage)}
+
+.perks{margin:clamp(28px,4vw,40px) 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
+.perk{background:rgba(254,243,235,.05);border:var(--stroke-thin) solid rgba(175,193,187,.32);
+  border-radius:var(--radius-lg);padding:20px 14px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.perk__mark{color:var(--rose);font-size:16px;line-height:1}
+.perk__title{font:900 16px/1.15 var(--font-body);color:var(--cream)}
+.perk__desc{font:400 13px/1.4 var(--font-body);color:var(--light-sage)}
+@media (max-width:640px){.perks{grid-template-columns:1fr}}
+.perks__note{margin:14px 0 0;font:400 13px/1.5 var(--font-body);color:var(--light-sage)}
+
+.kiosk__card{
+  margin-top:clamp(28px,4vw,40px);background:var(--white);color:var(--deep-green);
+  border-radius:var(--radius-xl);padding:clamp(24px,4vw,40px);
+  box-shadow:var(--shadow-card);text-align:start;width:100%;
+}
+.form{display:flex;flex-direction:column;gap:16px}
+.form__err{font:700 14px/1.4 var(--font-body);color:var(--tomato)}
+[hidden]{display:none !important}
+
+.done{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:28px 8px}
+.done__mark{width:64px;height:64px;border-radius:50%;background:var(--deep-green);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.done__mark svg{width:32px;height:32px;stroke:var(--cream);stroke-width:2.6;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.done__title{font-family:var(--font-body);font-weight:900;font-size:clamp(26px,4vw,34px);line-height:1.15}
+.done__sub{margin:0;max-width:44ch;font:400 16px/1.55 var(--font-body);color:var(--sage-green)}
+.done__timer{margin-top:6px;font:400 13px/1.4 var(--font-body);color:var(--light-sage)}
+
+.kiosk__foot{margin-top:24px;font:400 13px/1.6 var(--font-body);color:var(--light-sage)}
+</style>
+</head>
+<body>
+
+<div class="kiosk">
+  <img class="kiosk__logo" src="../assets/logo-clean-color.svg" alt="VICO" />
+
+  <div class="kiosk__wrap">
+    <div class="kiosk__eyebrow">VICO'S Friends</div>
+    <h1 class="kiosk__title">מועדון החברים של VICO</h1>
+    <p class="kiosk__sub">הצטרפו עכשיו — זה לוקח דקה — וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות ופינוקים ששמורים רק למשפחה שלנו.</p>
+
+    <div class="perks">
+      <div class="perk">
+        <span class="perk__mark" aria-hidden="true">✦</span>
+        <div class="perk__title">מתנת הצטרפות</div>
+        <div class="perk__desc">10% הנחה בהזמנה הראשונה</div>
+      </div>
+      <div class="perk">
+        <span class="perk__mark" aria-hidden="true">✦</span>
+        <div class="perk__title">מתנת יום הולדת</div>
+        <div class="perk__desc">קינוח מתנה לבחירה</div>
+      </div>
+      <div class="perk">
+        <span class="perk__mark" aria-hidden="true">✦</span>
+        <div class="perk__title">מתנת יום נישואין</div>
+        <div class="perk__desc">2 כוסות יין הבית / בירה מהחבית</div>
+      </div>
+    </div>
+    <p class="perks__note">ובנוסף צבירת נקודות בכל הזמנה למימוש בהזמנות הבאות.</p>
+
+    <div class="kiosk__card">
+      <!-- Form state -->
+      <form class="form" id="signup-form" novalidate>
+        <label class="field" for="f-name">
+          <span class="field__label">שם מלא</span>
+          <input class="field__input" id="f-name" name="fullName" type="text"
+                 autocomplete="name" placeholder="השם המלא שלכם" />
+        </label>
+        <label class="field" for="f-email">
+          <span class="field__label">אימייל</span>
+          <input class="field__input" id="f-email" name="email" type="email"
+                 inputmode="email" autocomplete="email" placeholder="you@email.com" />
+        </label>
+        <label class="field" for="f-phone">
+          <span class="field__label">טלפון</span>
+          <input class="field__input" id="f-phone" name="phone" type="tel"
+                 inputmode="tel" autocomplete="tel" placeholder="050-0000000" />
+        </label>
+        <div class="field-row">
+          <label class="field" for="f-birthday">
+            <span class="field__label">תאריך לידה <small>(אופציונלי)</small></span>
+            <input class="field__input" id="f-birthday" name="birthDate" type="date" />
+          </label>
+          <label class="field" for="f-anniversary">
+            <span class="field__label">תאריך נישואין <small>(אופציונלי)</small></span>
+            <input class="field__input" id="f-anniversary" name="anniversaryDate" type="date" />
+          </label>
+        </div>
+        <label class="check">
+          <input type="checkbox" id="f-consent" checked />
+          <span class="check__box" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="check__label">אני מאשר/ת קבלת עדכונים, מבצעים, הטבות ותוכן שיווקי מ-Vico באמצעות דוא"ל, SMS, או אמצעי תקשורת אחרים. ידוע לי כי אוכל להסיר את עצמי מרשימת התפוצה בכל עת.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" id="f-terms" />
+          <span class="check__box" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="check__label">קראתי והבנתי את <a href="../assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="../assets/VICO-privacy-policy.docx" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
+        </label>
+        <div class="form__err" id="form-err" role="alert" hidden></div>
+        <button type="submit" class="btn btn--primary btn--xl btn--block">הצטרפות למועדון</button>
+      </form>
+
+      <!-- Success state -->
+      <div class="done" id="signup-done" hidden>
+        <div class="done__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <div class="done__title" id="done-title">ברוכים הבאים למשפחה!</div>
+        <p class="done__sub" id="done-sub">ההטבות שלכם מחכות בביקור הבא. נתראה בקרוב ✦</p>
+        <button type="button" class="btn btn--secondary btn--md" id="reset-btn">הרשמה נוספת</button>
+        <div class="done__timer" id="done-timer"></div>
+      </div>
+    </div>
+
+    <p class="kiosk__foot">VICO — אבן עזרא 17, הרצליה</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CONFIG = {
+    signupEndpoint: "https://script.google.com/macros/s/AKfycbz9GsPRooDKvUQAWHnkBdZQ3AcUBJtvUvBkkAT-eoRQmES4NuouVCWNYcboZTFWoMpGnw/exec"
+  };
+
+  var campaign = { source: "member-club-kiosk", campaign: "" };
+  try {
+    var p = new URLSearchParams(window.location.search);
+    if (p.get("source")) campaign.source = p.get("source");
+    campaign.campaign = p.get("campaign") || "";
+  } catch (e) {}
+  function track(name, data){
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: name }, campaign, data || {}));
+    } catch (e) {}
+  }
+
+  var form   = document.getElementById("signup-form");
+  var done   = document.getElementById("signup-done");
+  var elName = document.getElementById("f-name");
+  var elEmail = document.getElementById("f-email");
+  var elPhone = document.getElementById("f-phone");
+  var elBirthday = document.getElementById("f-birthday");
+  var elAnniversary = document.getElementById("f-anniversary");
+  var elConsent = document.getElementById("f-consent");
+  var elTerms = document.getElementById("f-terms");
+  var elErr  = document.getElementById("form-err");
+  var doneTitle = document.getElementById("done-title");
+  var doneSub   = document.getElementById("done-sub");
+  var doneTimer = document.getElementById("done-timer");
+
+  function showError(msg){ elErr.textContent = msg; elErr.hidden = false; }
+  function clearError(){ elErr.hidden = true; elErr.textContent = ""; }
+
+  // Kiosk = shared device for many different guests: never pre-fill or skip
+  // the form based on a previous visitor's browser storage.
+  var AUTO_RESET_SECONDS = 12;
+  var resetTimeoutId = null, resetIntervalId = null;
+
+  function resetForm(){
+    if (resetTimeoutId) clearTimeout(resetTimeoutId);
+    if (resetIntervalId) clearInterval(resetIntervalId);
+    form.reset();
+    elConsent.checked = true;
+    elTerms.checked = false;
+    clearError();
+    var submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "הצטרפות למועדון"; }
+    done.hidden = true;
+    form.hidden = false;
+    try { elName.focus({ preventScroll: true }); } catch (e) {}
+  }
+
+  function showDone(already){
+    form.hidden = true;
+    done.hidden = false;
+    doneTitle.textContent = already ? "כבר חברים אצלנו!" : "ברוכים הבאים למשפחה!";
+    doneSub.textContent = already
+      ? "המספר הזה כבר רשום למועדון — ההטבות מחכות לכם."
+      : "ההטבות שלכם מחכות בביקור הבא. נתראה בקרוב ✦";
+
+    var remaining = AUTO_RESET_SECONDS;
+    doneTimer.textContent = "המסך יתאפס בעוד " + remaining + " שניות…";
+    resetIntervalId = setInterval(function(){
+      remaining -= 1;
+      if (remaining > 0) doneTimer.textContent = "המסך יתאפס בעוד " + remaining + " שניות…";
+    }, 1000);
+    resetTimeoutId = setTimeout(resetForm, AUTO_RESET_SECONDS * 1000);
+  }
+
+  document.getElementById("reset-btn").addEventListener("click", resetForm);
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var name = (elName.value || "").trim();
+    var email = (elEmail.value || "").trim();
+    var digits = (elPhone.value || "").replace(/\D/g, "");
+    if (digits.indexOf("972") === 0) {
+      digits = "0" + digits.slice(3).replace(/^0/, "");
+    }
+    if (!name){
+      return showError("נשמח לשם המלא שלכם.");
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      return showError("האימייל לא נראה תקין — נסו שוב.");
+    }
+    if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0)){
+      return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
+    }
+    if (!elConsent.checked || !elTerms.checked){
+      return showError("צריך לאשר את שני הסעיפים — קבלת עדכונים ותקנון המועדון — כדי להצטרף.");
+    }
+    var payload = {
+      fullName: name,
+      email: email,
+      phone: digits,
+      birthDate: elBirthday.value || "",
+      anniversaryDate: elAnniversary.value || "",
+      marketingConsent: !!elConsent.checked,
+      termsAccepted: !!elTerms.checked,
+      source: campaign.source,
+      campaign: campaign.campaign,
+      createdAt: new Date().toISOString()
+    };
+    clearError();
+
+    if (!CONFIG.signupEndpoint) {
+      track("signup_success");
+      return showDone(false);
+    }
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var origLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "רגע…"; }
+
+    fetch(CONFIG.signupEndpoint, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || res.ok !== true) {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+          return showError("משהו השתבש בשליחה. נסו שוב או פנו לצוות.");
+        }
+        if (res.duplicate) {
+          track("signup_duplicate");
+          showDone(true);
+        } else {
+          track("signup_success");
+          showDone(false);
+        }
+      })
+      .catch(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+        showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
+      });
+  });
+  elName.addEventListener("input", clearError);
+  elEmail.addEventListener("input", clearError);
+  elPhone.addEventListener("input", clearError);
+  elTerms.addEventListener("change", clearError);
+
+  track("kiosk_view");
+
+  // Best-effort: keep the tablet screen awake while the kiosk page is open.
+  if ("wakeLock" in navigator) {
+    var wakeLock = null;
+    function requestWakeLock(){
+      navigator.wakeLock.request("screen").then(function(wl){ wakeLock = wl; }).catch(function(){});
+    }
+    requestWakeLock();
+    document.addEventListener("visibilitychange", function(){
+      if (document.visibilityState === "visible") requestWakeLock();
+    });
+  }
+})();
+</script>
+</body>
+</html>
