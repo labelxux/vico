@@ -102,7 +102,7 @@ a:hover{color:var(--tomato)}
 .kiosk{min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   padding:clamp(28px,4vw,56px) clamp(20px,4vw,40px) calc(28px + env(safe-area-inset-bottom));}
 .kiosk__logo{height:44px;width:auto;margin-bottom:clamp(20px,3vw,32px);filter:drop-shadow(0 4px 14px rgba(0,0,0,.25))}
-.kiosk__wrap{width:100%;max-width:1040px;color:var(--cream);text-align:center}
+.kiosk__wrap{width:100%;max-width:640px;margin:0 auto;color:var(--cream);text-align:center}
 .kiosk__title{margin:10px 0 0;font-family:var(--font-body);font-weight:900;
   font-size:clamp(30px,4.6vw,48px);line-height:1.1;text-wrap:balance}
 .kiosk__sub{margin:12px auto 0;max-width:640px;font:400 17px/1.6 var(--font-body);color:var(--light-sage)}
@@ -111,7 +111,7 @@ a:hover{color:var(--tomato)}
 .perk{background:rgba(254,243,235,.05);border:var(--stroke-thin) solid rgba(175,193,187,.32);
   border-radius:var(--radius-lg);padding:20px 14px;
   display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-.perk__mark{color:var(--rose);font-size:16px;line-height:1}
+.perk__mark{width:clamp(36px,8vw,44px);height:auto;display:block}
 .perk__title{font:900 16px/1.15 var(--font-body);color:var(--cream)}
 .perk__desc{font:400 13px/1.4 var(--font-body);color:var(--light-sage)}
 @media (max-width:640px){.perks{grid-template-columns:1fr}}
@@ -136,11 +136,17 @@ a:hover{color:var(--tomato)}
 .done__timer{margin-top:6px;font:400 13px/1.4 var(--font-body);color:var(--light-sage)}
 
 .footer{background:var(--deep-green);color:var(--cream);
-  padding:44px 24px calc(52px + env(safe-area-inset-bottom));
-  text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px}
+  padding:44px 24px calc(52px + env(safe-area-inset-bottom))}
+.footer__inner{
+  max-width:1100px;margin:0 auto;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:28px;
+}
+.footer__brand{display:flex;flex-direction:column;align-items:center;gap:12px}
 .footer__mark{width:52px;height:52px;border-radius:14px}
-.footer__meta{display:flex;flex-direction:column;gap:2px}
+.footer__meta{display:flex;flex-direction:column;gap:2px;align-items:center}
 .footer__meta div{font:400 14px/1.7 var(--font-body);color:var(--light-sage)}
+.footer__address{font:400 14px/1.7 var(--font-body);color:var(--light-sage);text-underline-offset:3px}
+.footer__address:hover{color:var(--cream)}
 .footer__links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font:700 14px/1 var(--font-body)}
 .footer__links a{color:var(--cream);text-underline-offset:4px}
 </style>
@@ -151,22 +157,22 @@ a:hover{color:var(--tomato)}
   <img class="kiosk__logo" src="../assets/logo-clean-color.svg" alt="VICO" />
 
   <div class="kiosk__wrap">
-    <h1 class="kiosk__title">מועדון החברים של VICO</h1>
+    <h1 class="kiosk__title">מועדון החברים של</h1>
     <p class="kiosk__sub">הצטרפו עכשיו וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות ופינוקים ששמורים רק למשפחה שלנו.</p>
 
     <div class="perks">
       <div class="perk">
-        <span class="perk__mark" aria-hidden="true">✦</span>
+        <img class="perk__mark" src="../assets/member-gift-welcome.svg" alt="" aria-hidden="true" />
         <div class="perk__title">מתנת הצטרפות</div>
         <div class="perk__desc">10% הנחה בהזמנה הראשונה</div>
       </div>
       <div class="perk">
-        <span class="perk__mark" aria-hidden="true">✦</span>
+        <img class="perk__mark" src="../assets/member-gift-birthday.svg" alt="" aria-hidden="true" />
         <div class="perk__title">מתנת יום הולדת</div>
         <div class="perk__desc">קינוח מתנה לבחירה</div>
       </div>
       <div class="perk">
-        <span class="perk__mark" aria-hidden="true">✦</span>
+        <img class="perk__mark" src="../assets/member-gift-wedding.svg" alt="" aria-hidden="true" />
         <div class="perk__title">מתנת יום נישואין</div>
         <div class="perk__desc">2 כוסות יין הבית / בירה מהחבית</div>
       </div>
@@ -235,15 +241,20 @@ a:hover{color:var(--tomato)}
 </div>
 
 <footer class="footer" aria-label="פרטי VICO">
-  <img class="footer__mark" src="../assets/favicon-cream-on-green.svg" alt="VICO" />
-  <div class="footer__meta">
-    <div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>
-    <div>אבן עזרא 17, הרצליה</div>
-  </div>
-  <div class="footer__links">
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener">אינסטגרם</a>
-    <a href="#">הצהרת נגישות</a>
-    <a href="#">מדיניות פרטיות</a>
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <img class="footer__mark" src="../assets/favicon-cream-on-green.svg" alt="VICO" />
+      <div class="footer__meta">
+        <div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>
+        <a class="footer__address" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>
+      </div>
+    </div>
+    <div class="footer__links">
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">עקבו אחרינו</a>
+      <a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">איך מגיעים?</a>
+      <a href="#">הצהרת נגישות</a>
+      <a href="#">מדיניות פרטיות</a>
+    </div>
   </div>
 </footer>
 
