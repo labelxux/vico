@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>מסיבת הפתיחה של VICO — יום חמישי 3.9</title>
+<meta name="description" content="אתם מוזמנים למסיבת הפתיחה של VICO — יום חמישי 3.9 בשעה 20:00, אבן עזרא 17 הרצליה. אשרו הגעה ושמרו לכם מקום בשולחן." />
+<meta name="theme-color" content="#133932" />
+<meta name="robots" content="noindex, nofollow" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://vico.ltd/party-invite/" />
+<meta property="og:title" content="מסיבת הפתיחה של VICO" />
+<meta property="og:description" content="יום חמישי 3.9, 20:00 ✦ אבן עזרא 17, הרצליה. שולחן, אנשים טובים, וכל מה שיצא מהתנור." />
+<meta property="og:image" content="https://vico.ltd/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="628" />
+<meta property="og:locale" content="he_IL" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="מסיבת הפתיחה של VICO" />
+<meta name="twitter:description" content="יום חמישי 3.9, 20:00 ✦ אבן עזרא 17, הרצליה." />
+<meta name="twitter:image" content="https://vico.ltd/assets/og-image.jpg" />
+<link rel="icon" type="image/svg+xml" href="../assets/favicon-cream-tomato.svg" />
+
+<!-- VICO design-system tokens -->
+<link rel="stylesheet" href="../ds/tokens/fig-tokens.css" />
+<link rel="stylesheet" href="../ds/tokens/colors.css" />
+<link rel="stylesheet" href="../ds/tokens/typography.css" />
+<link rel="stylesheet" href="../ds/tokens/spacing.css" />
+
+<style>
+/* ---------- Reset / base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font-body);
+  color:var(--deep-green);
+  background:var(--cream);
+  overflow-x:hidden;
+  min-height:100dvh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:var(--deep-green)}
+a:hover{color:var(--tomato)}
+
+/* ---------- Motion ---------- */
+@keyframes vico-drift{from{transform:scale(1.06) translateY(0.6%)}to{transform:scale(1.06) translateY(-1.4%)}}
+@keyframes vico-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.rise{animation:vico-rise .9s var(--ease-standard,ease) both}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+
+/* ---------- Shared components (mirrors index.html / member-club) ---------- */
+.btn{
+  --btn-bg:var(--tomato);--btn-fg:var(--white);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-body);font-weight:400;line-height:1;letter-spacing:.01em;
+  border:none;border-radius:var(--radius-pill);
+  background:var(--btn-bg);color:var(--btn-fg);
+  cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:filter var(--dur-fast,140ms) var(--ease-standard,ease),
+             transform var(--dur-fast,140ms) var(--ease-standard,ease);
+  box-shadow:0 8px 22px rgba(239,64,69,.28);
+}
+.btn:hover{filter:brightness(.92);color:var(--btn-fg)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.btn--lg{font-size:clamp(16px,4.2vw,19px);padding:18px 34px}
+.btn--md{font-size:15px;padding:14px 24px}
+.btn--block{width:100%}
+.btn--secondary{--btn-bg:transparent;--btn-fg:var(--cream);
+  border:var(--stroke-thin) solid var(--light-sage);box-shadow:none}
+.btn--secondary:hover{background:rgba(254,243,235,.1);filter:none}
+.btn--outline{--btn-bg:transparent;--btn-fg:var(--cream);
+  border:var(--stroke-thin) solid var(--light-sage);box-shadow:none}
+.btn--outline:hover{background:rgba(254,243,235,.1);filter:none}
+
+.field{display:flex;flex-direction:column;gap:8px}
+.field__label{font:700 13px/1.2 var(--font-body);letter-spacing:.02em;color:var(--deep-green)}
+.field__input{
+  width:100%;font:400 17px/1.3 var(--font-body);color:var(--deep-green);
+  background:var(--white);
+  border:var(--stroke-thin) solid var(--light-sage);
+  border-radius:var(--radius-md);
+  padding:15px 16px;
+  transition:border-color var(--dur-fast,140ms) var(--ease-standard,ease),
+             box-shadow var(--dur-fast,140ms) var(--ease-standard,ease);
+}
+.field__input::placeholder{color:var(--sage-green);opacity:.7}
+.field__input:focus{outline:none;border-color:var(--deep-green);box-shadow:0 0 0 3px rgba(19,57,50,.12)}
+.field__input[type="tel"]{direction:ltr;text-align:right}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  cursor:pointer;border-radius:var(--radius-pill);padding:12px 20px;
+  font:700 15px/1 var(--font-body);
+  background:var(--white);color:var(--deep-green);
+  border:var(--stroke-thin) solid var(--light-sage);
+  transition:background var(--dur-fast,140ms) var(--ease-standard,ease),
+             color var(--dur-fast,140ms) var(--ease-standard,ease),
+             border-color var(--dur-fast,140ms) var(--ease-standard,ease);
+}
+.chip.is-selected{background:var(--deep-green);color:var(--cream);border-color:var(--deep-green)}
+.chip:focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px}
+
+.form{display:flex;flex-direction:column;gap:16px;text-align:start}
+.form__err{font:700 14px/1.4 var(--font-body);color:var(--tomato)}
+.form__note{font:400 12px/1.5 var(--font-body);color:var(--sage-green);text-align:center}
+[hidden]{display:none !important}
+
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.perk{
+  background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);
+  padding:26px 22px 24px;display:flex;flex-direction:column;gap:8px;text-align:start;
+}
+.perk__mark{color:var(--tomato);font-size:17px;line-height:1}
+.perk__title{font:900 clamp(18px,2.6vw,21px)/1.15 var(--font-body);color:var(--deep-green)}
+.perk__desc{font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
+
+.done{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
+  background:var(--deep-green);color:var(--cream);border-radius:var(--radius-xl);
+  padding:clamp(30px,6vw,44px) clamp(22px,4vw,32px);}
+.done__mark{color:var(--rose);font-size:20px;line-height:1;letter-spacing:.2em}
+.done__title{font-family:var(--font-body);font-weight:900;font-size:clamp(26px,7vw,38px);line-height:1.1}
+.done__sub{margin:0;font:400 17px/1.6 var(--font-body);color:var(--light-sage);max-width:34ch}
+.done__actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+
+/* ===== 01 · Hero ===== */
+.hero{position:relative;min-height:100dvh;display:flex;flex-direction:column;background:var(--deep-green);overflow:hidden}
+.hero__media{position:absolute;inset:0;animation:vico-drift 22s ease-in-out infinite alternate}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(19,57,50,.52) 0%,rgba(19,57,50,.18) 38%,rgba(19,57,50,.86) 100%)}
+.hero__topbar{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px}
+.hero__logo{height:44px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.4))}
+.hero__labels{direction:ltr;display:flex;align-items:center;gap:9px;color:var(--cream);opacity:.92}
+.hero__labels .lab{font:700 12px/1 var(--font-body);letter-spacing:.2em}
+.hero__labels .lab--serif{font:400 19px/1 var(--font-serif);font-style:italic}
+.hero__labels .star{font-size:11px;opacity:.75}
+.hero__content{position:relative;z-index:2;margin-top:auto;
+  padding:0 24px clamp(40px,7vw,72px);display:flex;flex-direction:column;
+  align-items:flex-start;gap:18px;color:var(--cream)}
+.hero__eyebrow{display:flex;align-items:center;gap:10px;font:700 clamp(12px,3vw,14px)/1 var(--font-body);
+  letter-spacing:.26em;color:var(--rose)}
+.hero__eyebrow .star{opacity:.7}
+.hero__title{margin:0;font-family:var(--font-body);font-weight:900;font-size:clamp(40px,11vw,96px);
+  line-height:.98;letter-spacing:-.02em}
+.hero__title .accent{color:var(--rose)}
+.hero__sub{margin:0;max-width:30ch;font:300 clamp(17px,4vw,22px)/1.55 var(--font-body);color:var(--light-sage)}
+.hero__pill{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 20px;
+  border-radius:var(--radius-pill);background:rgba(254,243,235,.1);
+  border:var(--stroke-thin) solid rgba(175,193,187,.4);
+  font:700 clamp(14px,3.6vw,17px)/1 var(--font-body);color:var(--cream)}
+.hero__pill .star{color:var(--rose)}
+.hero__countdown{display:flex;gap:clamp(10px,3vw,18px);margin-top:2px}
+.hero__unit{min-width:clamp(62px,17vw,84px);padding:12px 8px 10px;border-radius:var(--radius-md);
+  background:rgba(19,57,50,.5);border:var(--stroke-thin) solid rgba(175,193,187,.28);text-align:center}
+.hero__unit-val{font:900 clamp(24px,7vw,38px)/1 var(--font-body);color:var(--cream)}
+.hero__unit-lab{margin-top:6px;font:400 11px/1 var(--font-body);letter-spacing:.16em;color:var(--light-sage)}
+.hero__cta{margin-top:6px}
+.hero__cta .btn{font-size:clamp(16px,4.2vw,19px);padding:18px 34px}
+
+/* ===== 02 · What awaits ===== */
+.awaits{background:var(--cream);padding:clamp(72px,12vw,128px) 0 clamp(56px,9vw,96px)}
+.awaits__copy{max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;
+  align-items:center;text-align:center;gap:14px}
+.awaits__art{width:clamp(150px,30vw,260px);height:auto;margin-bottom:clamp(8px,2vw,18px)}
+.awaits__kicker{font:700 clamp(13px,2.6vw,15px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato)}
+.awaits__heading{margin:0;font-family:var(--font-body);font-weight:900;font-size:clamp(30px,7vw,54px);
+  line-height:1.06;color:var(--deep-green);text-wrap:balance}
+.awaits__body{margin:8px 0 0;max-width:56ch;font:400 clamp(16px,2.4vw,19px)/1.7 var(--font-body);color:var(--deep-green)}
+.awaits__perks{max-width:1080px;margin:clamp(36px,6vw,60px) auto 0;padding:0 24px}
+
+.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin:clamp(44px,7vw,72px) 0 0}
+.carousel__track{display:flex;gap:6px;width:max-content;will-change:transform}
+.carousel__item{flex:0 0 auto;width:clamp(240px,34vw,400px);height:clamp(280px,44vh,460px);
+  margin:0;overflow:hidden;background:var(--deep-green)}
+.carousel__item img{width:100%;height:100%;object-fit:cover;display:block}
+.carousel.is-scrollable{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.carousel.is-scrollable::-webkit-scrollbar{display:none}
+
+/* ===== 03 · Details ===== */
+.details{position:relative;background:var(--deep-green);color:var(--cream);
+  padding:clamp(72px,12vw,124px) 24px clamp(80px,13vw,132px);overflow:hidden}
+.details__wrap{max-width:900px;margin:0 auto}
+.details__kicker{font:700 13px/1 var(--font-body);letter-spacing:.3em;color:var(--rose)}
+.details__heading{margin:14px 0 0;font-family:var(--font-body);font-weight:900;
+  font-size:clamp(30px,7vw,52px);line-height:1.06}
+.details__grid{margin-top:clamp(28px,5vw,44px);display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;align-items:stretch}
+.details__rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;
+  background:rgba(175,193,187,.28);border:var(--stroke-thin) solid rgba(175,193,187,.28);
+  border-radius:var(--radius-lg);overflow:hidden}
+.details__row{background:var(--deep-green);padding:24px 22px;display:flex;flex-direction:column;gap:8px}
+.details__row-label{font:700 11px/1 var(--font-body);letter-spacing:.24em;color:var(--light-sage)}
+.details__row-value{font:900 clamp(18px,2.6vw,22px)/1.25 var(--font-body);color:var(--cream)}
+.details__row-note{font:400 14px/1.55 var(--font-body);color:var(--light-sage)}
+.details__map{margin:0;background:var(--cream);border-radius:var(--radius-lg);padding:14px 12px 12px;
+  display:flex;flex-direction:column;gap:10px}
+.details__map svg{width:100%;height:auto;display:block;overflow:visible}
+.details__map-cap{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font:700 12px/1.4 var(--font-body);color:var(--sage-green)}
+.details__map-cap .star{color:var(--tomato)}
+.details__actions{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px}
+
+/* ===== 04 · RSVP ===== */
+.rsvp{background:var(--cream);padding:clamp(72px,12vw,124px) 24px clamp(60px,10vw,100px)}
+.rsvp__wrap{max-width:560px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:14px}
+.rsvp__kicker{font:700 13px/1 var(--font-body);letter-spacing:.3em;color:var(--tomato)}
+.rsvp__heading{margin:0;font-family:var(--font-body);font-weight:900;font-size:clamp(32px,8vw,56px);
+  line-height:1.04;color:var(--deep-green);text-wrap:balance}
+.rsvp__sub{margin:0;font:400 clamp(16px,2.4vw,18px)/1.6 var(--font-body);color:var(--sage-green)}
+.rsvp__card{margin-top:12px;background:var(--white);border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-card);padding:clamp(24px,5vw,34px) clamp(20px,4vw,30px)}
+
+/* ===== Footer (shared) ===== */
+.footer{background:var(--deep-green);color:var(--cream);padding:44px 24px calc(52px + env(safe-area-inset-bottom))}
+.footer__inner{max-width:1100px;margin:0 auto;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:28px}
+.footer__brand{display:flex;flex-direction:column;align-items:center;gap:12px}
+.footer__mark{width:52px;height:52px;border-radius:14px}
+.footer__meta{display:flex;flex-direction:column;gap:2px;align-items:center}
+.footer__meta div{font:400 14px/1.7 var(--font-body);color:var(--light-sage)}
+.footer__address{font:400 14px/1.7 var(--font-body);color:var(--light-sage);text-underline-offset:3px}
+.footer__address:hover{color:var(--cream)}
+.footer__map{display:block;width:160px;flex-shrink:0;border-radius:12px;overflow:hidden;
+  filter:saturate(.85);transition:filter var(--dur-fast,140ms) ease,transform var(--dur-fast,140ms) ease}
+.footer__map:hover{filter:saturate(1);transform:scale(1.03)}
+.footer__map img{width:100%;height:auto;display:block}
+.footer__links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font:700 14px/1 var(--font-body)}
+.footer__links a{color:var(--cream);text-underline-offset:4px}
+@media (min-width:860px){
+  .footer__inner{flex-direction:row;justify-content:space-between;align-items:center;text-align:start;gap:32px}
+  .footer__brand{flex-direction:row;text-align:start}
+  .footer__meta{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 01 · Hero ============ -->
+<section class="hero" aria-label="VICO — מסיבת הפתיחה">
+  <div class="hero__media" aria-hidden="true">
+    <img class="hero__img" src="../assets/hero.jpg" alt="" />
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__topbar">
+    <img class="hero__logo" src="../assets/logo-clean-color.svg" alt="VICO" />
+    <div class="hero__labels" aria-hidden="true">
+      <span class="lab">כשר</span>
+      <span class="star">✦</span>
+      <span class="lab lab--serif">wine</span>
+      <span class="star">✦</span>
+      <span class="lab">PASTA</span>
+    </div>
+  </div>
+
+  <div class="hero__content rise">
+    <div class="hero__eyebrow">
+      <span>אתם מוזמנים</span>
+      <span class="star">✦</span>
+      <span dir="ltr">VICO OPENING</span>
+    </div>
+    <h1 class="hero__title">פותחים את<br />הדלת.<br /><span class="accent">ואת הבקבוקים.</span></h1>
+    <p class="hero__sub">מסיבת ההשקה של האיטלקייה השכונתית שלכם. שולחן, אנשים טובים, וכל מה שיצא מהתנור.</p>
+    <div class="hero__pill">
+      <span>יום חמישי ✦ 3.9</span>
+      <span class="star">✦</span>
+      <span dir="ltr">20:00</span>
+      <span class="star">✦</span>
+      <span>אבן עזרא 17, הרצליה</span>
+    </div>
+    <div class="hero__countdown" id="countdown" aria-live="polite">
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="d">0</div><div class="hero__unit-lab">ימים</div></div>
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="h">00</div><div class="hero__unit-lab">שעות</div></div>
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="m">00</div><div class="hero__unit-lab">דקות</div></div>
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="s">00</div><div class="hero__unit-lab">שניות</div></div>
+    </div>
+    <div class="hero__cta">
+      <button type="button" class="btn btn--primary" data-goto-rsvp>
+        <span>שומרים לי מקום בשולחן</span>
+        <span style="color:rgba(255,255,255,.75)">✦</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · What awaits ============ -->
+<section class="awaits" aria-labelledby="awaits-heading">
+  <div class="awaits__copy">
+    <img class="awaits__art" src="../assets/cheers.png" alt="" />
+    <div class="awaits__kicker">מה מחכה לכם בערב</div>
+    <h2 class="awaits__heading" id="awaits-heading">באים בתור אורחים,<br />יוצאים בתור שכונה.</h2>
+    <p class="awaits__body">מקבלים אתכם עם כוס קרה ביד, מושיבים אתכם לשולחן, ומשם הערב זורם: טעימות מסתובבות מהתפריט, סוואג של VICO ומוזיקה עד שמכבים את התנור.</p>
+  </div>
+
+  <div class="awaits__perks perks">
+    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">סנגריה מהברז</div><div class="perk__desc">קרה, מתגלגלת לכוס ברגע שנכנסתם.</div></div>
+    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">לימונדה קרה</div><div class="perk__desc">מהברז שלידה — גם לילדים, גם לנוהגים.</div></div>
+    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">טעימות מסתובבות</div><div class="perk__desc">פיצות, פסטות והמנות החדשות עוברות בין השולחנות.</div></div>
+    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">סוואג של VICO</div><div class="perk__desc">דברים קטנים לקחת הביתה, כל עוד יש.</div></div>
+  </div>
+
+  <div class="carousel" id="gallery" aria-label="גלריית VICO">
+    <div class="carousel__track">
+      <figure class="carousel__item"><img src="../assets/gallery-img-1.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-2.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-3.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-4.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-5.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-6.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-7.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-8.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-9.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="../assets/gallery-img-10.jpg" alt=""></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · Details ============ -->
+<section class="details" aria-labelledby="details-heading">
+  <div class="details__wrap">
+    <div class="details__kicker">איך מגיעים</div>
+    <h2 class="details__heading" id="details-heading">כל הפרטים הקטנים.</h2>
+
+    <div class="details__grid">
+      <div class="details__rows">
+        <div class="details__row">
+          <div class="details__row-label">מתי</div>
+          <div class="details__row-value">יום חמישי, 3.9</div>
+          <div class="details__row-note">פתיחת דלתות ב-20:00</div>
+        </div>
+        <div class="details__row">
+          <div class="details__row-label">איפה</div>
+          <div class="details__row-value">אבן עזרא 17, הרצליה</div>
+          <div class="details__row-note">המתחם מול פארק חנה רובינא</div>
+        </div>
+        <div class="details__row">
+          <div class="details__row-label">חניה</div>
+          <div class="details__row-value">במתחם ובסביבה</div>
+          <div class="details__row-note">חניון תיכון בן גוריון (אבן עזרא 15), וחניה חופשית ברחבי חנה רובינא עם כמה כניסות לפארק ולמתחם.</div>
+        </div>
+        <div class="details__row">
+          <div class="details__row-label">אחרי הפתיחה</div>
+          <div class="details__row-value">א׳–ה׳, 12:00–23:00</div>
+          <div class="details__row-note">מוזמנים לחזור בכל יום, לא רק במסיבה.</div>
+        </div>
+      </div>
+
+      <figure class="details__map">
+        <svg viewBox="20 -20 1200 840" role="img" aria-label="מפת הסביבה: אבן עזרא 17, הפארק ואפשרויות החניה">
+          <g fill="none" stroke="var(--deep-green)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M262 26 C 128 70 64 190 74 348 C 82 528 132 686 202 792" />
+            <path d="M262 26 C 392 62 528 92 648 100 L 752 104" />
+            <path d="M846 128 C 902 154 952 204 1012 274 C 1082 354 1142 424 1182 474" />
+            <path d="M798 156 C 792 300 784 424 778 520 C 772 640 766 720 758 796" />
+            <path d="M80 246 C 200 240 300 254 336 336" />
+            <path d="M432 30 L 428 218" />
+            <path d="M452 592 C 528 574 602 590 652 624 C 700 656 730 660 772 660" />
+            <circle cx="800" cy="106" r="49" />
+          </g>
+
+          <path d="M312 292 C 268 336 292 396 286 442 C 280 502 302 556 348 582 C 400 610 456 578 462 524 C 470 462 442 410 452 362 C 462 306 396 264 350 278 Z" fill="var(--cream)" stroke="var(--deep-green)" stroke-width="15" stroke-linejoin="round" />
+          <text x="366" y="470" fill="var(--deep-green)" text-anchor="middle" style="font: 900 56px var(--font-body)">פארק</text>
+
+          <g transform="rotate(11 640 396)">
+            <rect x="516" y="272" width="264" height="248" rx="6" fill="var(--pink-salmaon)" opacity="0.5" />
+            <text x="648" y="378" fill="var(--tomato)" text-anchor="middle" style="font: 900 78px var(--font-body); letter-spacing: 0.02em">VICO</text>
+            <text x="648" y="446" fill="var(--deep-green)" text-anchor="middle" style="font: 700 48px var(--font-body)">אבן עזרא 17</text>
+          </g>
+
+          <g fill="var(--deep-green)" text-anchor="middle" style="font: 900 56px/1.2 var(--font-body)">
+            <text x="556" y="556">חניון המתחם</text>
+            <text x="536" y="716">חניון בן גוריון</text>
+            <text x="536" y="774">אבן עזרא 15</text>
+          </g>
+          <g fill="var(--tomato)">
+            <circle cx="556" cy="578" r="14" />
+            <circle cx="536" cy="662" r="14" />
+          </g>
+
+          <g fill="var(--deep-green)" stroke="var(--cream)" stroke-width="8" paint-order="stroke" text-anchor="middle" style="font: 700 56px var(--font-body)">
+            <text x="500" y="42" transform="rotate(-6 500 42)">חנה רובינא</text>
+            <text x="1040" y="272" transform="rotate(41 1040 272)">אבן שפרוט</text>
+            <text x="866" y="430" transform="rotate(89 866 430)">אבן עזרא</text>
+            <text x="136" y="448" transform="rotate(96 136 448)">חנה רובינא</text>
+          </g>
+        </svg>
+        <figcaption class="details__map-cap">
+          <span>המתחם והפארק</span>
+          <span class="star">✦</span>
+          <span>שתי אפשרויות חניה</span>
+          <span class="star">✦</span>
+          <span>וחניה חופשית סביב חנה רובינא</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="details__actions">
+      <a class="btn btn--outline" href="https://waze.com/ul?q=%D7%90%D7%91%D7%9F%20%D7%A2%D7%96%D7%A8%D7%90%2017%20%D7%94%D7%A8%D7%A6%D7%9C%D7%99%D7%94" target="_blank" rel="noopener">
+        <span>ניווט ב-Waze</span>
+        <span style="color:var(--rose)">✦</span>
+      </a>
+      <button type="button" class="btn btn--primary" data-goto-rsvp>אישור הגעה</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · RSVP ============ -->
+<section class="rsvp" id="vico-rsvp" aria-labelledby="rsvp-heading">
+  <div class="rsvp__wrap">
+    <div class="rsvp__kicker">אישור הגעה</div>
+    <h2 class="rsvp__heading" id="rsvp-heading">אז מה, שומרים לכם מקום?</h2>
+    <p class="rsvp__sub">רק שנדע כמה כיסאות להצמיד ומתי לפתוח לכם את הברז.</p>
+
+    <div class="rsvp__card">
+      <!-- Form state -->
+      <form class="form" id="rsvp-form" novalidate>
+        <label class="field" for="f-name">
+          <span class="field__label">שם מלא</span>
+          <input class="field__input" id="f-name" name="fullName" type="text" autocomplete="name" placeholder="השם שלכם" />
+        </label>
+        <label class="field" for="f-phone">
+          <span class="field__label">טלפון</span>
+          <input class="field__input" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000" dir="ltr" />
+        </label>
+
+        <div class="field">
+          <span class="field__label">כמה תהיו?</span>
+          <div class="chips" id="party-chips" role="group" aria-label="כמה תהיו">
+            <button type="button" class="chip" data-party="1">1</button>
+            <button type="button" class="chip" data-party="2">2</button>
+            <button type="button" class="chip" data-party="3">3</button>
+            <button type="button" class="chip" data-party="4">4</button>
+            <button type="button" class="chip" data-party="5">5</button>
+            <button type="button" class="chip" data-party="6+">6+</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="field__label">באיזו שעה תגיעו?</span>
+          <div class="chips" id="time-chips" role="group" aria-label="באיזו שעה תגיעו">
+            <button type="button" class="chip" data-time="20:00">20:00</button>
+            <button type="button" class="chip" data-time="21:00">21:00</button>
+            <button type="button" class="chip" data-time="22:00">22:00</button>
+            <button type="button" class="chip" data-time="נראה איך יוצא">נראה איך יוצא</button>
+          </div>
+        </div>
+
+        <div class="form__err" id="form-err" role="alert" hidden></div>
+        <button type="submit" class="btn btn--primary btn--block">מגיעים ✦ שמרו לנו מקום</button>
+        <div class="form__note">מוזמנים גם להביא מי שיאהב את המקום הזה — רק עדכנו אותנו במספר.</div>
+      </form>
+
+      <!-- Success state -->
+      <div class="done" id="rsvp-done" hidden>
+        <span class="done__mark" aria-hidden="true">✦</span>
+        <div class="done__title" id="done-title"></div>
+        <p class="done__sub" id="done-sub"></p>
+        <div class="done__actions">
+          <button type="button" class="btn btn--secondary" id="share-wa">שיתוף בוואטסאפ</button>
+          <button type="button" class="btn btn--primary" id="edit-rsvp">עדכון הפרטים</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer class="footer" aria-label="פרטי VICO">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <img class="footer__mark" src="../assets/favicon-cream-on-green.svg" alt="VICO" />
+      <div class="footer__meta">
+        <div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>
+        <a class="footer__address" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>
+      </div>
+    </div>
+    <a class="footer__map" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener" aria-label="פתחו במפות Google">
+      <img src="../assets/vico-minimap.png" alt="מפה — אבן עזרא 17, הרצליה" loading="lazy" />
+    </a>
+    <div class="footer__links">
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">עקבו אחרינו</a>
+      <a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">איך מגיעים?</a>
+      <a href="#">הצהרת נגישות</a>
+      <a href="#">מדיניות פרטיות</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var STORE_KEY = "vico_opening_rsvp";
+  var EVENT_TIME = new Date(2026, 8, 3, 20, 0, 0).getTime(); // Thu 3.9.2026, 20:00
+  var WA_SHARE_TEXT = "מסיבת הפתיחה של VICO ✦ יום חמישי 3.9, 20:00 ✦ אבן עזרא 17, הרצליה";
+
+  // ---- countdown ----
+  var elD = document.querySelector('[data-unit="d"]');
+  var elH = document.querySelector('[data-unit="h"]');
+  var elM = document.querySelector('[data-unit="m"]');
+  var elS = document.querySelector('[data-unit="s"]');
+  function pad(n){ return String(n).padStart(2, "0"); }
+  function tickCountdown(){
+    var diff = Math.max(0, EVENT_TIME - Date.now());
+    var d = Math.floor(diff / 864e5);
+    var h = Math.floor((diff % 864e5) / 36e5);
+    var m = Math.floor((diff % 36e5) / 6e4);
+    var s = Math.floor((diff % 6e4) / 1000);
+    elD.textContent = String(d);
+    elH.textContent = pad(h);
+    elM.textContent = pad(m);
+    elS.textContent = pad(s);
+  }
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  // ---- scroll-to-rsvp ----
+  var nameInput = document.getElementById("f-name");
+  Array.prototype.forEach.call(document.querySelectorAll("[data-goto-rsvp]"), function(btn){
+    btn.addEventListener("click", function(){
+      var el = document.getElementById("vico-rsvp");
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
+      setTimeout(function(){ try { nameInput.focus({ preventScroll: true }); } catch(e){} }, 500);
+    });
+  });
+
+  // ---- chip groups ----
+  var party = null, arrival = null;
+  function wireChips(containerId, onPick){
+    var container = document.getElementById(containerId);
+    Array.prototype.forEach.call(container.querySelectorAll(".chip"), function(chip){
+      chip.addEventListener("click", function(){
+        Array.prototype.forEach.call(container.querySelectorAll(".chip"), function(c){ c.classList.remove("is-selected"); });
+        chip.classList.add("is-selected");
+        onPick(chip);
+        clearError();
+      });
+    });
+  }
+  wireChips("party-chips", function(chip){ party = chip.getAttribute("data-party"); });
+  wireChips("time-chips", function(chip){ arrival = chip.getAttribute("data-time"); });
+
+  // ---- form ----
+  var form = document.getElementById("rsvp-form");
+  var done = document.getElementById("rsvp-done");
+  var elPhone = document.getElementById("f-phone");
+  var elErr = document.getElementById("form-err");
+  var doneTitle = document.getElementById("done-title");
+  var doneSub = document.getElementById("done-sub");
+
+  function showError(msg){ elErr.textContent = msg; elErr.hidden = false; }
+  function clearError(){ elErr.hidden = true; elErr.textContent = ""; }
+
+  function showDone(payload){
+    form.hidden = true;
+    done.hidden = false;
+    doneTitle.textContent = payload.name.split(" ")[0] + ", השולחן שלכם שמור.";
+    doneSub.textContent = payload.party + " ✦ " + payload.arrival + " ✦ יום חמישי 3.9. נתראה עם כוס קרה ביד.";
+  }
+
+  function loadSaved(){
+    try {
+      var saved = localStorage.getItem(STORE_KEY);
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) { return null; }
+  }
+  var saved = loadSaved();
+  if (saved) showDone(saved);
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var name = (nameInput.value || "").trim();
+    var digits = (elPhone.value || "").replace(/\D/g, "");
+    if (digits.indexOf("972") === 0) digits = "0" + digits.slice(3).replace(/^0/, "");
+    if (!name) return showError("נשמח לשם שלכם.");
+    if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0))
+      return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
+    if (!party) return showError("כמה תהיו? בחרו מספר.");
+    var payload = { name: name, phone: digits, party: party, arrival: arrival || "מתישהו בערב", createdAt: new Date().toISOString() };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
+    clearError();
+    showDone(payload);
+  });
+  nameInput.addEventListener("input", clearError);
+  elPhone.addEventListener("input", clearError);
+
+  document.getElementById("share-wa").addEventListener("click", function(){
+    window.open("https://wa.me/?text=" + encodeURIComponent(WA_SHARE_TEXT), "_blank", "noopener");
+  });
+  document.getElementById("edit-rsvp").addEventListener("click", function(){
+    done.hidden = true;
+    form.hidden = false;
+  });
+
+  // ---- Gallery: seamless auto-scrolling carousel (mirrors index.html) ----
+  (function () {
+    var carousel = document.querySelector(".carousel");
+    var track = carousel && carousel.querySelector(".carousel__track");
+    if (!track) return;
+
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      carousel.classList.add("is-scrollable");
+      return;
+    }
+
+    var originals = Array.prototype.slice.call(track.children);
+
+    function build() {
+      while (track.children.length > originals.length) track.removeChild(track.lastChild);
+      originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+      var period = track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+      while (track.scrollWidth < window.innerWidth + period + 80) {
+        originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+      }
+      return period;
+    }
+
+    var period = build();
+    var x = 0, last = null, paused = false;
+    var PX_PER_SEC = 42;
+
+    function frame(ts) {
+      if (last === null) last = ts;
+      var dt = (ts - last) / 1000; last = ts;
+      if (!paused) {
+        x -= PX_PER_SEC * dt;
+        if (x <= -period) x += period;
+        track.style.transform = "translateX(" + x + "px)";
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    carousel.addEventListener("mouseenter", function () { paused = true; });
+    carousel.addEventListener("mouseleave", function () { paused = false; });
+
+    var rt;
+    window.addEventListener("resize", function () {
+      clearTimeout(rt);
+      rt = setTimeout(function () { x = 0; last = null; period = build(); }, 200);
+    });
+  })();
+})();
+</script>
+</body>
+</html>
