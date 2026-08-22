@@ -230,7 +230,7 @@ a:hover{color:var(--tomato)}
   padding:24px 16px;
   display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;
 }
-.perk__mark{width:clamp(40px,9vw,52px);height:auto;display:block}
+.perk__mark{color:var(--rose);font-size:18px;line-height:1}
 .perk__title{font:900 clamp(17px,2.4vw,20px)/1.15 var(--font-body);color:var(--cream)}
 .perk__desc{font:400 14px/1.45 var(--font-body);color:var(--light-sage)}
 @media (max-width:560px){.perks{grid-template-columns:1fr}}
@@ -252,7 +252,7 @@ a:hover{color:var(--tomato)}
 /* ===== 05 · Jobs ===== */
 .jobs{background:var(--cream);padding:clamp(96px,16vw,156px) 24px}
 .jobs__wrap{max-width:560px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
-.jobs__star{color:var(--tomato);font-size:22px;line-height:1;letter-spacing:.2em;margin:2px 0}
+.jobs__art{width:clamp(72px,14vw,110px);height:auto;margin-bottom:4px}
 .jobs__title{font-family:var(--font-body);font-weight:900;
   font-size:clamp(22px,5.5vw,28px);line-height:1.25;text-wrap:balance}
 .jobs__text{margin:0;font:400 17px/1.6 var(--font-body);color:var(--sage-green)}
@@ -348,6 +348,7 @@ a:hover{color:var(--tomato)}
       <figure class="carousel__item"><img src="assets/gallery-img-8.jpg" alt=""></figure>
       <figure class="carousel__item"><img src="assets/gallery-img-9.jpg" alt=""></figure>
       <figure class="carousel__item"><img src="assets/gallery-img-10.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-11.jpg" alt=""></figure>
     </div>
   </div>
 </section>
@@ -389,7 +390,7 @@ a:hover{color:var(--tomato)}
           <span class="check__box" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <span class="check__label">קראתי והבנתי את <a href="assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="assets/VICO-privacy-policy.docx" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
+          <span class="check__label">קראתי והבנתי את <a href="assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
         </label>
         <div class="form__err" id="form-err" role="alert" hidden></div>
         <button type="submit" class="btn btn--primary btn--lg btn--block">אני בפנים</button>
@@ -407,17 +408,17 @@ a:hover{color:var(--tomato)}
 
     <div class="perks">
       <div class="perk">
-        <img class="perk__mark" src="assets/member-gift-welcome.svg" alt="" aria-hidden="true" />
+        <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת הצטרפות</div>
         <div class="perk__desc">10% הנחה בהזמנה הראשונה</div>
       </div>
       <div class="perk">
-        <img class="perk__mark" src="assets/member-gift-birthday.svg" alt="" aria-hidden="true" />
+        <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת יום הולדת</div>
         <div class="perk__desc">קינוח מתנה לבחירה</div>
       </div>
       <div class="perk">
-        <img class="perk__mark" src="assets/member-gift-wedding.svg" alt="" aria-hidden="true" />
+        <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת יום נישואין</div>
         <div class="perk__desc">2 כוסות יין הבית / בירה מהחבית</div>
       </div>
@@ -429,13 +430,12 @@ a:hover{color:var(--tomato)}
 <!-- ============ 05 · Jobs ============ -->
 <section class="jobs section" id="vico-jobs" aria-labelledby="jobs-title">
   <div class="jobs__wrap">
-    <span class="jobs__star" aria-hidden="true">✦</span>
+    <img class="jobs__art" src="assets/hiring.svg" alt="" aria-hidden="true" />
     <div class="jobs__title" id="jobs-title">באים לבשל איתנו? VICO מגייסת</div>
     <p class="jobs__text">אנחנו מחפשים אנשים עם תשוקה לאוכל, לאירוח ולחיוכים. אם אתם רוצים להיות חלק מצוות ההקמה של המקום הכי חם בעיר, מעל גיל 18 ומתאימה לכם עבודה במשמרות — דברו איתנו.</p>
     <p class="jobs__text jobs__text--dark">התקשרו או שלחו הודעה:
       <a class="jobs__tel" id="jobs-tel" dir="ltr" href="tel:0506545363">050-654-5363</a>
     </p>
-    <span class="jobs__star" aria-hidden="true">✦</span>
   </div>
 </section>
 
@@ -452,8 +452,8 @@ a:hover{color:var(--tomato)}
     <div class="footer__links">
       <a id="ig-link" href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">עקבו אחרינו</a>
       <a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">איך מגיעים?</a>
-      <a href="#">הצהרת נגישות</a>
-      <a href="#">מדיניות פרטיות</a>
+      <a href="assets/vico-accessibility-statement.pdf" target="_blank" rel="noopener">הצהרת נגישות</a>
+      <a href="assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות פרטיות</a>
     </div>
   </div>
 </footer>

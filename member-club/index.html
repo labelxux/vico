@@ -111,7 +111,7 @@ a:hover{color:var(--tomato)}
 .perk{background:rgba(254,243,235,.05);border:var(--stroke-thin) solid rgba(175,193,187,.32);
   border-radius:var(--radius-lg);padding:20px 14px;
   display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
-.perk__mark{width:clamp(36px,8vw,44px);height:auto;display:block}
+.perk__mark{color:var(--rose);font-size:16px;line-height:1}
 .perk__title{font:900 16px/1.15 var(--font-body);color:var(--cream)}
 .perk__desc{font:400 13px/1.4 var(--font-body);color:var(--light-sage)}
 @media (max-width:640px){.perks{grid-template-columns:1fr}}
@@ -162,17 +162,17 @@ a:hover{color:var(--tomato)}
 
     <div class="perks">
       <div class="perk">
-        <img class="perk__mark" src="../assets/member-gift-welcome.svg" alt="" aria-hidden="true" />
+        <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת הצטרפות</div>
         <div class="perk__desc">10% הנחה בהזמנה הראשונה</div>
       </div>
       <div class="perk">
-        <img class="perk__mark" src="../assets/member-gift-birthday.svg" alt="" aria-hidden="true" />
+        <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת יום הולדת</div>
         <div class="perk__desc">קינוח מתנה לבחירה</div>
       </div>
       <div class="perk">
-        <img class="perk__mark" src="../assets/member-gift-wedding.svg" alt="" aria-hidden="true" />
+        <span class="perk__mark" aria-hidden="true">✦</span>
         <div class="perk__title">מתנת יום נישואין</div>
         <div class="perk__desc">2 כוסות יין הבית / בירה מהחבית</div>
       </div>
@@ -219,7 +219,7 @@ a:hover{color:var(--tomato)}
           <span class="check__box" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <span class="check__label">קראתי והבנתי את <a href="../assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="../assets/VICO-privacy-policy.docx" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
+          <span class="check__label">קראתי והבנתי את <a href="../assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="../assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
         </label>
         <div class="form__err" id="form-err" role="alert" hidden></div>
         <button type="submit" class="btn btn--primary btn--xl btn--block">הצטרפות למועדון</button>
@@ -252,8 +252,8 @@ a:hover{color:var(--tomato)}
     <div class="footer__links">
       <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">עקבו אחרינו</a>
       <a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">איך מגיעים?</a>
-      <a href="#">הצהרת נגישות</a>
-      <a href="#">מדיניות פרטיות</a>
+      <a href="../assets/vico-accessibility-statement.pdf" target="_blank" rel="noopener">הצהרת נגישות</a>
+      <a href="../assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות פרטיות</a>
     </div>
   </div>
 </footer>
