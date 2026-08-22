@@ -39,6 +39,7 @@ body{
   min-height:100dvh;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
+  -webkit-tap-highlight-color:transparent;
 }
 img{max-width:100%;display:block}
 a{color:var(--deep-green)}
@@ -54,6 +55,7 @@ a:hover{color:var(--tomato)}
 
 /* ---------- Shared components (mirrors index.html / member-club) ---------- */
 .btn{
+  -webkit-appearance:none;appearance:none;
   --btn-bg:var(--tomato);--btn-fg:var(--white);
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-family:var(--font-body);font-weight:400;line-height:1;letter-spacing:.01em;
@@ -94,6 +96,7 @@ a:hover{color:var(--tomato)}
 
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{
+  -webkit-appearance:none;appearance:none;
   cursor:pointer;border-radius:var(--radius-pill);padding:12px 20px;
   font:700 15px/1 var(--font-body);
   background:var(--white);color:var(--deep-green);
@@ -199,7 +202,6 @@ a:hover{color:var(--tomato)}
 .details__row-note{font:400 14px/1.55 var(--font-body);color:var(--light-sage)}
 .details__map{margin:0;background:var(--cream);border-radius:var(--radius-lg);padding:14px 12px 12px;
   display:flex;flex-direction:column;gap:10px}
-.details__map svg{width:100%;height:auto;display:block;overflow:visible}
 .details__map-cap{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
   font:700 12px/1.4 var(--font-body);color:var(--sage-green)}
 .details__map-cap .star{color:var(--tomato)}
@@ -351,44 +353,7 @@ a:hover{color:var(--tomato)}
       </div>
 
       <figure class="details__map">
-        <svg viewBox="20 -20 1200 840" role="img" aria-label="מפת הסביבה: אבן עזרא 17, הפארק ואפשרויות החניה">
-          <g fill="none" stroke="var(--deep-green)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M262 26 C 128 70 64 190 74 348 C 82 528 132 686 202 792" />
-            <path d="M262 26 C 392 62 528 92 648 100 L 752 104" />
-            <path d="M846 128 C 902 154 952 204 1012 274 C 1082 354 1142 424 1182 474" />
-            <path d="M798 156 C 792 300 784 424 778 520 C 772 640 766 720 758 796" />
-            <path d="M80 246 C 200 240 300 254 336 336" />
-            <path d="M432 30 L 428 218" />
-            <path d="M452 592 C 528 574 602 590 652 624 C 700 656 730 660 772 660" />
-            <circle cx="800" cy="106" r="49" />
-          </g>
-
-          <path d="M312 292 C 268 336 292 396 286 442 C 280 502 302 556 348 582 C 400 610 456 578 462 524 C 470 462 442 410 452 362 C 462 306 396 264 350 278 Z" fill="var(--cream)" stroke="var(--deep-green)" stroke-width="15" stroke-linejoin="round" />
-          <text x="366" y="470" fill="var(--deep-green)" text-anchor="middle" style="font: 900 56px var(--font-body)">פארק</text>
-
-          <g transform="rotate(11 640 396)">
-            <rect x="516" y="272" width="264" height="248" rx="6" fill="var(--pink-salmaon)" opacity="0.5" />
-            <text x="648" y="378" fill="var(--tomato)" text-anchor="middle" style="font: 900 78px var(--font-body); letter-spacing: 0.02em">VICO</text>
-            <text x="648" y="446" fill="var(--deep-green)" text-anchor="middle" style="font: 700 48px var(--font-body)">אבן עזרא 17</text>
-          </g>
-
-          <g fill="var(--deep-green)" text-anchor="middle" style="font: 900 56px/1.2 var(--font-body)">
-            <text x="556" y="556">חניון המתחם</text>
-            <text x="536" y="716">חניון בן גוריון</text>
-            <text x="536" y="774">אבן עזרא 15</text>
-          </g>
-          <g fill="var(--tomato)">
-            <circle cx="556" cy="578" r="14" />
-            <circle cx="536" cy="662" r="14" />
-          </g>
-
-          <g fill="var(--deep-green)" stroke="var(--cream)" stroke-width="8" paint-order="stroke" text-anchor="middle" style="font: 700 56px var(--font-body)">
-            <text x="500" y="42" transform="rotate(-6 500 42)">חנה רובינא</text>
-            <text x="1040" y="272" transform="rotate(41 1040 272)">אבן שפרוט</text>
-            <text x="866" y="430" transform="rotate(89 866 430)">אבן עזרא</text>
-            <text x="136" y="448" transform="rotate(96 136 448)">חנה רובינא</text>
-          </g>
-        </svg>
+        <img src="../assets/vico-minimap.png" alt="מפת הסביבה: אבן עזרא 17, הפארק ואפשרויות החניה" style="width:100%;height:auto;border-radius:var(--radius-md)" />
         <figcaption class="details__map-cap">
           <span>המתחם והפארק</span>
           <span class="star">✦</span>
