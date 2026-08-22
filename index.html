@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="ds/tokens/colors.css" />
 <link rel="stylesheet" href="ds/tokens/typography.css" />
 <link rel="stylesheet" href="ds/tokens/spacing.css" />
+<link rel="stylesheet" href="ds/footer.css" />
 
 <style>
 /* ---------- Reset / base ---------- */
@@ -259,22 +260,6 @@ a:hover{color:var(--tomato)}
 .jobs__text--dark{color:var(--deep-green)}
 .jobs__tel{font-weight:700;color:var(--tomato);text-decoration-thickness:1.5px;text-underline-offset:4px;white-space:nowrap}
 
-/* ===== Footer ===== */
-.footer{background:var(--deep-green);color:var(--cream);
-  padding:44px 24px calc(52px + env(safe-area-inset-bottom))}
-.footer__inner{
-  max-width:1100px;margin:0 auto;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:28px;
-}
-.footer__brand{display:flex;flex-direction:column;align-items:center;gap:12px}
-.footer__mark{width:52px;height:52px;border-radius:14px}
-.footer__meta{display:flex;flex-direction:column;gap:2px;align-items:center}
-.footer__meta div{font:400 14px/1.7 var(--font-body);color:var(--light-sage)}
-.footer__address{font:400 14px/1.7 var(--font-body);color:var(--light-sage);text-underline-offset:3px}
-.footer__address:hover{color:var(--cream)}
-.footer__links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font:700 14px/1 var(--font-body)}
-.footer__links a{color:var(--cream);text-underline-offset:4px}
-
 @media (max-width:520px){
   .hero__topbar{padding:15px 16px}
   .hero__logo{height:34px}
@@ -440,23 +425,8 @@ a:hover{color:var(--tomato)}
 </section>
 
 <!-- ============ Footer ============ -->
-<footer class="footer" aria-label="פרטי VICO">
-  <div class="footer__inner">
-    <div class="footer__brand">
-      <img class="footer__mark" src="assets/favicon-cream-on-green.svg" alt="VICO" />
-      <div class="footer__meta">
-        <div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>
-        <a class="footer__address" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>
-      </div>
-    </div>
-    <div class="footer__links">
-      <a id="ig-link" href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">עקבו אחרינו</a>
-      <a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">איך מגיעים?</a>
-      <a href="assets/vico-accessibility-statement.pdf" target="_blank" rel="noopener">הצהרת נגישות</a>
-      <a href="assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות פרטיות</a>
-    </div>
-  </div>
-</footer>
+<div id="site-footer"></div>
+<script src="assets/footer.js"></script>
 
 <script>
 (function(){
@@ -466,7 +436,6 @@ a:hover{color:var(--tomato)}
   // ---- config (mirrors the design-composer props/defaults) ----
   var CONFIG = {
     jobsPhone: "0506545363",
-    instagramUrl: "https://www.instagram.com/vico.restaurant",
     waText: "יש איטלקייה חדשה בשכונה!",
     siteUrl: "https://vico.ltd",
     // Google Apps Script Web App URL (…/exec) that appends each signup to the club sheet.
@@ -613,11 +582,10 @@ a:hover{color:var(--tomato)}
     window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank", "noopener");
   });
 
-  // ---- jobs + instagram wiring from config ----
+  // ---- jobs wiring from config ----
   var telHref = "tel:" + CONFIG.jobsPhone.replace(/[^\d+]/g, "");
   document.getElementById("jobs-tel").setAttribute("href", telHref);
   document.getElementById("jobs-tel").addEventListener("click", function(){ track("jobs_phone_click"); });
-  document.getElementById("ig-link").setAttribute("href", CONFIG.instagramUrl);
 
   // ---- hero scroll cue: lay the circular label out as rotated letters ----
   (function () {
