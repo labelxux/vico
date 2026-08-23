@@ -130,13 +130,16 @@ a:hover{color:var(--tomato)}
   background:linear-gradient(180deg,rgba(19,57,50,.57) 0%,rgba(19,57,50,.23) 38%,rgba(19,57,50,.91) 100%)}
 .hero__topbar{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px}
 .hero__logo{height:44px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.4))}
-.hero__countdown--mini{display:flex;gap:8px}
-.hero__countdown--mini .hero__unit{min-width:54px;padding:10px 7px 7px;border-radius:12px}
-.hero__countdown--mini .hero__unit-val{font-size:23px}
-.hero__countdown--mini .hero__unit-lab{margin-top:2px;font-size:9.5px;letter-spacing:.08em}
+.hero__countdown--mini{display:flex;gap:4px}
+.hero__countdown--mini .hero__unit{min-width:60px;padding:12px 8px 8px;border-radius:12px}
+.hero__countdown--mini .hero__unit-val{font-size:26px}
+.hero__countdown--mini .hero__unit-lab{margin-top:2px;font-size:10px;letter-spacing:.08em}
 .hero__content{position:relative;z-index:2;margin-top:auto;
   padding:0 24px clamp(40px,7vw,72px);display:flex;flex-direction:column;
   align-items:flex-start;gap:18px;color:var(--cream)}
+.hero__eyebrow{display:flex;align-items:center;gap:10px;font:700 clamp(12px,3vw,14px)/1 var(--font-body);
+  letter-spacing:.26em;color:var(--rose)}
+.hero__eyebrow .star{opacity:.7}
 .hero__title{margin:0;font-family:var(--font-body);font-weight:900;font-size:clamp(40px,11vw,96px);
   line-height:.98;letter-spacing:-.02em}
 .hero__title .accent{color:var(--rose)}
@@ -207,6 +210,13 @@ a:hover{color:var(--tomato)}
   </div>
 
   <div class="hero__content rise">
+    <div class="hero__eyebrow">
+      <span>אתם מוזמנים</span>
+      <span class="star">✦</span>
+      <span dir="ltr">VICO OPENING</span>
+    </div>
+    <h1 class="hero__title">אתם מוזמנים</h1>
+    <p class="hero__sub">ערב הפתיחה של VICO ואנחנו מתרגשים שתהיו חלק ממנו עם אוכל טעים, יין ומוזיקה טובה.</p>
     <div class="hero__pill">
       <span>יום חמישי ✦ 3.9</span>
       <span class="star">✦</span>
@@ -214,9 +224,6 @@ a:hover{color:var(--tomato)}
       <span class="star">✦</span>
       <span>אבן עזרא 17, הרצליה</span>
     </div>
-    <h1 class="hero__title">אתם מוזמנים</h1>
-    <p class="hero__sub">ערב הפתיחה של VICO ואנחנו מתרגשים שתהיו חלק ממנו עם אוכל טעים, יין ומוזיקה טובה.</p>
-    <button type="button" class="btn btn--primary btn--md" data-goto-rsvp>אני מגיע</button>
   </div>
 </section>
 
