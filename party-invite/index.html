@@ -415,7 +415,8 @@ a:hover{color:var(--tomato)}
   "use strict";
   var STORE_KEY = "vico_opening_rsvp";
   var EVENT_TIME = new Date(2026, 8, 3, 20, 0, 0).getTime(); // Thu 3.9.2026, 20:00
-  var WA_SHARE_TEXT = "מסיבת הפתיחה של VICO ✦ יום חמישי 3.9, 20:00 ✦ אבן עזרא 17, הרצליה";
+  var WA_SHARE_TEXT = "מצטרפים לפתיחה של VICO?";
+  var WA_SHARE_URL = "https://vico.ltd/party-invite/";
 
   // ---- countdown ----
   var elD = document.querySelector('[data-unit="d"]');
@@ -508,7 +509,7 @@ a:hover{color:var(--tomato)}
   elPhone.addEventListener("input", clearError);
 
   document.getElementById("share-wa").addEventListener("click", function(){
-    window.open("https://wa.me/?text=" + encodeURIComponent(WA_SHARE_TEXT), "_blank", "noopener");
+    window.open("https://wa.me/?text=" + encodeURIComponent(WA_SHARE_TEXT + "\n" + WA_SHARE_URL), "_blank", "noopener");
   });
   document.getElementById("edit-rsvp").addEventListener("click", function(){
     done.hidden = true;
