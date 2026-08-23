@@ -114,15 +114,6 @@ a:hover{color:var(--tomato)}
 .form__note{font:400 12px/1.5 var(--font-body);color:var(--sage-green);text-align:center}
 [hidden]{display:none !important}
 
-.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.perk{
-  background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);
-  padding:26px 22px 24px;display:flex;flex-direction:column;gap:8px;text-align:start;
-}
-.perk__mark{color:var(--tomato);font-size:17px;line-height:1}
-.perk__title{font:900 clamp(18px,2.6vw,21px)/1.15 var(--font-body);color:var(--deep-green)}
-.perk__desc{font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
-
 .done{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
   background:var(--deep-green);color:var(--cream);border-radius:var(--radius-xl);
   padding:clamp(30px,6vw,44px) clamp(22px,4vw,32px);}
@@ -139,10 +130,10 @@ a:hover{color:var(--tomato)}
   background:linear-gradient(180deg,rgba(19,57,50,.57) 0%,rgba(19,57,50,.23) 38%,rgba(19,57,50,.91) 100%)}
 .hero__topbar{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px}
 .hero__logo{height:44px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.4))}
-.hero__labels{direction:ltr;display:flex;align-items:center;gap:9px;color:var(--cream);opacity:.92}
-.hero__labels .lab{font:700 12px/1 var(--font-body);letter-spacing:.2em}
-.hero__labels .lab--serif{font:400 19px/1 var(--font-serif);font-style:italic}
-.hero__labels .star{font-size:11px;opacity:.75}
+.hero__countdown--mini{display:flex;gap:6px}
+.hero__countdown--mini .hero__unit{min-width:34px;padding:5px 4px 4px;border-radius:8px}
+.hero__countdown--mini .hero__unit-val{font-size:14px}
+.hero__countdown--mini .hero__unit-lab{margin-top:1px;font-size:7px;letter-spacing:.08em}
 .hero__content{position:relative;z-index:2;margin-top:auto;
   padding:0 24px clamp(40px,7vw,72px);display:flex;flex-direction:column;
   align-items:flex-start;gap:18px;color:var(--cream)}
@@ -163,25 +154,6 @@ a:hover{color:var(--tomato)}
   background:rgba(19,57,50,.5);border:var(--stroke-thin) solid rgba(175,193,187,.28);text-align:center}
 .hero__unit-val{font:900 clamp(24px,7vw,38px)/1 var(--font-body);color:var(--cream)}
 .hero__unit-lab{margin-top:6px;font:400 11px/1 var(--font-body);letter-spacing:.16em;color:var(--light-sage)}
-
-/* ===== 02 · What awaits ===== */
-.awaits{background:var(--cream);padding:clamp(72px,12vw,128px) 0 clamp(56px,9vw,96px)}
-.awaits__copy{max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;
-  align-items:center;text-align:center;gap:14px}
-.awaits__art{width:clamp(150px,30vw,260px);height:auto;margin-bottom:clamp(8px,2vw,18px)}
-.awaits__kicker{font:700 clamp(13px,2.6vw,15px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato)}
-.awaits__heading{margin:0;font-family:var(--font-body);font-weight:900;font-size:clamp(30px,7vw,54px);
-  line-height:1.06;color:var(--deep-green);text-wrap:balance}
-.awaits__body{margin:8px 0 0;max-width:56ch;font:400 clamp(16px,2.4vw,19px)/1.7 var(--font-body);color:var(--deep-green)}
-.awaits__perks{max-width:1080px;margin:clamp(36px,6vw,60px) auto 0;padding:0 24px}
-
-.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin:clamp(44px,7vw,72px) 0 0}
-.carousel__track{display:flex;gap:6px;width:max-content;will-change:transform}
-.carousel__item{flex:0 0 auto;width:clamp(240px,34vw,400px);height:clamp(280px,44vh,460px);
-  margin:0;overflow:hidden;background:var(--deep-green)}
-.carousel__item img{width:100%;height:100%;object-fit:cover;display:block}
-.carousel.is-scrollable{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.carousel.is-scrollable::-webkit-scrollbar{display:none}
 
 /* ===== 03 · Details ===== */
 .details{position:relative;background:var(--deep-green);color:var(--cream);
@@ -229,12 +201,11 @@ a:hover{color:var(--tomato)}
 
   <div class="hero__topbar">
     <img class="hero__logo" src="../assets/logo-clean-color.svg" alt="VICO" />
-    <div class="hero__labels" aria-hidden="true">
-      <span class="lab">כשר</span>
-      <span class="star">✦</span>
-      <span class="lab lab--serif">wine</span>
-      <span class="star">✦</span>
-      <span class="lab">PASTA</span>
+    <div class="hero__countdown hero__countdown--mini" id="countdown" aria-live="polite">
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="s">00</div><div class="hero__unit-lab">שניות</div></div>
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="m">00</div><div class="hero__unit-lab">דקות</div></div>
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="h">00</div><div class="hero__unit-lab">שעות</div></div>
+      <div class="hero__unit"><div class="hero__unit-val" data-unit="d">0</div><div class="hero__unit-lab">ימים</div></div>
     </div>
   </div>
 
@@ -244,8 +215,8 @@ a:hover{color:var(--tomato)}
       <span class="star">✦</span>
       <span dir="ltr">VICO OPENING</span>
     </div>
-    <h1 class="hero__title">פותחים את<br />הדלת.<br /><span class="accent">ואת הבקבוקים.</span></h1>
-    <p class="hero__sub">מסיבת ההשקה של האיטלקייה השכונתית שלכם. שולחן, אנשים טובים, וכל מה שיצא מהתנור.</p>
+    <h1 class="hero__title">השכונה מקבלת איטלקייה חדשה!</h1>
+    <p class="hero__sub">ערב הפתיחה של VICO ואנחנו מתרגשים שתהיו חלק ממנו עם אוכל טעים, יין ומוזיקה טובה.</p>
     <div class="hero__pill">
       <span>יום חמישי ✦ 3.9</span>
       <span class="star">✦</span>
@@ -253,44 +224,7 @@ a:hover{color:var(--tomato)}
       <span class="star">✦</span>
       <span>אבן עזרא 17, הרצליה</span>
     </div>
-    <div class="hero__countdown" id="countdown" aria-live="polite">
-      <div class="hero__unit"><div class="hero__unit-val" data-unit="s">00</div><div class="hero__unit-lab">שניות</div></div>
-      <div class="hero__unit"><div class="hero__unit-val" data-unit="m">00</div><div class="hero__unit-lab">דקות</div></div>
-      <div class="hero__unit"><div class="hero__unit-val" data-unit="h">00</div><div class="hero__unit-lab">שעות</div></div>
-      <div class="hero__unit"><div class="hero__unit-val" data-unit="d">0</div><div class="hero__unit-lab">ימים</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 02 · What awaits ============ -->
-<section class="awaits" aria-labelledby="awaits-heading">
-  <div class="awaits__copy">
-    <img class="awaits__art" src="../assets/cheers.png" alt="" />
-    <div class="awaits__kicker">מה מחכה לכם בערב</div>
-    <h2 class="awaits__heading" id="awaits-heading">זה הערב שלנו.<br />ואתם חלק ממנו.</h2>
-    <p class="awaits__body">רצינו לפתוח את VICO בדיוק ככה — עם האנשים שאנחנו אוהבים, משהו טוב לאכול ולשתות, מוזיקה ואווירה שנשארים בשבילה עוד קצת.</p>
-  </div>
-
-  <div class="awaits__perks perks">
-    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">משהו טוב בכוס</div><div class="perk__desc">יין, סנגריה ועוד משהו קר להתחיל איתו.</div></div>
-    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">ביסים מסתובבים</div><div class="perk__desc">ביסים, טעימות והפתעות שממשיכות להגיע.</div></div>
-    <div class="perk"><span class="perk__mark" aria-hidden="true">✦</span><div class="perk__title">האווירה של VICO</div><div class="perk__desc">מוזיקה, יין, אנשים שאנחנו אוהבים וקצת יותר זמן ממה שתכננתם.</div></div>
-  </div>
-
-  <div class="carousel" id="gallery" aria-label="גלריית VICO">
-    <div class="carousel__track">
-      <figure class="carousel__item"><img src="../assets/gallery-img-1.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-2.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-3.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-4.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-5.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-6.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-7.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-8.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-9.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-10.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="../assets/gallery-img-11.jpg" alt=""></figure>
-    </div>
+    <button type="button" class="btn btn--primary btn--md" data-goto-rsvp>אני מגיע</button>
   </div>
 </section>
 
@@ -350,8 +284,8 @@ a:hover{color:var(--tomato)}
 <section class="rsvp" id="vico-rsvp" aria-labelledby="rsvp-heading">
   <div class="rsvp__wrap">
     <div class="rsvp__kicker">אישור הגעה</div>
-    <h2 class="rsvp__heading" id="rsvp-heading">אז מה, שומרים לכם מקום?</h2>
-    <p class="rsvp__sub">רק שנדע כמה כיסאות להצמיד ומתי לפתוח לכם את הברז.</p>
+    <h2 class="rsvp__heading" id="rsvp-heading">שנשמור מקום?</h2>
+    <p class="rsvp__sub">הישיבה על בסיס מקום פנוי, אבל זה יעזור לנו לדעת לכמה אנשים להערך.</p>
 
     <div class="rsvp__card">
       <!-- Form state -->
@@ -383,7 +317,6 @@ a:hover{color:var(--tomato)}
             <button type="button" class="chip" data-time="20:00">20:00</button>
             <button type="button" class="chip" data-time="21:00">21:00</button>
             <button type="button" class="chip" data-time="22:00">22:00</button>
-            <button type="button" class="chip" data-time="נראה איך יוצא">נראה איך יוצא</button>
           </div>
         </div>
 
@@ -515,55 +448,6 @@ a:hover{color:var(--tomato)}
     done.hidden = true;
     form.hidden = false;
   });
-
-  // ---- Gallery: seamless auto-scrolling carousel (mirrors index.html) ----
-  (function () {
-    var carousel = document.querySelector(".carousel");
-    var track = carousel && carousel.querySelector(".carousel__track");
-    if (!track) return;
-
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      carousel.classList.add("is-scrollable");
-      return;
-    }
-
-    var originals = Array.prototype.slice.call(track.children);
-
-    function build() {
-      while (track.children.length > originals.length) track.removeChild(track.lastChild);
-      originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
-      var period = track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
-      while (track.scrollWidth < window.innerWidth + period + 80) {
-        originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
-      }
-      return period;
-    }
-
-    var period = build();
-    var x = 0, last = null, paused = false;
-    var PX_PER_SEC = 42;
-
-    function frame(ts) {
-      if (last === null) last = ts;
-      var dt = (ts - last) / 1000; last = ts;
-      if (!paused) {
-        x -= PX_PER_SEC * dt;
-        if (x <= -period) x += period;
-        track.style.transform = "translateX(" + x + "px)";
-      }
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-
-    carousel.addEventListener("mouseenter", function () { paused = true; });
-    carousel.addEventListener("mouseleave", function () { paused = false; });
-
-    var rt;
-    window.addEventListener("resize", function () {
-      clearTimeout(rt);
-      rt = setTimeout(function () { x = 0; last = null; period = build(); }, 200);
-    });
-  })();
 })();
 </script>
 </body>
