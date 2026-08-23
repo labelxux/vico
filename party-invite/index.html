@@ -349,6 +349,9 @@ a:hover{color:var(--tomato)}
   var EVENT_TIME = new Date(2026, 8, 3, 20, 0, 0).getTime(); // Thu 3.9.2026, 20:00
   var WA_SHARE_TEXT = "מצטרפים לפתיחה של VICO?";
   var WA_SHARE_URL = "https://vico.ltd/party-invite/";
+  // Same Apps Script Web App as the club-signup forms (club-sheet-apps-script.gs) —
+  // formType tells it to append to the separate "Party RSVP" sheet instead of "Leads".
+  var RSVP_ENDPOINT = "https://script.google.com/macros/s/AKfycbz9GsPRooDKvUQAWHnkBdZQ3AcUBJtvUvBkkAT-eoRQmES4NuouVCWNYcboZTFWoMpGnw/exec";
 
   // ---- countdown ----
   var elD = document.querySelector('[data-unit="d"]');
@@ -432,10 +435,36 @@ a:hover{color:var(--tomato)}
     if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0))
       return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
     if (!party) return showError("כמה תהיו? בחרו מספר.");
-    var payload = { name: name, phone: digits, party: party, arrival: arrival || "מתישהו בערב", createdAt: new Date().toISOString() };
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
+    var payload = { formType: "partyRsvp", name: name, phone: digits, party: party, arrival: arrival || "מתישהו בערב", createdAt: new Date().toISOString() };
     clearError();
-    showDone(payload);
+
+    if (!RSVP_ENDPOINT) {
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
+      return showDone(payload);
+    }
+
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var origLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "רגע…"; }
+
+    fetch(RSVP_ENDPOINT, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || res.ok !== true) {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+          return showError("משהו השתבש בשליחה. נסו שוב או צרו קשר איתנו ישירות.");
+        }
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
+        showDone(payload);
+      })
+      .catch(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
+        showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
+      });
   });
   nameInput.addEventListener("input", clearError);
   elPhone.addEventListener("input", clearError);
