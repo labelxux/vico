@@ -99,13 +99,23 @@ a:hover{color:var(--tomato)}
 .check__label a{color:var(--deep-green);font-weight:700;text-decoration-thickness:1.5px;text-underline-offset:2px}
 .check__label a:hover{color:var(--tomato)}
 
+/* ---------- Rotating background gallery ---------- */
+.kiosk-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--deep-green)}
+.kiosk-bg__img{position:absolute;inset:0;z-index:1;background-size:cover;background-position:center;
+  opacity:0;transition:opacity 3s ease}
+.kiosk-bg__img.is-active{opacity:1}
+.kiosk-bg__scrim{position:absolute;inset:0;z-index:2;background:rgba(19,57,50,.78)}
+/* keep the shared footer painted above the fixed background layer */
+footer.footer{position:relative;z-index:1}
+
 /* ---------- Page layout ---------- */
-.kiosk{min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+.kiosk{position:relative;z-index:1;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   padding:clamp(28px,4vw,56px) clamp(20px,4vw,40px) calc(28px + env(safe-area-inset-bottom));}
-.kiosk__logo{height:44px;width:auto;margin-bottom:clamp(20px,3vw,32px);filter:drop-shadow(0 4px 14px rgba(0,0,0,.25))}
 .kiosk__wrap{width:100%;max-width:640px;margin:0 auto;color:var(--cream);text-align:center}
-.kiosk__title{margin:10px 0 0;font-family:var(--font-body);font-weight:900;
+.kiosk__title{margin:0;font-family:var(--font-body);font-weight:900;
   font-size:clamp(30px,4.6vw,48px);line-height:1.1;text-wrap:balance}
+.kiosk__title-logo{display:inline-block;height:.78em;width:auto;vertical-align:-.08em;
+  margin-inline-start:.18em;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25))}
 .kiosk__sub{margin:12px auto 0;max-width:640px;font:400 17px/1.6 var(--font-body);color:var(--light-sage)}
 
 .perks{margin:clamp(28px,4vw,40px) 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
@@ -140,11 +150,13 @@ a:hover{color:var(--tomato)}
 </head>
 <body>
 
-<div class="kiosk">
-  <img class="kiosk__logo" src="../assets/logo-clean-color.svg" alt="VICO" />
+<div class="kiosk-bg" id="kiosk-bg" aria-hidden="true">
+  <div class="kiosk-bg__scrim"></div>
+</div>
 
+<div class="kiosk">
   <div class="kiosk__wrap">
-    <h1 class="kiosk__title">מועדון החברים של</h1>
+    <h1 class="kiosk__title">מועדון החברים של <img class="kiosk__title-logo" src="../assets/logo-clean-color.svg" alt="VICO" /></h1>
     <p class="kiosk__sub">הצטרפו עכשיו וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות ופינוקים ששמורים רק למשפחה שלנו.</p>
 
     <div class="perks">
@@ -391,6 +403,50 @@ a:hover{color:var(--tomato)}
       if (document.visibilityState === "visible") requestWakeLock();
     });
   }
+})();
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var mount = document.getElementById("kiosk-bg");
+  if (!mount) return;
+
+  var IMAGES = [
+    "../assets/hero.jpg",
+    "../assets/gallery-img-1.jpg",
+    "../assets/gallery-img-2.jpg",
+    "../assets/gallery-img-3.jpg",
+    "../assets/gallery-img-4.jpg",
+    "../assets/gallery-img-5.jpg",
+    "../assets/gallery-img-6.jpg",
+    "../assets/gallery-img-7.jpg",
+    "../assets/gallery-img-8.jpg",
+    "../assets/gallery-img-9.jpg",
+    "../assets/gallery-img-10.jpg",
+    "../assets/gallery-img-11.jpg"
+  ];
+  // Shuffle so the kiosk doesn't always open on the same photo.
+  for (var i = IMAGES.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = IMAGES[i]; IMAGES[i] = IMAGES[j]; IMAGES[j] = tmp;
+  }
+
+  var layers = IMAGES.map(function (src, i) {
+    var el = document.createElement("div");
+    el.className = "kiosk-bg__img" + (i === 0 ? " is-active" : "");
+    el.style.backgroundImage = "url(" + src + ")";
+    mount.appendChild(el);
+    return el;
+  });
+
+  var ROTATE_MS = 18 * 60 * 1000; // ~18 minutes between crossfades
+  var current = 0;
+  setInterval(function () {
+    layers[current].classList.remove("is-active");
+    current = (current + 1) % layers.length;
+    layers[current].classList.add("is-active");
+  }, ROTATE_MS);
 })();
 </script>
 </body>
