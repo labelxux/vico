@@ -9,9 +9,9 @@
  *   - Club signups (index.html, member-club) → the "Leads" sheet (or the
  *     spreadsheet's first sheet if no "Leads" tab exists). Requires both
  *     consent checkboxes server-side.
- *   - Party RSVPs (party-invite) → the "Party RSVP" sheet, created
- *     automatically the first time someone RSVPs. No consent fields — the
- *     payload is tagged { formType: "partyRsvp" } so the script knows
+ *   - Party RSVPs (party-invite) → the "Opening Party" sheet (created
+ *     automatically if that tab doesn't exist yet). No consent fields —
+ *     the payload is tagged { formType: "partyRsvp" } so the script knows
  *     which sheet to use.
  *
  * Both flows dedupe on phone number (per-sheet): a repeat phone doesn't
@@ -87,7 +87,7 @@ function doPost(e) {
     var result;
 
     if (data.formType === 'partyRsvp') {
-      var rsvpSheet = ss.getSheetByName('Party RSVP') || ss.insertSheet('Party RSVP');
+      var rsvpSheet = ss.getSheetByName('Opening Party') || ss.insertSheet('Opening Party');
       result = appendToSheet_(rsvpSheet, data);
     } else {
       if (!data.marketingConsent || !data.termsAccepted) {
@@ -111,7 +111,7 @@ function doPost(e) {
 // Bump this string whenever you deploy, so a plain GET to the /exec URL
 // (e.g. in a browser tab) tells you which version is actually live —
 // no form submission needed to check.
-var SCRIPT_VERSION = 'v3 — party RSVP → separate sheet';
+var SCRIPT_VERSION = 'v4 — party RSVP → "Opening Party" sheet';
 
 function doGet() {
   return ContentService.createTextOutput('VICO club endpoint is live. (' + SCRIPT_VERSION + ')');
