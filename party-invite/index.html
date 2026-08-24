@@ -349,6 +349,7 @@ a:hover{color:var(--tomato)}
         <p class="done__sub" id="done-sub"></p>
         <div class="done__actions">
           <button type="button" class="btn btn--secondary btn--md" id="share-wa">שיתוף בוואטסאפ</button>
+          <button type="button" class="btn btn--secondary btn--md" id="add-calendar">הוספה ליומן</button>
           <button type="button" class="btn btn--primary btn--md" id="edit-rsvp">עדכון הפרטים</button>
         </div>
       </div>
@@ -490,6 +491,41 @@ a:hover{color:var(--tomato)}
   document.getElementById("share-wa").addEventListener("click", function(){
     window.open("https://wa.me/?text=" + encodeURIComponent(WA_SHARE_TEXT + "\n" + WA_SHARE_URL), "_blank", "noopener");
   });
+
+  document.getElementById("add-calendar").addEventListener("click", function(){
+    function pad(n){ return String(n).padStart(2, "0"); }
+    function fmt(d){
+      return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
+    }
+    var start = new Date(2026, 8, 3, 20, 0, 0);
+    var end = new Date(2026, 8, 3, 23, 0, 0);
+    var ics = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//VICO//Party Invite//HE",
+      "CALSCALE:GREGORIAN",
+      "BEGIN:VEVENT",
+      "UID:vico-opening-party-" + fmt(start) + "@vico.ltd",
+      "DTSTAMP:" + fmt(new Date()),
+      "DTSTART:" + fmt(start),
+      "DTEND:" + fmt(end),
+      "SUMMARY:מסיבת הפתיחה של VICO",
+      "LOCATION:אבן עזרא 17, הרצליה",
+      "DESCRIPTION:יום חמישי 3.9 בשעה 20:00 — השולחן שלכם שמור. מחכים לכם עם אוכל טעים\\, יין ומוזיקה טובה.",
+      "END:VEVENT",
+      "END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "vico-opening-party.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
   document.getElementById("edit-rsvp").addEventListener("click", function(){
     done.hidden = true;
     form.hidden = false;
