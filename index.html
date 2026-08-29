@@ -203,6 +203,25 @@ a:hover{color:var(--tomato)}
 .hero__cta{margin-top:6px;max-width:100%}
 .hero__cta .btn{white-space:nowrap;font-weight:400;font-size:clamp(15px,3.8vw,18px);padding:15px 30px}
 
+/* ===== Opening countdown banner (sticky, always visible) ===== */
+.obanner{position:sticky;top:0;z-index:40;background:var(--deep-green);color:var(--cream);
+  padding:9px 14px;overflow:hidden;border-bottom:var(--stroke-thin) solid rgba(175,193,187,.28)}
+.obanner__wrap{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:center;gap:8px clamp(10px,3vw,20px)}
+.obanner__text{font:700 clamp(12px,2.8vw,14px)/1.3 var(--font-body);white-space:nowrap}
+.obanner__text .star{color:var(--rose);opacity:.8;margin:0 2px}
+.obanner__countdown{display:flex;gap:5px}
+.obanner__unit{min-width:38px;padding:4px 4px 3px;border-radius:8px;
+  background:rgba(254,243,235,.08);border:var(--stroke-thin) solid rgba(175,193,187,.3);text-align:center}
+.obanner__unit-val{font:900 15px/1 var(--font-body);color:var(--cream)}
+.obanner__unit-lab{margin-top:2px;font:400 8px/1 var(--font-body);letter-spacing:.08em;color:var(--light-sage)}
+.obanner__cta{flex:0 0 auto;white-space:nowrap;font-size:13px !important;padding:9px 18px !important}
+@media (max-width:640px){
+  .obanner{padding:8px 10px}
+  .obanner__wrap{gap:6px 10px}
+  .obanner__text{width:100%;text-align:center;white-space:normal}
+}
+
 /* ===== 02 · The feeling ===== */
 .feel{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,120px) 24px;background:var(--cream)}
 .feel__copy{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:4px}
@@ -289,10 +308,28 @@ a:hover{color:var(--tomato)}
 </head>
 <body>
 
+<!-- ============ Opening countdown banner (sticky, always visible) ============ -->
+<section class="obanner" aria-label="הפתיחה הרשמית של VICO">
+  <div class="obanner__wrap">
+    <div class="obanner__text">
+      VICO נפתחים רשמית
+      <span class="star">✦</span>
+      <span dir="ltr">יום שלישי 1.9 ✦ 12:00</span>
+    </div>
+    <div class="obanner__countdown" id="obanner-countdown" aria-live="polite">
+      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="d">0</div><div class="obanner__unit-lab">ימים</div></div>
+      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="h">00</div><div class="obanner__unit-lab">שעות</div></div>
+      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="m">00</div><div class="obanner__unit-lab">דקות</div></div>
+      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="s">00</div><div class="obanner__unit-lab">שניות</div></div>
+    </div>
+    <button type="button" class="btn btn--primary btn--md obanner__cta" data-goto-signup data-obanner-cta>הצטרפו למועדון</button>
+  </div>
+</section>
+
 <!-- ============ 01 · Hero ============ -->
 <section class="hero section" aria-label="VICO — נפתחים בקרוב">
   <div class="hero__media" aria-hidden="true">
-    <img class="hero__img" src="assets/hero.jpg" alt="" />
+    <img class="hero__img" src="assets/hero-1280.jpg" srcset="assets/hero-1280.jpg 1280w, assets/hero.jpg 1800w" sizes="100vw" alt="" fetchpriority="high" decoding="async" />
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -325,7 +362,7 @@ a:hover{color:var(--tomato)}
 <!-- ============ 02 · The feeling ============ -->
 <section class="feel section" aria-labelledby="feel-copy">
   <div class="feel__copy" id="feel-copy">
-    <img class="feel__art" src="assets/cheers.png" alt="" />
+    <img class="feel__art" src="assets/cheers.png" alt="" loading="lazy" decoding="async" />
     <div class="feel__intro">
       <div class="feel__kicker">תכירו את VICO</div>
       <h2 class="feel__heading">השכונה מתחדשת ואנחנו מתרגשים לפתוח אתכם פרק חדש!</h2>
@@ -335,17 +372,17 @@ a:hover{color:var(--tomato)}
 
   <div class="carousel" id="gallery" aria-label="גלריית VICO">
     <div class="carousel__track">
-      <figure class="carousel__item"><img src="assets/gallery-img-1.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-2.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-3.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-4.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-5.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-6.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-7.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-8.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-9.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-10.jpg" alt=""></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-11.jpg" alt=""></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-1.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-2.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-3.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-4.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-5.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-6.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-7.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-8.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-9.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-10.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/gallery-img-11.jpg" alt="" loading="lazy" decoding="async"></figure>
     </div>
   </div>
 </section>
@@ -427,7 +464,7 @@ a:hover{color:var(--tomato)}
 <!-- ============ 05 · Jobs ============ -->
 <section class="jobs section" id="vico-jobs" aria-labelledby="jobs-title">
   <div class="jobs__wrap">
-    <img class="jobs__art" src="assets/hiring.svg" alt="" aria-hidden="true" />
+    <img class="jobs__art" src="assets/hiring.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
     <div class="jobs__title" id="jobs-title">באים לבשל איתנו? VICO מגייסת</div>
     <p class="jobs__text">אנחנו מחפשים אנשים עם תשוקה לאוכל, לאירוח ולחיוכים. אם אתם רוצים להיות חלק מצוות ההקמה של המקום הכי חם בעיר, מעל גיל 18 ומתאימה לכם עבודה במשמרות — דברו איתנו.</p>
     <p class="jobs__text jobs__text--dark">התקשרו או שלחו הודעה:
@@ -468,6 +505,35 @@ a:hover{color:var(--tomato)}
       window.dataLayer.push(Object.assign({ event: name }, campaign, data || {}));
     } catch (e) {}
   }
+
+  // ---- opening countdown banner ----
+  (function () {
+    var EVENT_TIME = new Date(2026, 8, 1, 12, 0, 0).getTime(); // Tue 1.9.2026, 12:00 — official restaurant opening
+    var banner = document.querySelector(".obanner");
+    if (!banner) return;
+    var elD = banner.querySelector('[data-obanner-unit="d"]');
+    var elH = banner.querySelector('[data-obanner-unit="h"]');
+    var elM = banner.querySelector('[data-obanner-unit="m"]');
+    var elS = banner.querySelector('[data-obanner-unit="s"]');
+    function pad(n){ return String(n).padStart(2, "0"); }
+    var timer;
+    function tick(){
+      var diff = EVENT_TIME - Date.now();
+      if (diff <= 0) {
+        banner.hidden = true;
+        clearInterval(timer);
+        return;
+      }
+      elD.textContent = String(Math.floor(diff / 864e5));
+      elH.textContent = pad(Math.floor((diff % 864e5) / 36e5));
+      elM.textContent = pad(Math.floor((diff % 36e5) / 6e4));
+      elS.textContent = pad(Math.floor((diff % 6e4) / 1000));
+    }
+    tick();
+    timer = setInterval(tick, 1000);
+    var cta = banner.querySelector("[data-obanner-cta]");
+    if (cta) cta.addEventListener("click", function(){ track("opening_banner_cta_click"); });
+  })();
 
   // ---- element refs ----
   var form   = document.getElementById("signup-form");
