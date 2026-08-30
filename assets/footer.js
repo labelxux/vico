@@ -20,6 +20,7 @@
           '<div class="footer__meta">' +
             '<div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>' +
             '<a class="footer__address" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>' +
+            '<a class="footer__address" dir="ltr" href="tel:+97298615866">09-861-5866</a>' +
           '</div>' +
         '</div>' +
         '<div class="footer__links">' +
