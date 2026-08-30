@@ -9,7 +9,10 @@
 .footer__mark{width:52px;height:52px;border-radius:14px}
 .footer__meta{display:flex;flex-direction:column;gap:2px;align-items:center}
 .footer__meta div{font:400 14px/1.7 var(--font-body);color:var(--light-sage)}
-.footer__address{font:400 14px/1.7 var(--font-body);color:var(--light-sage);text-underline-offset:3px}
-.footer__address:hover{color:var(--cream)}
+.footer__contact{display:flex;flex-direction:column;align-items:center;gap:8px}
+.footer__contact-label{font:700 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.footer__contact-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.footer__contact-row a{font:400 12px/1.5 var(--font-body);color:var(--light-sage);text-underline-offset:3px}
+.footer__contact-row a:hover{color:var(--cream)}
 .footer__links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font:700 14px/1 var(--font-body)}
 .footer__links a{color:var(--cream);text-underline-offset:4px}

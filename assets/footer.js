@@ -19,13 +19,18 @@
           '<img class="footer__mark" src="' + base + 'favicon-cream-on-green.svg" alt="VICO" />' +
           '<div class="footer__meta">' +
             '<div dir="ltr">kosher כשר ✦ Est 2026 ✦ Pizza · Pasta · Wine</div>' +
-            '<a class="footer__address" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>' +
-            '<a class="footer__address" dir="ltr" href="tel:+97298615866">09-861-5866</a>' +
+          '</div>' +
+        '</div>' +
+        '<div class="footer__contact">' +
+          '<div class="footer__contact-label">צרו קשר</div>' +
+          '<div class="footer__contact-row">' +
+            '<a href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>' +
+            '<a dir="ltr" href="tel:+97298615866">09-861-5866</a>' +
+            '<a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">ניווט בוויז</a>' +
           '</div>' +
         '</div>' +
         '<div class="footer__links">' +
           '<a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">עקבו אחרינו</a>' +
-          '<a href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">איך מגיעים?</a>' +
           '<a href="' + base + 'vico-accessibility-statement.pdf" target="_blank" rel="noopener">הצהרת נגישות</a>' +
           '<a href="' + base + 'VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות פרטיות</a>' +
         '</div>' +
