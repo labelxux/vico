@@ -71,6 +71,7 @@
 <link rel="stylesheet" href="ds/tokens/typography.css" />
 <link rel="stylesheet" href="ds/tokens/spacing.css" />
 <link rel="stylesheet" href="ds/footer.css" />
+<link rel="stylesheet" href="ds/header.css" />
 
 <style>
 /* ---------- Reset / base ---------- */
@@ -199,15 +200,6 @@ a:hover{color:var(--tomato)}
 .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 .hero__scrim{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(19,57,50,.30) 0%,rgba(19,57,50,.04) 42%,rgba(19,57,50,.62) 100%)}
-.hero__topbar{
-  position:absolute;top:0;right:0;left:0;z-index:3;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 22px;pointer-events:none;
-}
-.hero__logo{height:46px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.35))}
-.hero__labels{display:flex;flex-direction:row;align-items:center;gap:11px;direction:ltr}
-.hero__labels .lab{font:700 17px/1 var(--font-body);letter-spacing:.22em;color:var(--cream);opacity:.92;text-transform:uppercase}
-.hero__labels .star{color:var(--cream);opacity:.8;font-size:13px}
 .hero__content{
   position:relative;z-index:2;margin-top:auto;
   padding:0 24px calc(104px + env(safe-area-inset-bottom));
@@ -324,16 +316,8 @@ a:hover{color:var(--tomato)}
 .jobs__tel{font-weight:700;color:var(--tomato);text-decoration-thickness:1.5px;text-underline-offset:4px;white-space:nowrap}
 
 @media (max-width:520px){
-  .hero__topbar{padding:15px 16px}
-  .hero__logo{height:34px}
-  .hero__labels .lab{font-size:12px;letter-spacing:.06em}
-  .hero__labels .star{font-size:11px}
-  .hero__labels{gap:6px}
   .hero__scroll{width:78px;height:78px}
   .taste{padding-left:24px;padding-right:24px}
-}
-@media (max-width:360px){
-  .hero__labels .lab--pizza,.hero__labels .star--pizza{display:none}
 }
 </style>
 </head>
@@ -364,25 +348,12 @@ a:hover{color:var(--tomato)}
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
 
-  <div class="hero__topbar">
-    <img class="hero__logo" src="assets/logo-clean-color.svg" alt="VICO" />
-    <div class="hero__labels" aria-hidden="true">
-      <span class="lab">כשר</span>
-      <span class="star">✦</span>
-      <span class="lab">wine</span>
-      <span class="star">✦</span>
-      <span class="lab">PASTA</span>
-      <span class="star star--pizza">✦</span>
-      <span class="lab lab--pizza">PIZZA</span>
-    </div>
-  </div>
+  <div id="site-header"></div>
+  <script src="assets/header.js"></script>
 
   <div class="hero__content rise">
     <div class="hero__eyebrow">WE'RE OPEN</div>
     <h1 class="hero__title">האיטלקייה<br>השכונתית<br>החדשה שלכם</h1>
-    <div class="hero__cta">
-      <button type="button" class="btn btn--primary btn--lg" data-goto-signup>להצטרפות למשפחה</button>
-    </div>
   </div>
   <a class="hero__scroll" href="#feel-copy" aria-label="גלול למטה" data-scroll-text="Scroll Down ✦ Scroll Down ✦ ">
     <span class="hero__scroll-ring" aria-hidden="true"></span>

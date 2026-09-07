@@ -1,0 +1,13 @@
+/* ===== Shared VICO site header ===== */
+.site-header{
+  position:absolute;top:0;right:0;left:0;z-index:3;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 22px;pointer-events:none;
+}
+.site-header__logo{height:46px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.35))}
+.site-header__order-btn{white-space:nowrap;font-size:14px;padding:10px 20px;pointer-events:auto}
+@media (max-width:520px){
+  .site-header{padding:15px 16px}
+  .site-header__logo{height:34px}
+  .site-header__order-btn{font-size:12px;padding:8px 14px}
+}
