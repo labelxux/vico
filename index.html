@@ -79,6 +79,7 @@
 
   gtag('config', 'G-NMEN16FV4J');
 </script>
+<script src="assets/analytics.js" defer></script>
 
 <!-- VICO design-system tokens -->
 <link rel="stylesheet" href="ds/tokens/fig-tokens.css" />
@@ -333,7 +334,7 @@ a:hover{color:var(--tomato)}
 <script src="assets/header.js"></script>
 
 <!-- ============ 01 · Hero ============ -->
-<section class="hero section" aria-label="VICO — האיטלקייה השכונתית שלכם">
+<section class="hero section" id="vico-hero" aria-label="VICO — האיטלקייה השכונתית שלכם">
   <div class="hero__media" aria-hidden="true">
     <img class="hero__img" src="assets/hero-1280.jpg" srcset="assets/hero-1280.jpg 1280w, assets/hero.jpg 1800w" sizes="100vw" alt="" fetchpriority="high" decoding="async" />
   </div>
@@ -344,8 +345,8 @@ a:hover{color:var(--tomato)}
     <h1 class="hero__title">האיטלקייה<br>השכונתית שלכם.</h1>
     <p class="hero__sub">עבודת יד, טאבון חם ושולחן שכיף להישאר סביבו.</p>
     <div class="hero__cta">
-      <a class="btn btn--primary btn--lg" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener" data-track="hero_order_click">הזמינו עכשיו</a>
-      <a class="btn btn--ghost-light btn--lg" href="/menu/" data-track="hero_menu_click">לתפריט</a>
+      <a class="btn btn--primary btn--lg" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">הזמינו עכשיו</a>
+      <a class="btn btn--ghost-light btn--lg" href="/menu/">לתפריט</a>
     </div>
   </div>
 </section>
@@ -421,7 +422,7 @@ a:hover{color:var(--tomato)}
           <li>מוכן תוך דקות</li>
         </ul>
         <div class="takeaway__cta">
-          <a class="btn btn--primary btn--lg" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener" data-track="takeaway_order_click">להזמנה אונליין</a>
+          <a class="btn btn--primary btn--lg" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">להזמנה אונליין</a>
         </div>
         <p class="takeaway__phone">שאלות, הזמנת מקום, קבוצות או אירוע? <a dir="ltr" href="tel:+97298615866">09-861-5866</a></p>
       </div>
@@ -504,7 +505,7 @@ a:hover{color:var(--tomato)}
 </section>
 
 <!-- ============ 05 · Today / Tonight ============ -->
-<section class="tonight section" id="vico-tonight" aria-labelledby="tonight-title">
+<section class="tonight section" id="vico-tonight" aria-labelledby="tonight-title" data-mode="day">
   <div class="wrap">
     <div class="tonight__card">
       <div class="tonight__copy">
@@ -551,7 +552,7 @@ a:hover{color:var(--tomato)}
     <p class="perks__note">ובנוסף צבירת נקודות בכל הזמנה למימוש בהזמנות הבאות.</p>
 
     <div class="signup__toggle">
-      <a class="btn btn--light btn--lg" href="https://customer-profile.tabit.cloud/1BB9397F-3725-45F1-8CE0-3541C4D241B7" target="_blank" rel="noopener" data-track="club_join_click">הצטרפו למועדון <svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+      <a class="btn btn--light btn--lg" href="https://customer-profile.tabit.cloud/1BB9397F-3725-45F1-8CE0-3541C4D241B7" target="_blank" rel="noopener">הצטרפו למועדון <svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
     </div>
     <p class="signup__legal"><a href="assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון המועדון</a> · <a href="assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות פרטיות</a></p>
   </div>
@@ -613,24 +614,6 @@ a:hover{color:var(--tomato)}
 (function(){
   "use strict";
 
-  // ---- analytics ----
-  var campaign = { source: "direct", campaign: "" };
-  try {
-    var p = new URLSearchParams(window.location.search);
-    campaign.source = p.get("source") || "direct";
-    campaign.campaign = p.get("campaign") || "";
-  } catch (e) {}
-  function track(name, data){
-    try {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(Object.assign({ event: name }, campaign, data || {}));
-    } catch (e) {}
-  }
-  track("landing_view");
-  Array.prototype.forEach.call(document.querySelectorAll("[data-track]"), function(el){
-    el.addEventListener("click", function(){ track(el.getAttribute("data-track")); });
-  });
-
   // ---- Today / Tonight: swap copy after 17:00 local time ----
   (function () {
     var hour = new Date().getHours();
@@ -639,6 +622,7 @@ a:hover{color:var(--tomato)}
     var title = document.querySelector('[data-tonight="title"]');
     var list = document.querySelector('[data-tonight="list"]');
     if (!eyebrow || !title || !list) return;
+    document.getElementById("vico-tonight").setAttribute("data-mode", "night");
     eyebrow.textContent = "Tonight at VICO";
     title.textContent = "הערב ב־VICO";
     list.innerHTML =

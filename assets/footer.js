@@ -15,7 +15,7 @@
   var EXT_ICON = '<svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>';
 
   mount.outerHTML =
-    '<footer class="footer" aria-label="פרטי VICO">' +
+    '<footer class="footer" aria-label="פרטי VICO" data-loc="footer">' +
       '<div class="footer__inner">' +
         '<div class="footer__brand">' +
           '<img class="footer__mark" src="' + base + 'favicon-cream-on-green.svg" alt="VICO" />' +

@@ -34,7 +34,7 @@
   }
 
   mount.outerHTML =
-    '<header class="site-header site-header--' + variant + '" data-header>' +
+    '<header class="site-header site-header--' + variant + '" data-header data-loc="header">' +
       '<a class="site-header__logo-link" href="/" aria-label="VICO — לעמוד הבית">' +
         '<img class="site-header__logo" src="' + base + 'logo-clean-color.svg" alt="VICO" />' +
       '</a>' +
@@ -48,10 +48,10 @@
         '</button>' +
       '</div>' +
     '</header>' +
-    '<nav class="site-header__drawer" data-drawer hidden aria-label="ניווט נייד">' +
+    '<nav class="site-header__drawer" data-drawer hidden aria-label="ניווט נייד" data-loc="drawer">' +
       LINKS.map(function (l) { return linkHtml(l); }).join("") +
     '</nav>' +
-    '<div class="site-mobilebar" aria-label="פעולות מהירות">' +
+    '<div class="site-mobilebar" aria-label="פעולות מהירות" data-loc="mobilebar">' +
       '<a class="btn btn--primary btn--md site-mobilebar__order" href="' + ORDER_URL + '" target="_blank" rel="noopener">הזמינו עכשיו</a>' +
       '<a class="btn btn--secondary btn--md site-mobilebar__menu" href="/menu/">תפריט</a>' +
     '</div>';

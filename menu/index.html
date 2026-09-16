@@ -92,6 +92,7 @@
   gtag('js', new Date());
   gtag('config', 'G-NMEN16FV4J');
 </script>
+<script src="../assets/analytics.js" defer></script>
 
 <link rel="stylesheet" href="../ds/tokens/fig-tokens.css" />
 <link rel="stylesheet" href="../ds/tokens/colors.css" />
@@ -215,7 +216,7 @@ a:hover{color:var(--tomato)}
 <script src="../assets/header.js"></script>
 
 <!-- ===== Intro ===== -->
-<section class="intro" aria-labelledby="menu-title">
+<section class="intro" id="intro" aria-labelledby="menu-title">
   <div class="wrap">
     <h1 class="intro__title" id="menu-title">התפריט</h1>
     <p class="intro__meta">פיצה · פסטה · יין ✦ כשר ✦ אבן עזרא 17, הרצליה</p>
@@ -239,7 +240,7 @@ a:hover{color:var(--tomato)}
 </section>
 
 <!-- ===== Category nav ===== -->
-<nav class="catnav" aria-label="קטגוריות תפריט">
+<nav class="catnav" id="catnav" aria-label="קטגוריות תפריט">
   <div class="catnav__inner" data-catnav>
     <a href="#antipasti">ראשונות</a>
     <a href="#insalate">סלטים</a>
@@ -391,7 +392,7 @@ a:hover{color:var(--tomato)}
   </div>
 </main>
 
-<section class="cta" aria-label="הזמנה">
+<section class="cta" id="menu-cta" aria-label="הזמנה">
   <div class="wrap">
     <h2>נשאר רק לבחור.</h2>
     <p>מזמינים אונליין ואוספים חם — או קופצים לשבת איתנו בטרסה.</p>
@@ -425,7 +426,10 @@ a:hover{color:var(--tomato)}
       var on = sections[i] === current;
       var was = a.classList.contains("is-active");
       a.classList.toggle("is-active", on);
-      if (on && !was) revealPill(a);
+      if (on && !was) {
+        revealPill(a);
+        if (window.vicoTrack) window.vicoTrack("menu_category_view", { category: sections[i].id });
+      }
     });
   }, { rootMargin: "-40% 0px -55% 0px" });
   sections.forEach(function(s){ if (s) io.observe(s); });
