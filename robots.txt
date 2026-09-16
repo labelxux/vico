@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /_archive/
 
 Sitemap: https://www.vico.ltd/sitemap.xml
