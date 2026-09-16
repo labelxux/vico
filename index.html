@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>VICO האיטלקייה השכונתית בהרצליה</title>
-<meta name="description" content="האיטלקייה החדשה שלכם - פיצה מהטאבון, פסטה טרייה בעבודת יד, יין טוב ומנות שכיף לחלוק. מקום נעים וקליל למשפחות, חברים וזוגות, מהצהריים ועד הערב. כשר." />
+<title>VICO | מסעדה איטלקית כשרה בהרצליה – פיצה, פסטה ויין</title>
+<meta name="description" content="VICO היא האיטלקייה השכונתית בהרצליה. פיצות מהטאבון, פסטה טרייה, מנות לחלוקה, יין וקוקטיילים. ישיבה במקום וטייק אוויי." />
 <meta name="theme-color" content="#133932" />
 <link rel="canonical" href="https://www.vico.ltd/" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="restaurant" />
 <meta property="og:site_name" content="VICO" />
 <meta property="og:url" content="https://www.vico.ltd/" />
-<meta property="og:title" content="VICO האיטלקייה השכונתית החדשה שלכם" />
-<meta property="og:description" content="פיצה, פסטה יין וטעמים שכבר מרגישים בבית. עכשיו פתוחים." />
+<meta property="og:title" content="VICO | האיטלקייה השכונתית בהרצליה" />
+<meta property="og:description" content="פיצה מהטאבון, פסטה טרייה ויין טוב. ישיבה במקום וטייק אוויי. כשר." />
 <meta property="og:image" content="https://www.vico.ltd/assets/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="628" />
 <meta property="og:locale" content="he_IL" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="VICO האיטלקייה השכונתית החדשה שלכם" />
-<meta name="twitter:description" content="פיצה, פסטה יין וטעמים שכבר מרגישים בבית. הפתיחה בספטמבר." />
+<meta name="twitter:title" content="VICO | האיטלקייה השכונתית בהרצליה" />
+<meta name="twitter:description" content="פיצה מהטאבון, פסטה טרייה ויין טוב. ישיבה במקום וטייק אוויי. כשר." />
 <meta name="twitter:image" content="https://www.vico.ltd/assets/og-image.jpg" />
 <link rel="icon" type="image/svg+xml" href="assets/favicon-cream-tomato.svg" />
 <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
@@ -32,10 +32,14 @@
   "@type": "Restaurant",
   "name": "VICO",
   "alternateName": "VICO האיטלקייה השכונתית",
+  "description": "מסעדה איטלקית כשרה בהרצליה — פיצות מהטאבון, פסטה טרייה, מנות לחלוקה, יין וקוקטיילים. ישיבה במקום וטייק אוויי.",
   "url": "https://www.vico.ltd/",
   "image": "https://www.vico.ltd/assets/og-image.jpg",
   "telephone": "+972-9-861-5866",
   "servesCuisine": ["Italian", "Pizza", "Pasta"],
+  "priceRange": "₪₪",
+  "menu": "https://www.vico.ltd/menu/",
+  "hasMenu": "https://www.vico.ltd/menu/",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "אבן עזרא 17",
@@ -47,6 +51,17 @@
     "@type": "GeoCoordinates",
     "latitude": 32.1691253,
     "longitude": 34.8355557
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+    "opens": "12:00",
+    "closes": "23:00"
+  }],
+  "potentialAction": {
+    "@type": "OrderAction",
+    "target": "https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter",
+    "deliveryMethod": ["http://purl.org/goodrelations/v1#DeliveryModePickUp"]
   },
   "sameAs": [
     "https://www.instagram.com/vico.restaurant",
@@ -77,6 +92,7 @@
 /* ---------- Reset / base ---------- */
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
   font-family:var(--font-body);
   color:var(--deep-green);
@@ -89,6 +105,7 @@ body{
 img{max-width:100%;display:block}
 a{color:var(--deep-green)}
 a:hover{color:var(--tomato)}
+[hidden]{display:none !important}
 
 /* ---------- Motion ---------- */
 @keyframes vico-drift{from{transform:scale(1.06) translateY(0.6%)}to{transform:scale(1.06) translateY(-1.4%)}}
@@ -96,10 +113,10 @@ a:hover{color:var(--tomato)}
 .rise{animation:vico-rise .9s var(--ease-standard,ease) both}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
+  html{scroll-behavior:auto}
 }
 
 /* ---------- Design-system components ---------- */
-/* Button */
 .btn{
   --btn-bg:var(--tomato);
   --btn-fg:var(--white);
@@ -126,70 +143,28 @@ a:hover{color:var(--tomato)}
   box-shadow:none;
 }
 .btn--secondary:hover{--btn-bg:var(--deep-green);--btn-fg:var(--cream);filter:none}
-
-/* Input */
-.field{display:flex;flex-direction:column;gap:8px}
-.field__label{font:700 13px/1.2 var(--font-body);letter-spacing:.02em;color:var(--deep-green)}
-.field__input{
-  width:100%;font:400 17px/1.3 var(--font-body);color:var(--deep-green);
-  background:var(--white);
-  border:var(--stroke-thin) solid var(--light-sage);
-  border-radius:var(--radius-md);
-  padding:15px 16px;
-  transition:border-color var(--dur-fast,140ms) var(--ease-standard,ease),
-             box-shadow var(--dur-fast,140ms) var(--ease-standard,ease);
+.btn--ghost-light{
+  --btn-bg:rgba(254,243,235,.14);--btn-fg:var(--cream);
+  border:var(--stroke-thin) solid rgba(254,243,235,.7);box-shadow:none;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
 }
-.field__input::placeholder{color:var(--sage-green);opacity:.7}
-.field__input:focus{
-  outline:none;border-color:var(--deep-green);
-  box-shadow:0 0 0 3px rgba(19,57,50,.12);
-}
-.field__input[type="tel"]{direction:ltr;text-align:right}
-
-/* Checkbox */
-.check{display:flex;align-items:flex-start;gap:12px;cursor:pointer;user-select:none}
-.check input{position:absolute;opacity:0;width:1px;height:1px}
-.check__box{
-  flex:0 0 auto;width:24px;height:24px;margin-top:1px;
-  border:var(--stroke-thin) solid var(--sage-green);
-  border-radius:var(--radius-sm);
-  background:var(--white);
-  display:flex;align-items:center;justify-content:center;
-  transition:background var(--dur-fast,140ms) var(--ease-standard,ease),
-             border-color var(--dur-fast,140ms) var(--ease-standard,ease);
-}
-.check__box svg{width:15px;height:15px;opacity:0;transform:scale(.6);
-  transition:opacity var(--dur-fast,140ms) ease,transform var(--dur-fast,140ms) var(--ease-standard,ease)}
-.check input:checked + .check__box{background:var(--deep-green);border-color:var(--deep-green)}
-.check input:checked + .check__box svg{opacity:1;transform:scale(1)}
-.check input:focus-visible + .check__box{outline:3px solid var(--focus-ring);outline-offset:2px}
-.check__label{font:400 12px/1.4 var(--font-body);color:var(--sage-green)}
-.check__label a{color:var(--deep-green);font-weight:700;text-decoration-thickness:1.5px;text-underline-offset:2px}
-.check__label a:hover{color:var(--tomato)}
-
-/* Image placeholder slot (brand placeholder convention) */
-.slot{
-  position:relative;overflow:hidden;background:var(--deep-green);
-  display:flex;align-items:center;justify-content:center;text-align:center;
-}
-.slot::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(120% 90% at 50% 0%, rgba(103,133,124,.35), transparent 60%);
-}
-.slot__inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;
-  padding:24px;max-width:82%}
-.slot__mark{font:400 34px/1 var(--font-wordmark);color:var(--light-sage);opacity:.85;letter-spacing:.04em}
-.slot__tag{font:700 11px/1 var(--font-body);letter-spacing:.28em;text-transform:uppercase;color:var(--light-sage);opacity:.85}
-.slot__cap{font:400 15px/1.5 var(--font-body);color:var(--cream);opacity:.9}
-.slot--light{background:var(--pink-salmaon)}
-.slot--light::before{background:radial-gradient(120% 90% at 50% 0%, rgba(251,203,205,.6), transparent 60%)}
-.slot--light .slot__mark{color:var(--tomato);opacity:.55}
-.slot--light .slot__tag{color:var(--sage-green)}
-.slot--light .slot__cap{color:var(--sage-green)}
+.btn--ghost-light:hover{--btn-bg:var(--cream);--btn-fg:var(--deep-green);filter:none}
+.btn--light{--btn-bg:var(--cream);--btn-fg:var(--deep-green);box-shadow:none}
+.btn--light:hover{filter:brightness(.96)}
 
 /* ---------- Layout helpers ---------- */
 .section{position:relative}
-.wrap{max-width:780px;margin:0 auto}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.kicker{font:700 clamp(13px,2vw,15px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato);text-transform:uppercase}
+.h2{margin:0;font-family:var(--font-body);font-weight:900;color:var(--deep-green);
+  font-size:clamp(30px,5.6vw,54px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+.lead{margin:0;font:400 clamp(17px,2.2vw,20px)/1.65 var(--font-body);color:var(--deep-green);max-width:620px}
+.section-head{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.section-head--center{align-items:center;text-align:center}
+.arrow-link{display:inline-flex;align-items:center;gap:8px;font:800 17px/1 var(--font-body);color:var(--deep-green);text-decoration:none;
+  border-bottom:2px solid var(--tomato);padding-bottom:4px}
+.arrow-link:hover{color:var(--tomato)}
+.arrow-link svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;transform:scaleX(-1)}
 
 /* ===== 01 · Hero ===== */
 .hero{
@@ -199,248 +174,362 @@ a:hover{color:var(--tomato)}
 .hero__media{position:absolute;inset:0;animation:vico-drift 22s ease-in-out infinite alternate;background:var(--deep-green)}
 .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 .hero__scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(19,57,50,.30) 0%,rgba(19,57,50,.04) 42%,rgba(19,57,50,.62) 100%)}
+  background:linear-gradient(180deg,rgba(19,57,50,.42) 0%,rgba(19,57,50,.06) 40%,rgba(19,57,50,.72) 100%)}
 .hero__content{
   position:relative;z-index:2;margin-top:auto;
-  padding:0 24px calc(104px + env(safe-area-inset-bottom));
+  padding:0 24px calc(64px + env(safe-area-inset-bottom));
   display:flex;flex-direction:column;align-items:flex-start;gap:16px;
-  color:var(--cream);
+  color:var(--cream);max-width:1100px;width:100%;margin-inline:auto;
 }
-.hero__scroll{
-  position:absolute;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));
-  transform:translateX(-50%);z-index:3;
-  width:92px;height:92px;color:var(--cream);text-decoration:none;
-  display:flex;align-items:center;justify-content:center;
-  filter:drop-shadow(0 2px 12px rgba(19,57,50,.5));
-}
-.hero__scroll-ring{position:absolute;inset:0;animation:vico-spin 10s linear infinite}
-.hero__scroll-ring span{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;
-  transform-origin:center;padding-top:4px;
-  font:800 10px/1 var(--font-body);letter-spacing:.02em;text-transform:uppercase;color:var(--cream)}
-.hero__scroll-arrow{position:relative;width:24px;height:24px;stroke:currentColor;stroke-width:2;
-  fill:none;stroke-linecap:round;stroke-linejoin:round}
-@keyframes vico-spin{to{transform:rotate(360deg)}}
-.hero__eyebrow{font:300 clamp(16px,3.4vw,24px)/1.1 var(--font-body);letter-spacing:.1em;opacity:.95}
+.hero__eyebrow{font:700 clamp(14px,2.4vw,18px)/1.1 var(--font-body);letter-spacing:.22em;color:var(--rose);text-transform:uppercase}
 .hero__title{margin:0;font-family:var(--font-body);font-weight:900;
-  font-size:clamp(32px,8.5vw,104px);line-height:1.04;letter-spacing:-.015em}
-.hero__cta{margin-top:6px;max-width:100%}
-.hero__cta .btn{white-space:nowrap;font-weight:400;font-size:clamp(15px,3.8vw,18px);padding:15px 30px}
+  font-size:clamp(38px,8vw,96px);line-height:1.02;letter-spacing:-.015em;text-wrap:balance}
+.hero__sub{margin:0;font:400 clamp(17px,2.4vw,22px)/1.5 var(--font-body);color:var(--cream);opacity:.95;max-width:560px}
+.hero__cta{margin-top:10px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero__cta .btn{font-size:clamp(15px,3.6vw,17px);padding:16px 30px}
 
-/* ===== Opening countdown banner (sticky, always visible) ===== */
-.obanner{position:sticky;top:0;z-index:40;background:var(--deep-green);color:var(--cream);
-  padding:9px 14px;overflow:hidden;border-bottom:var(--stroke-thin) solid rgba(175,193,187,.28)}
-.obanner__wrap{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;
-  align-items:center;justify-content:center;gap:8px clamp(10px,3vw,20px)}
-.obanner__text{font:700 clamp(12px,2.8vw,14px)/1.3 var(--font-body);white-space:nowrap}
-.obanner__text .star{color:var(--rose);opacity:.8;margin:0 2px}
-.obanner__countdown{display:flex;gap:5px}
-.obanner__unit{min-width:38px;padding:4px 4px 3px;border-radius:8px;
-  background:rgba(254,243,235,.08);border:var(--stroke-thin) solid rgba(175,193,187,.3);text-align:center}
-.obanner__unit-val{font:900 15px/1 var(--font-body);color:var(--cream)}
-.obanner__unit-lab{margin-top:2px;font:400 8px/1 var(--font-body);letter-spacing:.08em;color:var(--light-sage)}
-.obanner__cta{flex:0 0 auto;white-space:nowrap;font-size:13px !important;padding:9px 18px !important}
+/* ===== 02 · Dishes ===== */
+.dishes{background:var(--cream);padding:clamp(72px,10vw,120px) 0 clamp(64px,8vw,96px)}
+.dishes__grid{margin-top:clamp(32px,5vw,52px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,24px)}
+.dish{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--deep-green)}
+.dish__media{position:relative;aspect-ratio:1/1;border-radius:var(--radius-lg);overflow:hidden;background:var(--deep-green);margin-bottom:8px}
+.dish__media img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-med,260ms) var(--ease-standard,ease)}
+.dish:hover .dish__media img{transform:scale(1.04)}
+.dish__badge{position:absolute;top:12px;inset-inline-start:12px;padding:7px 12px;border-radius:var(--radius-pill);
+  background:var(--tomato);color:var(--white);font:800 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;direction:ltr}
+.dish__name{font:900 clamp(17px,2vw,20px)/1.2 var(--font-body)}
+.dish__desc{margin:0;font:400 14px/1.45 var(--font-body);color:var(--sage-green)}
+.dishes__cta{margin-top:clamp(36px,5vw,56px);display:flex;justify-content:center}
+@media (max-width:900px){.dishes__grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:640px){
-  .obanner{padding:8px 10px}
-  .obanner__wrap{gap:6px 10px}
-  .obanner__text{width:100%;text-align:center;white-space:normal}
+  .dishes__grid{grid-template-columns:repeat(2,1fr);gap:14px 12px}
+  .dish__media{border-radius:var(--radius-md)}
+  .dish__desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 }
 
-/* ===== 02 · The feeling ===== */
-.feel{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;padding:clamp(72px,12vw,120px) 24px;background:var(--cream)}
-.feel__copy{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:4px}
-.feel__intro{display:flex;flex-direction:column;gap:12px}
-.feel__kicker{font:700 clamp(14px,2.4vw,16px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato)}
-.feel__heading{margin:0;font-family:var(--font-body);font-weight:900;color:var(--deep-green);
-  font-size:clamp(30px,7vw,52px);line-height:1.08;text-wrap:balance}
-.feel__heading--accent{color:var(--tomato)}
-.feel__art{width:clamp(180px,34vw,320px);height:auto;display:block;margin:0 auto clamp(24px,4vw,36px)}
-.feel__body{margin:clamp(28px,4.5vw,40px) auto 0;max-width:620px;
-  font:400 clamp(17px,2.4vw,20px)/1.7 var(--font-body);color:var(--deep-green)}
-/* ===== Love at First Slice — seamless auto-scrolling carousel ===== */
-.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin:clamp(40px,6vw,60px) -24px 0}
-.carousel__track{display:flex;gap:6px;width:max-content;will-change:transform}
-.carousel__item{
-  flex:0 0 auto;width:clamp(260px,38vw,440px);height:clamp(300px,50vh,540px);
-  margin:0;overflow:hidden;border-radius:0;background:var(--deep-green);
+/* ===== 03 · Takeaway ===== */
+.takeaway{background:var(--deep-green);color:var(--cream);padding:clamp(72px,10vw,120px) 0;overflow:hidden}
+.takeaway__grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.takeaway__copy{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.takeaway .kicker{color:var(--rose)}
+.takeaway .h2{color:var(--cream)}
+.takeaway .lead{color:var(--light-sage)}
+.takeaway__list{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 22px}
+.takeaway__list li{font:700 15px/1 var(--font-body);color:var(--cream);display:flex;align-items:center;gap:8px}
+.takeaway__list li::before{content:"✦";color:var(--rose);font-size:12px}
+.takeaway__cta{margin-top:10px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.takeaway__phone{margin:14px 0 0;font:400 15px/1.5 var(--font-body);color:var(--light-sage)}
+.takeaway__phone a{color:var(--cream);font-weight:700;text-decoration-thickness:1.5px;text-underline-offset:4px;white-space:nowrap}
+.takeaway__phone a:hover{color:var(--rose)}
+.takeaway__photos{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end}
+.takeaway__photos img{width:100%;height:auto;border-radius:var(--radius-lg);object-fit:cover;object-position:center 65%;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.takeaway__photos img:first-child{aspect-ratio:3/4;transform:translateY(-8%)}
+.takeaway__photos img:last-child{aspect-ratio:3/4}
+@media (max-width:860px){
+  .takeaway__grid{grid-template-columns:1fr}
+  .takeaway__photos{margin-top:8px}
+  .takeaway__photos img:first-child{transform:none}
+  .takeaway__photos img{aspect-ratio:4/5;border-radius:var(--radius-md)}
 }
+
+/* ===== 04 · Atmosphere ===== */
+.feel{padding:clamp(80px,12vw,140px) 0 0;background:var(--cream);overflow:hidden}
+.feel__copy{max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;padding:0 24px}
+.feel__art{width:clamp(150px,26vw,240px);height:auto;display:block;margin:0 auto 8px}
+.feel__body{margin:8px auto 0;max-width:640px;font:400 clamp(17px,2.2vw,20px)/1.7 var(--font-body);color:var(--deep-green)}
+.carousel{position:relative;z-index:1;overflow:hidden;direction:ltr;margin:clamp(44px,6vw,64px) 0 0}
+.carousel__track{display:flex;gap:6px;width:max-content;will-change:transform}
+.carousel__item{flex:0 0 auto;width:clamp(240px,32vw,400px);height:clamp(320px,50vh,560px);margin:0;overflow:hidden;background:var(--deep-green)}
 .carousel__item img{width:100%;height:100%;object-fit:cover;display:block}
-/* reduced-motion fallback: no auto-scroll, let users swipe instead */
 .carousel.is-scrollable{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .carousel.is-scrollable::-webkit-scrollbar{display:none}
 
+/* ===== 04b · Bar ===== */
+.bar{background:var(--cream);padding:clamp(80px,12vw,140px) 0 clamp(72px,10vw,120px);overflow:hidden}
+.bar__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px);align-items:center}
+.bar__copy{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.bar__wines{margin:4px 0 6px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.bar__wines li{font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
+.bar__wines strong{display:inline-block;min-width:44px;font:700 12px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--tomato);margin-inline-end:6px}
+.bar__photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 40%;border-radius:var(--radius-xl);box-shadow:var(--shadow-card)}
+.cocktails{margin:clamp(40px,6vw,64px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,24px)}
+.cocktail{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:22px 18px 26px;border-radius:var(--radius-lg);
+  background:var(--white);border:var(--stroke-thin) solid var(--light-sage)}
+.cocktail img{width:160px;height:160px;max-width:100%;flex:0 0 auto;object-fit:cover;border-radius:var(--radius-md);margin-bottom:6px}
+.cocktail__name{font:900 17px/1.2 var(--font-body);color:var(--deep-green);letter-spacing:.03em}
+.cocktail__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--sage-green)}
+@media (max-width:900px){.cocktails{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:860px){.bar__grid{grid-template-columns:1fr}.bar__photo img{aspect-ratio:4/3}}
 
-/* ===== 04 · Signup ===== */
-.signup{position:relative;background:var(--deep-green);color:var(--cream);
-  padding:clamp(88px,15vw,140px) 24px;overflow:hidden}
-.signup__wrap{position:relative;max-width:560px;margin:0 auto;
-  display:flex;flex-direction:column;gap:18px;text-align:center}
-.signup__eyebrow{font:600 13px/1 var(--font-body);letter-spacing:.34em;text-transform:uppercase;color:var(--rose);direction:ltr}
-.signup__title{margin:0;font-family:var(--font-body);font-weight:900;
-  font-size:clamp(36px,9vw,60px);line-height:1.05;text-wrap:balance}
-.signup__sub{margin:0;font:400 18px/1.6 var(--font-body);color:var(--light-sage)}
-.perks{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.perk{
-  background:rgba(254,243,235,.05);
-  border:var(--stroke-thin) solid rgba(175,193,187,.32);
-  border-radius:var(--radius-lg);
-  padding:24px 16px;
-  display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;
+/* ===== 05 · Today / Tonight ===== */
+.tonight{background:var(--pink-salmaon);padding:clamp(64px,9vw,104px) 0}
+.tonight__card{
+  max-width:900px;margin:0 auto;background:var(--cream);border-radius:var(--radius-xl);
+  padding:clamp(28px,4.5vw,52px);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;
+  box-shadow:var(--shadow-card);
 }
+.tonight__copy{display:flex;flex-direction:column;gap:12px}
+.tonight__eyebrow{font:700 13px/1 var(--font-body);letter-spacing:.3em;color:var(--tomato);text-transform:uppercase;direction:ltr;text-align:start}
+.tonight__title{margin:0;font:900 clamp(26px,4vw,40px)/1.1 var(--font-body);color:var(--deep-green)}
+.tonight__list{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.tonight__list li{font:400 17px/1.4 var(--font-body);color:var(--deep-green);display:flex;gap:10px;align-items:baseline}
+.tonight__list li::before{content:"✦";color:var(--tomato);font-size:12px;flex:0 0 auto}
+.tonight__list li strong{font-weight:900}
+.tonight__side{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:200px}
+@media (max-width:640px){.tonight__card{grid-template-columns:1fr}.tonight__side{flex-direction:row;flex-wrap:wrap}.tonight__side .btn{flex:1 1 auto}}
+
+/* ===== 06 · Club ===== */
+.signup{position:relative;background:var(--deep-green);color:var(--cream);padding:clamp(80px,12vw,130px) 24px;overflow:hidden}
+.signup__wrap{position:relative;max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:18px;text-align:center}
+.signup__eyebrow{font:600 13px/1 var(--font-body);letter-spacing:.34em;text-transform:uppercase;color:var(--rose);direction:ltr}
+.signup__title{margin:0;font-family:var(--font-body);font-weight:900;font-size:clamp(34px,8vw,56px);line-height:1.05;text-wrap:balance}
+.signup__sub{margin:0;font:400 18px/1.6 var(--font-body);color:var(--light-sage)}
+.perks{margin-top:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.perk{background:rgba(254,243,235,.05);border:var(--stroke-thin) solid rgba(175,193,187,.32);border-radius:var(--radius-lg);
+  padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
 .perk__mark{color:var(--rose);font-size:18px;line-height:1}
-.perk__title{font:900 clamp(17px,2.4vw,20px)/1.15 var(--font-body);color:var(--cream)}
+.perk__title{font:900 clamp(16px,2.2vw,18px)/1.15 var(--font-body);color:var(--cream)}
 .perk__desc{font:400 14px/1.45 var(--font-body);color:var(--light-sage)}
 @media (max-width:560px){.perks{grid-template-columns:1fr}}
-.perks__note{margin:16px 0 0;text-align:center;font:400 14px/1.5 var(--font-body);color:var(--light-sage)}
-.signup__card{
-  margin-top:14px;background:var(--white);color:var(--deep-green);
-  border-radius:var(--radius-xl);padding:30px 26px;
-  box-shadow:var(--shadow-card);text-align:start;
-}
-.form{display:flex;flex-direction:column;gap:16px}
-.form__err{font:700 14px/1.4 var(--font-body);color:var(--tomato)}
-.done{display:flex;flex-direction:column;gap:12px;text-align:center;padding:8px 0}
-.done__title{font-family:var(--font-body);font-weight:900;
-  font-size:clamp(28px,7vw,40px);line-height:1.1}
-.done__sub{margin:0;font:400 17px/1.6 var(--font-body);color:var(--sage-green)}
-.done__share{margin-top:10px;display:flex;justify-content:center}
-[hidden]{display:none !important}
+.perks__note{margin:4px 0 0;text-align:center;font:400 14px/1.5 var(--font-body);color:var(--light-sage)}
+.signup__toggle{display:flex;justify-content:center;margin-top:6px}
+.signup__legal{margin:0;font:400 12px/1.5 var(--font-body);color:var(--sage-green)}
+.signup__legal a{color:var(--light-sage);text-underline-offset:3px}
+.signup__legal a:hover{color:var(--cream)}
 
-/* ===== 05 · Jobs ===== */
-.jobs{background:var(--cream);padding:clamp(96px,16vw,156px) 24px}
-.jobs__wrap{max-width:560px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
-.jobs__art{width:clamp(72px,14vw,110px);height:auto;margin-bottom:4px}
-.jobs__title{font-family:var(--font-body);font-weight:900;
-  font-size:clamp(22px,5.5vw,28px);line-height:1.25;text-wrap:balance}
-.jobs__text{margin:0;font:400 17px/1.6 var(--font-body);color:var(--sage-green)}
-.jobs__text--dark{color:var(--deep-green)}
-.jobs__tel{font-weight:700;color:var(--tomato);text-decoration-thickness:1.5px;text-underline-offset:4px;white-space:nowrap}
+/* ===== 07 · Visit ===== */
+.visit{background:var(--cream);padding:clamp(72px,10vw,120px) 0}
+.visit__grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:center}
+.visit__copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.visit__facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 18px;align-items:baseline}
+.visit__facts dt{font:700 12px/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage-green)}
+.visit__facts dd{margin:0;font:400 17px/1.4 var(--font-body);color:var(--deep-green)}
+.visit__facts dd a{text-decoration:none;font-weight:700}
+.visit__facts dd a:hover{color:var(--tomato)}
+.visit__facts dd small{font:400 13px/1.4 var(--font-body);color:var(--sage-green)}
+.visit__cta{display:flex;gap:10px;flex-wrap:wrap}
+.visit__map{display:block;border-radius:var(--radius-xl);overflow:hidden;border:var(--stroke-thin) solid var(--light-sage);box-shadow:var(--shadow-card);background:var(--cream)}
+.visit__map img{width:100%;height:auto}
+.visit__map-cap{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font:700 13px/1 var(--font-body);color:var(--deep-green);background:var(--white)}
+.visit__map-cap span:last-child{color:var(--tomato)}
+@media (max-width:860px){.visit__grid{grid-template-columns:1fr}}
 
-@media (max-width:520px){
-  .hero__scroll{width:78px;height:78px}
-  .taste{padding-left:24px;padding-right:24px}
-}
+/* ===== 08 · Instagram ===== */
+.insta{background:var(--cream);padding:0 0 clamp(72px,10vw,120px)}
+.insta__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.insta__handle{font:800 17px/1 var(--font-body);color:var(--deep-green);text-decoration:none;direction:ltr;border-bottom:2px solid var(--tomato);padding-bottom:4px}
+.insta__handle:hover{color:var(--tomato)}
+.insta__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.insta__grid a{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--radius-md);background:var(--deep-green)}
+.insta__grid img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-med,260ms) var(--ease-standard,ease)}
+.insta__grid a:hover img{transform:scale(1.05)}
+@media (max-width:640px){.insta__grid{grid-template-columns:repeat(3,1fr)}}
+
 </style>
 </head>
 <body>
 
-<!-- ============ Opening countdown banner (sticky, always visible) ============ -->
-<section class="obanner" aria-label="הפתיחה הרשמית של VICO">
-  <div class="obanner__wrap">
-    <div class="obanner__text">
-      VICO נפתחים רשמית
-      <span class="star">✦</span>
-      <span dir="ltr">יום שלישי 1.9 ✦ 12:00</span>
-    </div>
-    <div class="obanner__countdown" id="obanner-countdown" aria-live="polite">
-      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="d">0</div><div class="obanner__unit-lab">ימים</div></div>
-      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="h">00</div><div class="obanner__unit-lab">שעות</div></div>
-      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="m">00</div><div class="obanner__unit-lab">דקות</div></div>
-      <div class="obanner__unit"><div class="obanner__unit-val" data-obanner-unit="s">00</div><div class="obanner__unit-lab">שניות</div></div>
-    </div>
-    <button type="button" class="btn btn--primary btn--md obanner__cta" data-goto-signup data-obanner-cta>הצטרפו למועדון</button>
-  </div>
-</section>
+<div id="site-header" data-variant="overlay"></div>
+<script src="assets/header.js"></script>
 
 <!-- ============ 01 · Hero ============ -->
-<section class="hero section" aria-label="VICO — פתוחים עכשיו">
+<section class="hero section" aria-label="VICO — האיטלקייה השכונתית שלכם">
   <div class="hero__media" aria-hidden="true">
     <img class="hero__img" src="assets/hero-1280.jpg" srcset="assets/hero-1280.jpg 1280w, assets/hero.jpg 1800w" sizes="100vw" alt="" fetchpriority="high" decoding="async" />
   </div>
   <div class="hero__scrim" aria-hidden="true"></div>
 
-  <div id="site-header"></div>
-  <script src="assets/header.js"></script>
-
   <div class="hero__content rise">
-    <div class="hero__eyebrow">WE'RE OPEN</div>
-    <h1 class="hero__title">האיטלקייה<br>השכונתית<br>החדשה שלכם</h1>
+    <div class="hero__eyebrow">פיצה · פסטה · יין</div>
+    <h1 class="hero__title">האיטלקייה<br>השכונתית שלכם.</h1>
+    <p class="hero__sub">עבודת יד, טאבון חם ושולחן שכיף להישאר סביבו.</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary btn--lg" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener" data-track="hero_order_click">הזמינו עכשיו</a>
+      <a class="btn btn--ghost-light btn--lg" href="/menu/" data-track="hero_menu_click">לתפריט</a>
+    </div>
   </div>
-  <a class="hero__scroll" href="#feel-copy" aria-label="גלול למטה" data-scroll-text="Scroll Down ✦ Scroll Down ✦ ">
-    <span class="hero__scroll-ring" aria-hidden="true"></span>
-    <svg class="hero__scroll-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"></path></svg>
-  </a>
 </section>
 
-<!-- ============ 02 · The feeling ============ -->
-<section class="feel section" aria-labelledby="feel-copy">
-  <div class="feel__copy" id="feel-copy">
-    <img class="feel__art" src="assets/cheers.png" alt="" loading="lazy" decoding="async" />
-    <div class="feel__intro">
-      <div class="feel__kicker">תכירו את VICO</div>
-      <h2 class="feel__heading">השכונה מתחדשת ואנחנו מתרגשים לפתוח אתכם פרק חדש!</h2>
+<!-- ============ 02 · Dishes ============ -->
+<section class="dishes section" id="vico-food" aria-labelledby="food-title">
+  <div class="wrap">
+    <div class="section-head section-head--center" style="margin:0 auto">
+      <div class="kicker">מה אוכלים היום?</div>
+      <h2 class="h2" id="food-title">משהו טוב מחכה על השולחן.</h2>
     </div>
-    <p class="feel__body">שינינו את השם, הכנסנו אווירה חדשה אבל הבצק, הרוטב והטעמים המוכרים והאהובים נשארו בדיוק אותו דבר. לצד הפיצות האייקוניות, מחכות מנות חדשות, שדרוגים מרעננים ואווירה ביתית מפנקת.</p>
+
+    <div class="dishes__grid">
+      <a class="dish" href="/menu/#pizza">
+        <div class="dish__media"><img src="assets/gallery-img-3.jpg" alt="פיצה חריפה עם רוקט וצ׳ילי" loading="lazy" decoding="async" width="1100" height="1100"></div>
+        <div class="dish__name">פיצה חריפה</div>
+        <p class="dish__desc">רוטב עגבניות, מוצרלה, צ׳ילי וחלפיניו, שום קונפי ורוקט</p>
+      </a>
+      <a class="dish" href="/menu/#pasta">
+        <div class="dish__media"><img src="assets/dish-pasta-nera.jpg" alt="פסטה שחורה עם פטריות ושמן כמהין" loading="lazy" decoding="async" width="900" height="900"></div>
+        <div class="dish__name">פסטה שחורה</div>
+        <p class="dish__desc">פסטה טרייה שחורה, שמנת, פטריות, פרמזן ושמן כמהין</p>
+      </a>
+      <a class="dish" href="/menu/#antipasti">
+        <div class="dish__media"><img src="assets/dish-arancini.jpg" alt="ארנצ׳יני ברוטב רוזה" loading="lazy" decoding="async" width="900" height="900"></div>
+        <div class="dish__name">ארנצ׳יני רוזה</div>
+        <p class="dish__desc">שלושה ארנצ׳יני, רוטב רוזה, פרמזן ועשבי תיבול</p>
+      </a>
+      <a class="dish" href="/menu/#pasta">
+        <div class="dish__media"><img src="assets/gallery-img-4.jpg" alt="פסטה ירוקים וריקוטה" loading="lazy" decoding="async" width="1100" height="1100"></div>
+        <div class="dish__name">ירוקים וריקוטה</div>
+        <p class="dish__desc">פסטה טרייה, כרשה, שעועית ירוקה, תרד, ריקוטה, פרמזן ולימון</p>
+      </a>
+      <a class="dish" href="/menu/#pizza">
+        <div class="dish__media"><img src="assets/gallery-img-9.jpg" alt="פיצת בצלים" loading="lazy" decoding="async" width="1100" height="1100"></div>
+        <div class="dish__name">פיצה בצלים</div>
+        <p class="dish__desc">קרם בצל, מוצרלה, בצל ירוק, בצל מוחמץ ובצל פריך</p>
+      </a>
+      <a class="dish" href="/menu/#insalate">
+        <div class="dish__media"><img src="assets/dish-caesar.jpg" alt="סלט קיסר" loading="lazy" decoding="async" width="900" height="900"></div>
+        <div class="dish__name">סלט קיסר</div>
+        <p class="dish__desc">לבבות חסה, קרוטונים, פרמזן ורוטב קיסר</p>
+      </a>
+      <a class="dish dish--soon" href="/menu/#antipasti">
+        <div class="dish__media"><img src="assets/dish-beet.jpg" alt="סוכריות סלק — קרפצ׳יו סלק ממולא גבינת עזים" loading="lazy" decoding="async" width="900" height="900"><span class="dish__badge">Coming soon</span></div>
+        <div class="dish__name">סוכריות סלק</div>
+        <p class="dish__desc">קרפצ׳יו סלק ממולא גבינת עזים, בליווי רוקט ובלסמי</p>
+      </a>
+      <a class="dish" href="/menu/#pasta">
+        <div class="dish__media"><img src="assets/dish-gnocchi.jpg" alt="ניוקי גורגונזולה" loading="lazy" decoding="async" width="900" height="900"></div>
+        <div class="dish__name">ניוקי גורגונזולה</div>
+        <p class="dish__desc">ניוקי תפוח אדמה, שמנת וגורגונזולה</p>
+      </a>
+    </div>
+
+    <div class="dishes__cta">
+      <a class="arrow-link" href="/menu/">לתפריט המלא <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · Takeaway ============ -->
+<section class="takeaway section" id="vico-takeaway" aria-labelledby="takeaway-title">
+  <div class="wrap">
+    <div class="takeaway__grid">
+      <div class="takeaway__copy">
+        <div class="kicker">Takeaway</div>
+        <h2 class="h2" id="takeaway-title">VICO אצלכם בבית.</h2>
+        <p class="lead">פיצה מהטאבון, פסטה טרייה, סלטים וכל מה שטוב ליד — אורזים חם ומחכים לכם באבן עזרא 17.</p>
+        <ul class="takeaway__list">
+          <li>הזמנה אונליין בלבד</li>
+          <li>איסוף מהמסעדה</li>
+          <li>מוכן תוך דקות</li>
+        </ul>
+        <div class="takeaway__cta">
+          <a class="btn btn--primary btn--lg" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener" data-track="takeaway_order_click">להזמנה אונליין</a>
+        </div>
+        <p class="takeaway__phone">שאלות, הזמנת מקום, קבוצות או אירוע? <a dir="ltr" href="tel:+97298615866">09-861-5866</a></p>
+      </div>
+      <div class="takeaway__photos" aria-hidden="true">
+        <img src="assets/atmo-5.jpg" alt="" loading="lazy" decoding="async" width="734" height="1100">
+        <img src="assets/atmo-9.jpg" alt="" loading="lazy" decoding="async" width="734" height="1100">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · Atmosphere ============ -->
+<section class="feel section" id="vico-atmosphere" aria-labelledby="feel-title">
+  <div class="feel__copy">
+    <img class="feel__art" src="assets/cheers.png" alt="" loading="lazy" decoding="async" />
+    <div class="kicker">אצל VICO</div>
+    <h2 class="h2" id="feel-title">באים לפיצה,<br>נשארים לעוד כוס.</h2>
+    <p class="feel__body">VICO היא האיטלקייה של השכונה. מקום לקפוץ אליו למשולש, לפתוח שולחן עם פסטה ופיצה, או להישאר לעוד בקבוק יין בערב. מהצהריים עם הילדים ועד הלילה בטרסה.</p>
   </div>
 
   <div class="carousel" id="gallery" role="group" aria-label="גלריית VICO">
     <div class="carousel__track">
-      <figure class="carousel__item"><img src="assets/gallery-img-1.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-2.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-3.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-4.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-5.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-6.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-7.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-8.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-9.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-10.jpg" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="carousel__item"><img src="assets/gallery-img-11.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-7.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-9.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-2.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-4.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-1.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-8.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-6.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-invite.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-10.jpg" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="carousel__item"><img src="assets/atmo-12.jpg" alt="" loading="lazy" decoding="async"></figure>
     </div>
   </div>
 </section>
 
-<!-- ============ 04 · The first table (signup) ============ -->
+<!-- ============ 04b · Bar ============ -->
+<section class="bar section" id="vico-bar" aria-labelledby="bar-title">
+  <div class="wrap">
+    <div class="bar__grid">
+      <div class="bar__copy">
+        <div class="kicker">Wine Terrace</div>
+        <h2 class="h2" id="bar-title">כוס יין. קוקטייל. ועוד אחד.</h2>
+        <p class="lead">יינות ישראליים בכוס או בבקבוק, בירה קרה מהבקבוק וארבעה קוקטיילים שהבר שלנו רוקח בכל ערב. הטרסה מחכה.</p>
+        <ul class="bar__wines">
+          <li><strong>לבן</strong> מוני שסק · אדיר בראש בלאן</li>
+          <li><strong>אדום</strong> מוני פטיט ורדו · אדיר קברנה סוביניון · דרימיה סהר · אדיר פטיט סירה</li>
+          <li><strong>רוזה</strong> מוני קלאדוק · אדיר רוזה</li>
+        </ul>
+        <a class="arrow-link" href="/menu/#bar">לתפריט הבר <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="bar__photo" aria-hidden="true">
+        <img src="assets/atmo-4.jpg" alt="" loading="lazy" decoding="async" width="734" height="1100">
+      </div>
+    </div>
+
+    <ul class="cocktails">
+      <li class="cocktail">
+        <img src="assets/cocktail-fuoco.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
+        <div class="cocktail__name" dir="ltr">FUOCO!</div>
+        <p class="cocktail__desc">טקילה בצ׳ילי, פסיפלורה והדרים. טרופי, חמצמץ עם קיק חריף!</p>
+      </li>
+      <li class="cocktail">
+        <img src="assets/cocktail-dolce-vita.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
+        <div class="cocktail__name" dir="ltr">LA DOLCE VITA</div>
+        <p class="cocktail__desc">וודקה, סמבוק, ענבי מרלו ולימון. פרחוני, פירותי ומרענן</p>
+      </li>
+      <li class="cocktail">
+        <img src="assets/cocktail-memories.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
+        <div class="cocktail__name">זיכרונות מיפן</div>
+        <p class="cocktail__desc">ג׳ין וסאקה, דובדבן, יוזו ולימון. פירותי, חמצמץ ורענן</p>
+      </li>
+      <li class="cocktail">
+        <img src="assets/cocktail-amaro-amore.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
+        <div class="cocktail__name" dir="ltr">AMARO AMORE</div>
+        <p class="cocktail__desc">ג׳ין, קמפרי והדרים. מריר, הדרי ומאוזן</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 05 · Today / Tonight ============ -->
+<section class="tonight section" id="vico-tonight" aria-labelledby="tonight-title">
+  <div class="wrap">
+    <div class="tonight__card">
+      <div class="tonight__copy">
+        <div class="tonight__eyebrow" data-tonight="eyebrow">Today at VICO</div>
+        <h2 class="tonight__title" id="tonight-title" data-tonight="title">היום ב־VICO</h2>
+        <ul class="tonight__list" data-tonight="list">
+          <li><strong>פיצה מהטאבון</strong> — מרגריטה, חריפה, יוונית, בצלים ושחורה</li>
+          <li><strong>פסטה טרייה</strong> — מהקלאסית ועד ניוקי גורגונזולה</li>
+          <li><strong>Bambini</strong> — מנות ילדים עם ירקות ושתייה</li>
+        </ul>
+      </div>
+      <div class="tonight__side">
+        <a class="btn btn--primary btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">הזמינו עכשיו</a>
+        <a class="btn btn--secondary btn--md" href="/menu/">לתפריט</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · VICO'S Friends ============ -->
 <section class="signup section" id="vico-signup" aria-labelledby="signup-title">
   <div class="signup__wrap">
     <div class="signup__eyebrow">VICO'S Friends</div>
-    <h2 class="signup__title" id="signup-title">כמו באיטליה, אבל VIP</h2>
-    <p class="signup__sub">הצטרפו למועדון החברים השכונתי שלנו וקבלו הנחות קבועות, עדכונים על מנות חדשות, הטבות בלעדיות, ופינוקים ששמורים רק למשפחה שלנו.</p>
-
-    <div class="signup__card">
-      <!-- Form state -->
-      <form class="form" id="signup-form" novalidate>
-        <label class="field" for="f-name">
-          <span class="field__label">שם מלא</span>
-          <input class="field__input" id="f-name" name="fullName" type="text"
-                 autocomplete="name" placeholder="השם המלא שלכם" />
-        </label>
-        <label class="field" for="f-email">
-          <span class="field__label">אימייל</span>
-          <input class="field__input" id="f-email" name="email" type="email"
-                 inputmode="email" autocomplete="email" placeholder="you@email.com" />
-        </label>
-        <label class="field" for="f-phone">
-          <span class="field__label">טלפון</span>
-          <input class="field__input" id="f-phone" name="phone" type="tel"
-                 inputmode="tel" autocomplete="tel" placeholder="050-0000000" />
-        </label>
-        <label class="check">
-          <input type="checkbox" id="f-consent" checked />
-          <span class="check__box" aria-hidden="true">
-            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <span class="check__label">אני מאשר/ת קבלת עדכונים, מבצעים, הטבות ותוכן שיווקי מ-Vico באמצעות דוא"ל, SMS, או אמצעי תקשורת אחרים. ידוע לי כי אוכל להסיר את עצמי מרשימת התפוצה בכל עת.</span>
-        </label>
-        <label class="check">
-          <input type="checkbox" id="f-terms" />
-          <span class="check__box" aria-hidden="true">
-            <svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#FEF3EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <span class="check__label">קראתי והבנתי את <a href="assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון מועדון הלקוחות</a> ואת <a href="assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות הפרטיות</a> של VICO, ואני מסכים/ה לתנאיהם ולהצטרפות למועדון.</span>
-        </label>
-        <div class="form__err" id="form-err" role="alert" hidden></div>
-        <button type="submit" class="btn btn--primary btn--lg btn--block">אני בפנים</button>
-      </form>
-
-      <!-- Success state -->
-      <div class="done" id="signup-done" hidden>
-        <div class="done__title" id="done-title">אתם בפנים.</div>
-        <p class="done__sub" id="done-sub">כשיהיה מה לטעום, אתם תהיו הראשונים לדעת.</p>
-        <div class="done__share">
-          <button type="button" class="btn btn--secondary btn--md" id="share-wa">מי עוד צריך לדעת? שיתוף בוואטסאפ</button>
-        </div>
-      </div>
-    </div>
+    <h2 class="signup__title" id="signup-title">כבר חברים?</h2>
+    <p class="signup__sub">הצטרפו למועדון החברים שלנו וקבלו הטבות, פינוקים ועדכונים על כל מה שקורה אצלנו.</p>
 
     <div class="perks">
       <div class="perk">
@@ -460,18 +549,59 @@ a:hover{color:var(--tomato)}
       </div>
     </div>
     <p class="perks__note">ובנוסף צבירת נקודות בכל הזמנה למימוש בהזמנות הבאות.</p>
+
+    <div class="signup__toggle">
+      <a class="btn btn--light btn--lg" href="https://customer-profile.tabit.cloud/1BB9397F-3725-45F1-8CE0-3541C4D241B7" target="_blank" rel="noopener" data-track="club_join_click">הצטרפו למועדון <svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+    </div>
+    <p class="signup__legal"><a href="assets/VICO_member-club-terms.pdf" target="_blank" rel="noopener">תקנון המועדון</a> · <a href="assets/VICO-privacy-policy.pdf" target="_blank" rel="noopener">מדיניות פרטיות</a></p>
   </div>
 </section>
 
-<!-- ============ 05 · Jobs ============ -->
-<section class="jobs section" id="vico-jobs" aria-labelledby="jobs-title">
-  <div class="jobs__wrap">
-    <img class="jobs__art" src="assets/hiring.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-    <div class="jobs__title" id="jobs-title">באים לבשל איתנו? VICO מגייסת</div>
-    <p class="jobs__text">אנחנו מחפשים אנשים עם תשוקה לאוכל, לאירוח ולחיוכים. אם אתם רוצים להיות חלק מצוות ההקמה של המקום הכי חם בעיר, מעל גיל 18 ומתאימה לכם עבודה במשמרות — דברו איתנו.</p>
-    <p class="jobs__text jobs__text--dark">התקשרו או שלחו הודעה:
-      <a class="jobs__tel" id="jobs-tel" dir="ltr" href="tel:0506545363">050-654-5363</a>
-    </p>
+<!-- ============ 07 · Visit ============ -->
+<section class="visit section" id="vico-visit" aria-labelledby="visit-title">
+  <div class="wrap">
+    <div class="visit__grid">
+      <div class="visit__copy">
+        <div class="section-head">
+          <div class="kicker">Visit VICO</div>
+          <h2 class="h2" id="visit-title">נתראה בשכונה.</h2>
+        </div>
+        <dl class="visit__facts">
+          <dt>כתובת</dt><dd><a href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a></dd>
+          <dt>שעות</dt><dd>א׳–ה׳ 12:00–23:00</dd>
+          <dt>טלפון</dt><dd><a dir="ltr" href="tel:+97298615866">09-861-5866</a><br><small>להזמנת מקום, קבוצות ואירועים</small></dd>
+          <dt>כשרות</dt><dd>כשר</dd>
+          <dt>חניה</dt><dd>חניון המתחם (אבן עזרא 17) · חניון תיכון בן גוריון (אבן עזרא 15)</dd>
+        </dl>
+        <div class="visit__cta">
+          <a class="btn btn--primary btn--md" href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">ניווט ב־Waze</a>
+          <a class="btn btn--secondary btn--md" href="tel:+97298615866">הזמנת מקום</a>
+          <a class="btn btn--secondary btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">Takeaway אונליין</a>
+        </div>
+      </div>
+      <a class="visit__map" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener" aria-label="פתיחת המיקום במפות Google">
+        <img src="assets/vico-minimap.png" alt="מפה מאוירת: VICO באבן עזרא 17, הרצליה, עם סימון חניונים סמוכים" loading="lazy" decoding="async" width="1434" height="947">
+        <div class="visit__map-cap"><span>אבן עזרא 17, הרצליה</span><span>פתיחה במפות ←</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 · Instagram ============ -->
+<section class="insta section" id="vico-insta" aria-label="VICO באינסטגרם">
+  <div class="wrap">
+    <div class="insta__head">
+      <div class="kicker">מהשכונה</div>
+      <a class="insta__handle" href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">@vico.restaurant</a>
+    </div>
+    <div class="insta__grid">
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-gnocchi.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/gallery-img-1.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-pan.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/gallery-img-6.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-plating.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-pasta.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+    </div>
   </div>
 </section>
 
@@ -482,19 +612,8 @@ a:hover{color:var(--tomato)}
 <script>
 (function(){
   "use strict";
-  var STORE_KEY = "vico_first_table_signup";
 
-  // ---- config (mirrors the design-composer props/defaults) ----
-  var CONFIG = {
-    jobsPhone: "0506545363",
-    waText: "יש איטלקייה חדשה בשכונה!",
-    siteUrl: "https://vico.ltd",
-    // Google Apps Script Web App URL (…/exec) that appends each signup to the club sheet.
-    // Empty = store locally only (no send). Paste the deployed /exec URL here to go live.
-    signupEndpoint: "https://script.google.com/macros/s/AKfycbwu80EC5IxXIiOgLFKCFtQV7wTozNxwYDmhN8M-m1sMrkwxSu-1eav1bCYH8AmKz_Iyrw/exec"
-  };
-
-  // ---- analytics: push to dataLayer, same event names as the DC source ----
+  // ---- analytics ----
   var campaign = { source: "direct", campaign: "" };
   try {
     var p = new URLSearchParams(window.location.search);
@@ -507,188 +626,33 @@ a:hover{color:var(--tomato)}
       window.dataLayer.push(Object.assign({ event: name }, campaign, data || {}));
     } catch (e) {}
   }
-
-  // ---- opening countdown banner ----
-  (function () {
-    var EVENT_TIME = new Date(2026, 8, 1, 12, 0, 0).getTime(); // Tue 1.9.2026, 12:00 — official restaurant opening
-    var banner = document.querySelector(".obanner");
-    if (!banner) return;
-    var elD = banner.querySelector('[data-obanner-unit="d"]');
-    var elH = banner.querySelector('[data-obanner-unit="h"]');
-    var elM = banner.querySelector('[data-obanner-unit="m"]');
-    var elS = banner.querySelector('[data-obanner-unit="s"]');
-    function pad(n){ return String(n).padStart(2, "0"); }
-    var timer;
-    function tick(){
-      var diff = EVENT_TIME - Date.now();
-      if (diff <= 0) {
-        banner.hidden = true;
-        clearInterval(timer);
-        return;
-      }
-      elD.textContent = String(Math.floor(diff / 864e5));
-      elH.textContent = pad(Math.floor((diff % 864e5) / 36e5));
-      elM.textContent = pad(Math.floor((diff % 36e5) / 6e4));
-      elS.textContent = pad(Math.floor((diff % 6e4) / 1000));
-    }
-    tick();
-    timer = setInterval(tick, 1000);
-    var cta = banner.querySelector("[data-obanner-cta]");
-    if (cta) cta.addEventListener("click", function(){ track("opening_banner_cta_click"); });
-  })();
-
-  // ---- element refs ----
-  var form   = document.getElementById("signup-form");
-  var done   = document.getElementById("signup-done");
-  var elName = document.getElementById("f-name");
-  var elEmail = document.getElementById("f-email");
-  var elPhone= document.getElementById("f-phone");
-  var elConsent = document.getElementById("f-consent");
-  var elTerms = document.getElementById("f-terms");
-  var elErr  = document.getElementById("form-err");
-  var doneTitle = document.getElementById("done-title");
-  var doneSub   = document.getElementById("done-sub");
-
-  function showError(msg){
-    elErr.textContent = msg;
-    elErr.hidden = false;
-  }
-  function clearError(){ elErr.hidden = true; elErr.textContent = ""; }
-
-  function showDone(already){
-    form.hidden = true;
-    done.hidden = false;
-    doneTitle.textContent = already ? "כבר חברים אצלנו!" : "אתם בפנים.";
-    doneSub.textContent = already ? "המספר הזה כבר רשום למועדון — נתראה בקרוב." : "כשיהיה מה לטעום, אתם תהיו הראשונים לדעת.";
-  }
-
-  // ---- restore prior signup ----
-  try {
-    if (localStorage.getItem(STORE_KEY)) showDone(true);
-  } catch (e) {}
   track("landing_view");
-
-  // ---- hero CTA → smooth scroll to signup ----
-  Array.prototype.forEach.call(document.querySelectorAll("[data-goto-signup]"), function(btn){
-    btn.addEventListener("click", function(){
-      track("hero_cta_click");
-      var el = document.getElementById("vico-signup");
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
-      setTimeout(function(){ try { elName.focus({ preventScroll: true }); } catch(e){} }, 500);
-    });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-track]"), function(el){
+    el.addEventListener("click", function(){ track(el.getAttribute("data-track")); });
   });
 
-  // ---- submit ----
-  form.addEventListener("submit", function(ev){
-    ev.preventDefault();
-    var name = (elName.value || "").trim();
-    var email = (elEmail.value || "").trim();
-    var digits = (elPhone.value || "").replace(/\D/g, "");
-    // Normalize Israeli country-code prefixes (972 / +972, with or without a
-    // leading 0 after it) — autofill frequently inserts these — back to 05X.
-    if (digits.indexOf("972") === 0) {
-      digits = "0" + digits.slice(3).replace(/^0/, "");
-    }
-    if (!name){
-      return showError("נשמח לשם המלא שלכם.");
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-      return showError("האימייל לא נראה תקין — נסו שוב.");
-    }
-    if (!(digits.length >= 9 && digits.length <= 10 && digits.indexOf("05") === 0)){
-      return showError("המספר לא נראה שלם — נסו שוב (05X-XXXXXXX).");
-    }
-    if (!elConsent.checked || !elTerms.checked){
-      return showError("צריך לאשר את שני הסעיפים — קבלת עדכונים ותקנון המועדון — כדי להצטרף.");
-    }
-    var payload = {
-      fullName: name,
-      email: email,
-      phone: digits,
-      marketingConsent: !!elConsent.checked,
-      termsAccepted: !!elTerms.checked,
-      source: campaign.source,
-      campaign: campaign.campaign,
-      createdAt: new Date().toISOString()
-    };
-    clearError();
-
-    // No endpoint configured yet → keep the local-only behaviour.
-    if (!CONFIG.signupEndpoint) {
-      try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
-      track("signup_success");
-      return showDone(false);
-    }
-
-    // Send the lead to the Google Sheet (Apps Script) endpoint.
-    var submitBtn = form.querySelector('button[type="submit"]');
-    var origLabel = submitBtn ? submitBtn.textContent : "";
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "רגע…"; }
-
-    fetch(CONFIG.signupEndpoint, {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    }).then(function (r) { return r.json(); })
-      .then(function (res) {
-        if (!res || res.ok !== true) {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
-          return showError("משהו השתבש בשליחה. נסו שוב או צרו קשר איתנו ישירות.");
-        }
-        try { localStorage.setItem(STORE_KEY, JSON.stringify(payload)); } catch (e) {}
-        if (res.duplicate) {
-          track("signup_duplicate");
-          showDone(true);
-        } else {
-          track("signup_success");
-          showDone(false);
-        }
-      })
-      .catch(function () {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origLabel; }
-        showError("משהו השתבש בשליחה. בדקו חיבור לאינטרנט ונסו שוב.");
-      });
-  });
-  elName.addEventListener("input", clearError);
-  elEmail.addEventListener("input", clearError);
-  elPhone.addEventListener("input", clearError);
-  elTerms.addEventListener("change", clearError);
-
-  // ---- whatsapp share ----
-  document.getElementById("share-wa").addEventListener("click", function(){
-    track("whatsapp_share");
-    var msg = CONFIG.waText + "\n" + CONFIG.siteUrl;
-    window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank", "noopener");
-  });
-
-  // ---- jobs wiring from config ----
-  var telHref = "tel:" + CONFIG.jobsPhone.replace(/[^\d+]/g, "");
-  document.getElementById("jobs-tel").setAttribute("href", telHref);
-  document.getElementById("jobs-tel").addEventListener("click", function(){ track("jobs_phone_click"); });
-
-  // ---- hero scroll cue: lay the circular label out as rotated letters ----
+  // ---- Today / Tonight: swap copy after 17:00 local time ----
   (function () {
-    var badge = document.querySelector(".hero__scroll");
-    var ring = badge && badge.querySelector(".hero__scroll-ring");
-    if (!ring) return;
-    var chars = (badge.getAttribute("data-scroll-text") || "").split("");
-    var step = 360 / chars.length;
-    chars.forEach(function (ch, i) {
-      var s = document.createElement("span");
-      s.textContent = ch === " " ? " " : ch;
-      s.style.transform = "rotate(" + (i * step) + "deg)";
-      ring.appendChild(s);
-    });
+    var hour = new Date().getHours();
+    if (hour < 17 && hour >= 6) return;
+    var eyebrow = document.querySelector('[data-tonight="eyebrow"]');
+    var title = document.querySelector('[data-tonight="title"]');
+    var list = document.querySelector('[data-tonight="list"]');
+    if (!eyebrow || !title || !list) return;
+    eyebrow.textContent = "Tonight at VICO";
+    title.textContent = "הערב ב־VICO";
+    list.innerHTML =
+      '<li><strong>קוקטיילים</strong> — FUOCO!, La Dolce Vita, זיכרונות מיפן ו־Amaro Amore</li>' +
+      '<li><strong>יין</strong> — מוני ואדיר בכוס או בבקבוק, ובירה קרה ליד</li>' +
+      '<li><strong>אנטיפסטי לחלוקה</strong> — הפוקאצ׳ה של VICO, זוקיני נענע וארנצ׳יני רוזה</li>';
   })();
 
-  // ---- Love-at-First-Slice: seamless auto-scrolling carousel ----
+  // ---- seamless auto-scrolling gallery ----
   (function () {
     var carousel = document.querySelector(".carousel");
     var track = carousel && carousel.querySelector(".carousel__track");
     if (!track) return;
 
-    // Respect reduced-motion: no auto-scroll, allow manual swipe instead.
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       carousel.classList.add("is-scrollable");
       return;
@@ -696,8 +660,6 @@ a:hover{color:var(--tomato)}
 
     var originals = Array.prototype.slice.call(track.children);
 
-    // Clone the set until the track is comfortably wider than the viewport + one set,
-    // so the loop never reveals an empty edge. Returns the exact width of one set.
     function build() {
       while (track.children.length > originals.length) track.removeChild(track.lastChild);
       originals.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
@@ -717,7 +679,7 @@ a:hover{color:var(--tomato)}
       var dt = (ts - last) / 1000; last = ts;
       if (!paused) {
         x -= PX_PER_SEC * dt;
-        if (x <= -period) x += period;   // seamless wrap
+        if (x <= -period) x += period;
         track.style.transform = "translateX(" + x + "px)";
       }
       requestAnimationFrame(frame);

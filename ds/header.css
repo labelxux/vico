@@ -1,13 +1,81 @@
+/* ===== External-link icon (shared) ===== */
+.ext-icon{width:.85em;height:.85em;flex:0 0 auto;margin-inline-start:.35em;vertical-align:-.08em;
+  stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+
 /* ===== Shared VICO site header ===== */
 .site-header{
-  position:absolute;top:0;right:0;left:0;z-index:3;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 22px;pointer-events:none;
+  position:absolute;top:0;right:0;left:0;z-index:30;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px 22px;
 }
+.site-header--solid{
+  position:sticky;background:var(--deep-green);
+  border-bottom:var(--stroke-thin) solid rgba(175,193,187,.22);
+}
+.site-header__logo-link{display:flex;align-items:center;flex:0 0 auto}
 .site-header__logo{height:46px;width:auto;filter:drop-shadow(0 4px 18px rgba(19,57,50,.35))}
-.site-header__order-btn{white-space:nowrap;font-size:14px;padding:10px 20px;pointer-events:auto}
-@media (max-width:520px){
-  .site-header{padding:15px 16px}
+.site-header--solid .site-header__logo{filter:none}
+
+.site-header__nav{display:flex;gap:clamp(16px,2.4vw,30px);align-items:center;flex:1 1 auto;justify-content:center}
+.site-header__nav a{
+  display:inline-flex;align-items:center;
+  font:700 15px/1 var(--font-body);color:var(--cream);text-decoration:none;
+  padding:6px 2px;border-bottom:2px solid transparent;
+  text-shadow:0 1px 10px rgba(19,57,50,.45);
+  transition:border-color var(--dur-fast,140ms) var(--ease-standard,ease),color var(--dur-fast,140ms) ease;
+}
+.site-header--solid .site-header__nav a{text-shadow:none}
+.site-header__nav a:hover{color:var(--cream);border-bottom-color:var(--tomato)}
+
+.site-header__actions{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.site-header__order-btn{white-space:nowrap;font-size:14px;padding:10px 20px}
+
+.site-header__burger{
+  display:none;width:42px;height:42px;padding:0;border:0;background:transparent;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;border-radius:50%;
+}
+.site-header__burger span{display:block;width:22px;height:2px;background:var(--cream);border-radius:2px;
+  filter:drop-shadow(0 1px 6px rgba(19,57,50,.5));transition:transform var(--dur-fast,140ms) ease,opacity var(--dur-fast,140ms) ease}
+.site-header__burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.site-header__burger.is-open span:nth-child(2){opacity:0}
+.site-header__burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.site-header__burger:focus-visible{outline:3px solid var(--focus-ring);outline-offset:2px}
+
+.site-header__drawer{
+  position:absolute;top:74px;right:12px;left:12px;z-index:29;
+  display:flex;flex-direction:column;
+  background:var(--deep-green);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-pop);overflow:hidden;
+  border:var(--stroke-thin) solid rgba(175,193,187,.28);
+}
+.site-header--solid + .site-header__drawer{position:fixed}
+.site-header__drawer a{
+  display:flex;align-items:center;
+  font:700 18px/1 var(--font-body);color:var(--cream);text-decoration:none;
+  padding:18px 22px;border-bottom:var(--stroke-thin) solid rgba(175,193,187,.18);
+}
+.site-header__drawer a:last-child{border-bottom:0}
+.site-header__drawer a:hover{background:rgba(254,243,235,.06);color:var(--cream)}
+
+/* ===== Sticky mobile action bar (order + menu) ===== */
+.site-mobilebar{
+  display:none;position:fixed;right:0;bottom:0;left:0;z-index:40;
+  gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(254,243,235,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:var(--stroke-thin) solid var(--light-sage);
+}
+.site-mobilebar__order{flex:1 1 auto}
+.site-mobilebar__menu{flex:0 0 auto}
+
+@media (max-width:860px){
+  .site-header__nav{display:none}
+  .site-header__burger{display:flex}
+}
+@media (max-width:640px){
+  .site-header{padding:14px 16px}
   .site-header__logo{height:34px}
-  .site-header__order-btn{font-size:12px;padding:8px 14px}
+  .site-header .site-header__order-btn{display:none}
+  .site-header__drawer{top:62px}
+  .site-mobilebar{display:flex}
+  body.has-mobilebar{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 }
