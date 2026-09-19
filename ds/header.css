@@ -63,7 +63,9 @@
   gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
   background:rgba(254,243,235,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-top:var(--stroke-thin) solid var(--light-sage);
+  transition:transform var(--dur-med,260ms) var(--ease-standard,ease),opacity var(--dur-med,260ms) ease;
 }
+.site-mobilebar.is-hidden{transform:translateY(110%);opacity:0;pointer-events:none}
 .site-mobilebar__order{flex:1 1 auto}
 .site-mobilebar__menu{flex:0 0 auto}
 

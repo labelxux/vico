@@ -58,6 +58,20 @@
 
   document.body.classList.add("has-mobilebar");
 
+  // On pages with a full-screen hero, keep the mobile bar hidden until the
+  // visitor scrolls past it — the hero already carries the same two CTAs.
+  function watchHero() {
+    var hero = document.querySelector(".hero");
+    var mobilebar = document.querySelector(".site-mobilebar");
+    if (!hero || !mobilebar || !("IntersectionObserver" in window)) return;
+    mobilebar.classList.add("is-hidden");
+    new IntersectionObserver(function (entries) {
+      mobilebar.classList.toggle("is-hidden", entries[0].isIntersecting);
+    }, { rootMargin: "0px 0px -40% 0px" }).observe(hero);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", watchHero);
+  else watchHero();
+
   var burger = document.querySelector("[data-burger]");
   var drawer = document.querySelector("[data-drawer]");
   if (burger && drawer) {
