@@ -175,8 +175,8 @@ a:hover{color:var(--tomato)}
 .items{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
 .item{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:var(--stroke-thin) solid var(--light-sage)}
 .item:last-child{border-bottom:0}
-.item__name{margin:0;font:900 clamp(17px,2.4vw,20px)/1.25 var(--font-body);color:var(--deep-green)}
-.item__price{font:700 clamp(16px,2.2vw,19px)/1.25 var(--font-body);color:var(--tomato);white-space:nowrap;grid-row:1}
+.item__name{margin:0;grid-column:1;grid-row:1;font:900 clamp(17px,2.4vw,20px)/1.25 var(--font-body);color:var(--deep-green)}
+.item__price{font:700 clamp(16px,2.2vw,19px)/1.25 var(--font-body);color:var(--tomato);white-space:nowrap;grid-column:2;grid-row:1;text-align:start}
 .item__desc{margin:0;grid-column:1 / -1;font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
 .item__tag{display:inline-block;margin-inline-start:8px;font:700 10px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;
   color:var(--tomato);vertical-align:middle}
