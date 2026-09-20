@@ -18,7 +18,7 @@
   var ORDER_URL = "https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter";
   var LINKS = [
     { href: "/menu/", label: "תפריט" },
-    { href: ORDER_URL, label: "הזמנות", external: true },
+    { href: ORDER_URL, label: "איסוף עצמי", external: true, noIcon: true },
     { href: "/#vico-atmosphere", label: "אצלנו" },
     { href: "/#vico-bar", label: "הבר" },
     { href: "/#vico-signup", label: "מועדון" },
@@ -30,7 +30,7 @@
   function linkHtml(l, extraClass) {
     var cls = extraClass ? ' class="' + extraClass + '"' : "";
     var target = l.external ? ' target="_blank" rel="noopener"' : "";
-    return '<a' + cls + ' href="' + l.href + '"' + target + '>' + l.label + (l.external ? EXT_ICON : "") + '</a>';
+    return '<a' + cls + ' href="' + l.href + '"' + target + '>' + l.label + (l.external && !l.noIcon ? EXT_ICON : "") + '</a>';
   }
 
   mount.outerHTML =

@@ -26,7 +26,7 @@
         '</div>' +
         '<nav class="footer__links" aria-label="ניווט תחתון">' +
           '<a href="/menu/">תפריט</a>' +
-          '<a href="' + ORDER_URL + '" target="_blank" rel="noopener">הזמנות' + EXT_ICON + '</a>' +
+          '<a href="' + ORDER_URL + '" target="_blank" rel="noopener">איסוף עצמי</a>' +
           '<a href="/#vico-signup">מועדון</a>' +
           '<a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">אינסטגרם' + EXT_ICON + '</a>' +
         '</nav>' +
