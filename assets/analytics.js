@@ -21,7 +21,7 @@
   try { if (debug) sessionStorage.setItem("vico_ga_debug", "1"); else if (sessionStorage.getItem("vico_ga_debug")) debug = true; } catch (e) {}
 
   function send(name, params) {
-    var data = Object.assign({ page: page }, params || {});
+    var data = Object.assign({ page: page, lang: document.documentElement.lang || "he" }, params || {});
     if (debug) data.debug_mode = true;
     try {
       if (typeof window.gtag === "function") window.gtag("event", name, data);

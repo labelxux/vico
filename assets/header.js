@@ -16,13 +16,26 @@
   var variant = mount.getAttribute("data-variant") || "overlay";
 
   var ORDER_URL = "https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter";
+  var EN = /^en\b/i.test(document.documentElement.lang);
+  var P = EN ? "/en" : "";
+  var S = EN ? {
+    menu: "Menu", order: "Takeaway", about: "About", bar: "The Bar", club: "Club", contact: "Contact",
+    orderBtn: "Order Takeaway", orderNow: "Order now", menuShort: "Menu", nav: "Main navigation",
+    mobileNav: "Mobile navigation", openNav: "Open navigation", quick: "Quick actions", home: "VICO — home",
+    lang: "עברית", langTitle: "עברית", langHref: location.pathname.replace(/^\/en(\/|$)/, "/") + location.hash
+  } : {
+    menu: "תפריט", order: "איסוף עצמי", about: "אצלנו", bar: "הבר", club: "מועדון", contact: "צור קשר",
+    orderBtn: "הזמן Takeaway", orderNow: "הזמינו עכשיו", menuShort: "תפריט", nav: "ניווט ראשי",
+    mobileNav: "ניווט נייד", openNav: "פתיחת ניווט", quick: "פעולות מהירות", home: "VICO — לעמוד הבית",
+    lang: "EN", langTitle: "English", langHref: "/en" + location.pathname + location.hash
+  };
   var LINKS = [
-    { href: "/menu/", label: "תפריט" },
-    { href: ORDER_URL, label: "איסוף עצמי", external: true, noIcon: true },
-    { href: "/#vico-atmosphere", label: "אצלנו" },
-    { href: "/#vico-bar", label: "הבר" },
-    { href: "/#vico-signup", label: "מועדון" },
-    { href: "/#vico-visit", label: "צור קשר" }
+    { href: P + "/menu/", label: S.menu },
+    { href: ORDER_URL, label: S.order, external: true, noIcon: true },
+    { href: P + "/#vico-atmosphere", label: S.about },
+    { href: P + "/#vico-bar", label: S.bar },
+    { href: P + "/#vico-signup", label: S.club },
+    { href: P + "/#vico-visit", label: S.contact }
   ];
 
   var EXT_ICON = '<svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>';
@@ -35,25 +48,27 @@
 
   mount.outerHTML =
     '<header class="site-header site-header--' + variant + '" data-header data-loc="header">' +
-      '<a class="site-header__logo-link" href="/" aria-label="VICO — לעמוד הבית">' +
+      '<a class="site-header__logo-link" href="' + (P || "/") + '" aria-label="' + S.home + '">' +
         '<img class="site-header__logo" src="' + base + 'logo-clean-color.svg" alt="VICO" />' +
       '</a>' +
-      '<nav class="site-header__nav" aria-label="ניווט ראשי">' +
+      '<nav class="site-header__nav" aria-label="' + S.nav + '">' +
         LINKS.map(function (l) { return linkHtml(l); }).join("") +
+        '<a class="site-header__lang" href="' + S.langHref + '" lang="' + (EN ? "he" : "en") + '" title="' + S.langTitle + '" data-track="lang_switch">' + S.lang + '</a>' +
       '</nav>' +
       '<div class="site-header__actions">' +
-        '<a class="btn btn--primary btn--md site-header__order-btn" href="' + ORDER_URL + '" target="_blank" rel="noopener">הזמן Takeaway</a>' +
-        '<button type="button" class="site-header__burger" aria-label="פתיחת ניווט" aria-expanded="false" data-burger>' +
+        '<a class="btn btn--primary btn--md site-header__order-btn" href="' + ORDER_URL + '" target="_blank" rel="noopener">' + S.orderBtn + '</a>' +
+        '<button type="button" class="site-header__burger" aria-label="' + S.openNav + '" aria-expanded="false" data-burger>' +
           '<span></span><span></span><span></span>' +
         '</button>' +
       '</div>' +
     '</header>' +
-    '<nav class="site-header__drawer" data-drawer hidden aria-label="ניווט נייד" data-loc="drawer">' +
+    '<nav class="site-header__drawer" data-drawer hidden aria-label="' + S.mobileNav + '" data-loc="drawer">' +
       LINKS.map(function (l) { return linkHtml(l); }).join("") +
+      '<a class="site-header__lang" href="' + S.langHref + '" lang="' + (EN ? "he" : "en") + '" data-track="lang_switch">' + S.lang + '</a>' +
     '</nav>' +
-    '<div class="site-mobilebar" aria-label="פעולות מהירות" data-loc="mobilebar">' +
-      '<a class="btn btn--primary btn--md site-mobilebar__order" href="' + ORDER_URL + '" target="_blank" rel="noopener">הזמינו עכשיו</a>' +
-      '<a class="btn btn--secondary btn--md site-mobilebar__menu" href="/menu/">תפריט</a>' +
+    '<div class="site-mobilebar" aria-label="' + S.quick + '" data-loc="mobilebar">' +
+      '<a class="btn btn--primary btn--md site-mobilebar__order" href="' + ORDER_URL + '" target="_blank" rel="noopener">' + S.orderNow + '</a>' +
+      '<a class="btn btn--secondary btn--md site-mobilebar__menu" href="' + P + '/menu/">' + S.menuShort + '</a>' +
     '</div>';
 
   document.body.classList.add("has-mobilebar");

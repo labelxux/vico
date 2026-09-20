@@ -26,6 +26,9 @@
 }
 .site-header--solid .site-header__nav a{text-shadow:none}
 .site-header__nav a:hover{color:var(--cream);border-bottom-color:var(--tomato)}
+.site-header__lang{font-size:13px !important;letter-spacing:.08em;padding:5px 10px !important;border:var(--stroke-thin) solid rgba(254,243,235,.55);border-radius:var(--radius-pill);
+  border-bottom-width:var(--stroke-thin) !important;margin-inline-start:6px}
+.site-header__lang:hover{border-color:var(--cream) !important;background:rgba(254,243,235,.1)}
 
 .site-header__actions{display:flex;align-items:center;gap:10px;flex:0 0 auto}
 .site-header__order-btn{white-space:nowrap;font-size:14px;padding:10px 20px}
@@ -55,6 +58,7 @@
   padding:18px 22px;border-bottom:var(--stroke-thin) solid rgba(175,193,187,.18);
 }
 .site-header__drawer a:last-child{border-bottom:0}
+.site-header__drawer .site-header__lang{font-size:15px !important;letter-spacing:.08em;color:var(--light-sage);border:0;border-top:var(--stroke-thin) solid rgba(175,193,187,.18);border-radius:0;padding:18px 22px !important;margin:0}
 .site-header__drawer a:hover{background:rgba(254,243,235,.06);color:var(--cream)}
 
 /* ===== Sticky mobile action bar (order + menu) ===== */
