@@ -12,7 +12,6 @@
 
   var base = new URL(".", document.currentScript.src).href;
   var ORDER_URL = "https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter";
-  var EXT_ICON = '<svg class="ext-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>';
 
   mount.outerHTML =
     '<footer class="footer" aria-label="פרטי VICO" data-loc="footer">' +
@@ -28,7 +27,7 @@
           '<a href="/menu/">תפריט</a>' +
           '<a href="' + ORDER_URL + '" target="_blank" rel="noopener">איסוף עצמי</a>' +
           '<a href="/#vico-signup">מועדון</a>' +
-          '<a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">אינסטגרם' + EXT_ICON + '</a>' +
+          '<a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">אינסטגרם</a>' +
         '</nav>' +
         '<div class="footer__contact">' +
           '<div class="footer__contact-row">' +
