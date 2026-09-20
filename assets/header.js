@@ -22,7 +22,7 @@
     menu: "Menu", order: "Takeaway", about: "About", bar: "The Bar", club: "Club", contact: "Contact",
     orderBtn: "Order Takeaway", orderNow: "Order now", menuShort: "Menu", nav: "Main navigation",
     mobileNav: "Mobile navigation", openNav: "Open navigation", quick: "Quick actions", home: "VICO — home",
-    lang: "עברית", langTitle: "עברית", langHref: location.pathname.replace(/^\/en(\/|$)/, "/") + location.hash
+    lang: "עב", langTitle: "עברית", langHref: location.pathname.replace(/^\/en(\/|$)/, "/") + location.hash
   } : {
     menu: "תפריט", order: "איסוף עצמי", about: "אצלנו", bar: "הבר", club: "מועדון", contact: "צור קשר",
     orderBtn: "הזמן Takeaway", orderNow: "הזמינו עכשיו", menuShort: "תפריט", nav: "ניווט ראשי",
