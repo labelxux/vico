@@ -32,8 +32,10 @@
         '<div class="footer__contact">' +
           '<div class="footer__contact-row">' +
             '<a href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener">אבן עזרא 17, הרצליה</a>' +
-            '<a dir="ltr" href="tel:+97298615866">09-861-5866</a>' +
+            '<span class="footer__sep" aria-hidden="true">✦</span>' +
             '<span>א׳–ה׳ 12:00–23:00</span>' +
+            '<span class="footer__sep" aria-hidden="true">✦</span>' +
+            '<a dir="ltr" href="tel:+97298615866">09-861-5866</a>' +
           '</div>' +
         '</div>' +
         '<div class="footer__legal">' +
