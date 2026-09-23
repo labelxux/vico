@@ -112,11 +112,11 @@ body{font-family:var(--font-body);color:var(--deep-green);background:var(--cream
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{max-width:100%;display:block}
 a{color:var(--deep-green)}
-a:hover{color:var(--tomato)}
+a:hover{color:var(--tomato-ink)}
 [hidden]{display:none !important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
 
-.btn{--btn-bg:var(--tomato);--btn-fg:var(--white);display:inline-flex;align-items:center;justify-content:center;gap:8px;
+.btn{--btn-bg:var(--tomato-ink);--btn-fg:var(--white);display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-family:var(--font-body);font-weight:800;line-height:1;letter-spacing:.01em;border:none;border-radius:var(--radius-pill);
   background:var(--btn-bg);color:var(--btn-fg);cursor:pointer;text-decoration:none;white-space:nowrap;
   transition:filter var(--dur-fast,140ms) ease,transform var(--dur-fast,140ms) ease;box-shadow:0 8px 22px rgba(239,64,69,.28)}
@@ -131,17 +131,18 @@ a:hover{color:var(--tomato)}
 .btn--ghost-light:hover{--btn-bg:var(--cream);--btn-fg:var(--deep-green);filter:none}
 
 .wrap{max-width:860px;margin:0 auto;padding:0 24px}
-.kicker{font:700 13px/1 var(--font-body);letter-spacing:.14em;color:var(--tomato);text-transform:uppercase}
+.kicker{font:700 13px/1 var(--font-body);letter-spacing:.14em;color:var(--tomato-ink);text-transform:uppercase}
 
 /* ===== Intro ===== */
 .intro{background:var(--deep-green);color:var(--cream);padding:clamp(40px,7vw,72px) 0 clamp(36px,6vw,60px)}
 .intro__grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
 .intro__card{border-radius:var(--radius-lg);padding:clamp(22px,3.4vw,32px);display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:space-between;min-height:150px}
 .intro__card--here{background:rgba(254,243,235,.06);border:var(--stroke-thin) solid rgba(175,193,187,.32)}
-.intro__card--home{background:var(--tomato);color:var(--white)}
+.intro__card--home{background:var(--tomato-ink);color:var(--white)}
 .intro__card h2{margin:0;font:900 clamp(22px,3.4vw,30px)/1.1 var(--font-body)}
-.intro__card p{margin:0;font:400 16px/1.5 var(--font-body);opacity:.9}
-.intro__card--home .btn{--btn-bg:var(--cream);--btn-fg:var(--tomato);box-shadow:none}
+.intro__card p{margin:0;font:400 16px/1.5 var(--font-body)}
+.intro__card--here p{opacity:.9}
+.intro__card--home .btn{--btn-bg:var(--cream);--btn-fg:var(--tomato-ink);box-shadow:none}
 .intro__card--home .btn:hover{filter:brightness(.96)}
 .intro__title{margin:0 0 20px;font:900 clamp(34px,7vw,64px)/1.02 var(--font-body);letter-spacing:-.015em}
 .intro__meta{margin:0 0 26px;font:400 16px/1.5 var(--font-body);color:var(--light-sage)}
@@ -167,6 +168,8 @@ a:hover{color:var(--tomato)}
 .catnav a:hover{border-color:var(--deep-green);color:var(--deep-green)}
 .catnav a.is-active{background:var(--deep-green);color:var(--cream);border-color:var(--deep-green)}
 @media (max-width:640px){.catnav{top:62px}html{scroll-padding-top:124px}}
+/* short viewports (200%+ zoom, landscape phones): nothing sticky, so content keeps the screen */
+@media (max-height:500px){.catnav{position:static}html{scroll-padding-top:0}}
 
 /* ===== Menu sections ===== */
 .menu{padding:clamp(24px,4vw,40px) 0 clamp(72px,10vw,110px)}
@@ -174,27 +177,28 @@ a:hover{color:var(--tomato)}
 .cat__head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:clamp(14px,2.4vw,22px);
   padding-bottom:12px;border-bottom:2px solid var(--deep-green)}
 .cat__title{margin:0;font:900 clamp(28px,5vw,44px)/1 var(--font-body);letter-spacing:-.01em}
-.cat__latin{font:400 clamp(16px,2.4vw,22px)/1 var(--font-serif);font-style:italic;color:var(--sage-green);direction:ltr}
+.cat__latin{font:400 clamp(16px,2.4vw,22px)/1 var(--font-serif);font-style:italic;color:var(--sage-ink);direction:ltr}
 .items{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
 .item{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:var(--stroke-thin) solid var(--light-sage)}
 .item:last-child{border-bottom:0}
 .item__name{margin:0;grid-column:1;grid-row:1;font:900 clamp(17px,2.4vw,20px)/1.25 var(--font-body);color:var(--deep-green)}
-.item__price{font:700 clamp(16px,2.2vw,19px)/1.25 var(--font-body);color:var(--tomato);white-space:nowrap;grid-column:2;grid-row:1;text-align:start}
-.item__desc{margin:0;grid-column:1 / -1;font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
-.item__tag{display:inline-block;margin-inline-start:8px;font:700 10px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;
-  color:var(--tomato);vertical-align:middle}
+.item__price{font:700 clamp(16px,2.2vw,19px)/1.25 var(--font-body);color:var(--tomato-ink);white-space:nowrap;grid-column:2;grid-row:1;text-align:start}
+.item__desc{margin:0;grid-column:1 / -1;font:400 15px/1.5 var(--font-body);color:var(--sage-ink)}
+.item__tag{display:inline-block;margin-inline-start:8px;padding:5px 9px 4px;border-radius:var(--radius-pill);
+  background:var(--tomato-ink);color:var(--white);font:800 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;
+  vertical-align:.25em;white-space:nowrap}
 
 /* bar sub-sections */
 .sub{margin:clamp(28px,4vw,40px) 0 10px;font:900 clamp(20px,3vw,26px)/1.1 var(--font-body);color:var(--deep-green);display:flex;align-items:baseline;gap:10px}
-.sub__latin{font:400 16px/1 var(--font-serif);font-style:italic;color:var(--sage-green);direction:ltr}
-.wine{display:flex;flex-direction:column}
-.wine__head,.wine__row{display:grid;grid-template-columns:1fr 64px 64px;gap:12px;align-items:baseline;padding:11px 0;border-bottom:var(--stroke-thin) solid var(--light-sage)}
-.wine__head{border-bottom:2px solid var(--deep-green);padding-bottom:8px}
-.wine__head span{font:700 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--sage-green);text-align:center}
-.wine__group{padding:16px 0 4px;font:700 12px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--tomato)}
-.wine__row span:first-child{font:700 clamp(16px,2.2vw,18px)/1.3 var(--font-body);color:var(--deep-green)}
-.wine__row span:not(:first-child){font:700 16px/1.3 var(--font-body);color:var(--tomato);text-align:center;direction:ltr}
-.wine__row:last-child{border-bottom:0}
+.sub__latin{font:400 16px/1 var(--font-serif);font-style:italic;color:var(--sage-ink);direction:ltr}
+.wine{width:100%;border-collapse:collapse}
+.wine th,.wine td{padding:11px 0;border-bottom:var(--stroke-thin) solid var(--light-sage);vertical-align:baseline;text-align:start;font-weight:700}
+.wine thead th{padding:11px 0 8px;border-bottom:2px solid var(--deep-green);font:700 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--sage-ink);text-align:center}
+.wine thead th:not(:first-child){width:76px}
+.wine__group th{padding:16px 0 4px;border-bottom:0;font:700 12px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--tomato-ink)}
+.wine tbody th[scope="row"]{font:700 clamp(16px,2.2vw,18px)/1.3 var(--font-body);color:var(--deep-green)}
+.wine td{font:700 16px/1.3 var(--font-body);color:var(--tomato-ink);text-align:center;direction:ltr}
+.wine tbody:last-child tr:last-child > *{border-bottom:0}
 .cocktails{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .cocktail{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;padding:12px;border-radius:var(--radius-lg);background:var(--white);border:var(--stroke-thin) solid var(--light-sage)}
 .cocktail img{width:96px;height:96px;border-radius:var(--radius-md);object-fit:cover}
@@ -224,8 +228,11 @@ a:hover{color:var(--tomato)}
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
 <div id="site-header" data-variant="solid"></div>
 <script src="../assets/header.js"></script>
+
+<main id="main-content" tabindex="-1">
 
 <!-- ===== Intro ===== -->
 <section class="intro" id="intro" aria-labelledby="menu-title">
@@ -245,7 +252,7 @@ a:hover{color:var(--tomato)}
           <h2>רעבים בבית?</h2>
           <p>כל המנות זמינות גם ל־Takeaway. מזמינים אונליין, אוספים חם.</p>
         </div>
-        <a class="btn btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">להזמנה ←</a>
+        <a class="btn btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">להזמנה <span aria-hidden="true">←</span></a>
       </div>
     </div>
   </div>
@@ -264,24 +271,24 @@ a:hover{color:var(--tomato)}
   </div>
 </nav>
 
-<main class="menu">
+<div class="menu">
   <div class="wrap">
 
     <section class="cat" id="antipasti" aria-labelledby="t-antipasti">
-      <div class="cat__head"><h2 class="cat__title" id="t-antipasti">ראשונות</h2><span class="cat__latin">Antipasti</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-antipasti">ראשונות</h2><span class="cat__latin" lang="it">Antipasti</span></div>
       <ul class="items">
         <li class="item"><h3 class="item__name">הפוקאצ׳ה של VICO</h3><span class="item__price">32 ₪</span><p class="item__desc">פוקאצ׳ה חמה, שמן זית ובלסמי, סוכריות שום קונפי וסלסת עגבניות</p></li>
         <li class="item"><h3 class="item__name">זוקיני נענע</h3><span class="item__price">32 ₪</span><p class="item__desc">זוקיני, גילופי פרמזן, צנובר, נענע, לימון ושמן זית</p></li>
-        <li class="item"><h3 class="item__name">ארנצ׳יני רוזה</h3><span class="item__price">48 ₪</span><p class="item__desc">שלושה ארנצ׳יני, רוטב רוזה, פרמזן ועשבי תיבול</p></li>
+        <li class="item"><h3 class="item__name">ארנצ׳יני רוזה <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">48 ₪</span><p class="item__desc">שלושה ארנצ׳יני, רוטב רוזה, פרמזן ועשבי תיבול</p></li>
       </ul>
     </section>
 
     <section class="cat" id="insalate" aria-labelledby="t-insalate">
-      <div class="cat__head"><h2 class="cat__title" id="t-insalate">סלטים</h2><span class="cat__latin">Insalate</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-insalate">סלטים</h2><span class="cat__latin" lang="it">Insalate</span></div>
       <ul class="items">
         <li class="item"><h3 class="item__name">ירוק קטן</h3><span class="item__price">32 ₪</span><p class="item__desc">חסה, בצל סגול, צנונית ופטה, ברוטב ויניגרט</p></li>
         <li class="item"><h3 class="item__name">קיסר</h3><span class="item__price">52 ₪</span><p class="item__desc">לבבות חסה, קרוטונים, פרמזן ורוטב קיסר</p></li>
-        <li class="item"><h3 class="item__name">פנצנלה</h3><span class="item__price">54 ₪</span><p class="item__desc">עגבניות מגי, מלפפון, בצל סגול, בזיליקום, פוקאצ׳ה קלויה ומוצרלה</p></li>
+        <li class="item"><h3 class="item__name">פנצנלה <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">54 ₪</span><p class="item__desc">עגבניות מגי, מלפפון, בצל סגול, בזיליקום, פוקאצ׳ה קלויה ומוצרלה</p></li>
       </ul>
     </section>
 
@@ -291,20 +298,20 @@ a:hover{color:var(--tomato)}
     </div>
 
     <section class="cat" id="pizza" aria-labelledby="t-pizza">
-      <div class="cat__head"><h2 class="cat__title" id="t-pizza">פיצות</h2><span class="cat__latin">Pizza</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-pizza">פיצות</h2><span class="cat__latin" lang="it">Pizza</span></div>
       <ul class="items">
-        <li class="item"><h3 class="item__name">מרגריטה</h3><span class="item__price">62 ₪</span><p class="item__desc">רוטב עגבניות, מוצרלה ובזיליקום</p></li>
+        <li class="item"><h3 class="item__name">מרגריטה <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">62 ₪</span><p class="item__desc">רוטב עגבניות, מוצרלה ובזיליקום</p></li>
         <li class="item"><h3 class="item__name">חריפה</h3><span class="item__price">68 ₪</span><p class="item__desc">רוטב עגבניות, מוצרלה, צ׳ילי וחלפיניו, שום קונפי ורוקט</p></li>
-        <li class="item"><h3 class="item__name">יוונית</h3><span class="item__price">68 ₪</span><p class="item__desc">רוטב עגבניות, מוצרלה, בולגרית, קלמטה, בצל וזעתר טרי</p></li>
+        <li class="item"><h3 class="item__name">יוונית <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">68 ₪</span><p class="item__desc">רוטב עגבניות, מוצרלה, בולגרית, קלמטה, בצל וזעתר טרי</p></li>
         <li class="item"><h3 class="item__name">בצלים</h3><span class="item__price">72 ₪</span><p class="item__desc">קרם בצל, מוצרלה, בצל ירוק, בצל מוחמץ ובצל פריך</p></li>
         <li class="item"><h3 class="item__name">שחורה</h3><span class="item__price">74 ₪</span><p class="item__desc">בצק שחור, רוטב שמנת, מוצרלה, שמפיניון ושימג׳י, שמן כמהין</p></li>
       </ul>
     </section>
 
     <section class="cat" id="pasta" aria-labelledby="t-pasta">
-      <div class="cat__head"><h2 class="cat__title" id="t-pasta">פסטות</h2><span class="cat__latin">Pasta</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-pasta">פסטות</h2><span class="cat__latin" lang="it">Pasta</span></div>
       <ul class="items">
-        <li class="item"><h3 class="item__name">הקלאסית</h3><span class="item__price">48 ₪</span><p class="item__desc">פסטה טרייה, רוטב לבחירה: עגבניות, רוזה או שמנת</p></li>
+        <li class="item"><h3 class="item__name">הקלאסית <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">48 ₪</span><p class="item__desc">פסטה טרייה, רוטב לבחירה: עגבניות, רוזה או שמנת</p></li>
         <li class="item"><h3 class="item__name">אליו אוליו</h3><span class="item__price">52 ₪</span><p class="item__desc">פסטה טרייה, עגבניות שרי, קלמטה, שום ושמן זית</p></li>
         <li class="item"><h3 class="item__name">ירוקים וריקוטה</h3><span class="item__price">63 ₪</span><p class="item__desc">פסטה טרייה, כרשה, שעועית ירוקה, תרד, ריקוטה, פרמזן ולימון</p></li>
         <li class="item"><h3 class="item__name">ניוקי גורגונזולה</h3><span class="item__price">68 ₪</span><p class="item__desc">ניוקי תפוח אדמה, שמנת וגורגונזולה</p></li>
@@ -319,15 +326,15 @@ a:hover{color:var(--tomato)}
     </div>
 
     <section class="cat" id="bambini" aria-labelledby="t-bambini">
-      <div class="cat__head"><h2 class="cat__title" id="t-bambini">ילדים</h2><span class="cat__latin">Bambini</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-bambini">ילדים</h2><span class="cat__latin" lang="it">Bambini</span></div>
       <ul class="items">
-        <li class="item"><h3 class="item__name" dir="ltr" style="text-align:start">Pasta Piccola</h3><span class="item__price">36 ₪</span><p class="item__desc">מנת פסטה קטנה, רוטב לבחירה: עגבניות, רוזה או שמנת, ירקות ושתייה</p></li>
-        <li class="item"><h3 class="item__name" dir="ltr" style="text-align:start">Pizza Piccola</h3><span class="item__price">42 ₪</span><p class="item__desc">חצי פיצה מרגריטה, ירקות ושתייה</p></li>
+        <li class="item"><h3 class="item__name" dir="ltr" lang="it" style="text-align:start">Pasta Piccola</h3><span class="item__price">36 ₪</span><p class="item__desc">מנת פסטה קטנה, רוטב לבחירה: עגבניות, רוזה או שמנת, ירקות ושתייה</p></li>
+        <li class="item"><h3 class="item__name" dir="ltr" lang="it" style="text-align:start">Pizza Piccola</h3><span class="item__price">42 ₪</span><p class="item__desc">חצי פיצה מרגריטה, ירקות ושתייה</p></li>
       </ul>
     </section>
 
     <section class="cat" id="dolci" aria-labelledby="t-dolci">
-      <div class="cat__head"><h2 class="cat__title" id="t-dolci">קינוחים</h2><span class="cat__latin">Dolci</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-dolci">קינוחים</h2><span class="cat__latin" lang="it">Dolci</span></div>
       <ul class="items">
         <li class="item"><h3 class="item__name">מגולגלות נוטלה</h3><span class="item__price">44 ₪</span><p class="item__desc">מגולגלות נוטלה חמות מהטאבון בליווי קצפת</p></li>
         <li class="item"><h3 class="item__name">עוגת גבינה קלאסית</h3><span class="item__price">46 ₪</span></li>
@@ -340,25 +347,32 @@ a:hover{color:var(--tomato)}
     </div>
 
     <section class="cat" id="bar" aria-labelledby="t-bar">
-      <div class="cat__head"><h2 class="cat__title" id="t-bar">הבר</h2><span class="cat__latin">Bar</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-bar">הבר</h2><span class="cat__latin" lang="en">Bar</span></div>
 
-      <h3 class="sub">יין <span class="sub__latin">Wine</span></h3>
-      <div class="wine">
-        <div class="wine__head"><span></span><span>כוס</span><span>בקבוק</span></div>
-        <div class="wine__group">לבן</div>
-        <div class="wine__row"><span>מוני שסק לבן</span><span>32</span><span>119</span></div>
-        <div class="wine__row"><span>אדיר בראש בלאן</span><span>42</span><span>149</span></div>
-        <div class="wine__group">אדום</div>
-        <div class="wine__row"><span>מוני פטיט ורדו</span><span>32</span><span>119</span></div>
-        <div class="wine__row"><span>אדיר קברנה סוביניון</span><span>42</span><span>149</span></div>
-        <div class="wine__row"><span>דרימיה סהר אדום</span><span></span><span>155</span></div>
-        <div class="wine__row"><span>אדיר פטיט סירה</span><span></span><span>219</span></div>
-        <div class="wine__group">רוזה</div>
-        <div class="wine__row"><span>מוני רוזה קלאדוק</span><span>32</span><span>119</span></div>
-        <div class="wine__row"><span>אדיר רוזה</span><span>42</span><span>149</span></div>
-      </div>
+      <h3 class="sub">יין <span class="sub__latin" lang="en">Wine</span></h3>
+      <table class="wine">
+        <caption class="sr-only">יינות: מחיר לכוס ולבקבוק בש״ח</caption>
+        <thead><tr><th scope="col"><span class="sr-only">יין</span></th><th scope="col">כוס</th><th scope="col">בקבוק</th></tr></thead>
+        <tbody>
+          <tr class="wine__group"><th scope="rowgroup" colspan="3">לבן</th></tr>
+          <tr><th scope="row">מוני שסק לבן</th><td>32</td><td>119</td></tr>
+          <tr><th scope="row">אדיר בראש בלאן</th><td>42</td><td>149</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="wine__group"><th scope="rowgroup" colspan="3">אדום</th></tr>
+          <tr><th scope="row">מוני פטיט ורדו</th><td>32</td><td>119</td></tr>
+          <tr><th scope="row">אדיר קברנה סוביניון</th><td>42</td><td>149</td></tr>
+          <tr><th scope="row">דרימיה סהר אדום</th><td><span class="sr-only">לא מוגש בכוס</span></td><td>155</td></tr>
+          <tr><th scope="row">אדיר פטיט סירה</th><td><span class="sr-only">לא מוגש בכוס</span></td><td>219</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="wine__group"><th scope="rowgroup" colspan="3">רוזה</th></tr>
+          <tr><th scope="row">מוני רוזה קלאדוק</th><td>32</td><td>119</td></tr>
+          <tr><th scope="row">אדיר רוזה</th><td>42</td><td>149</td></tr>
+        </tbody>
+      </table>
 
-      <h3 class="sub">קוקטיילים <span class="sub__latin">Cocktails</span></h3>
+      <h3 class="sub">קוקטיילים <span class="sub__latin" lang="en">Cocktails</span></h3>
       <ul class="cocktails">
         <li class="cocktail">
           <img src="../assets/cocktail-fuoco.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
@@ -390,10 +404,10 @@ a:hover{color:var(--tomato)}
         </li>
       </ul>
 
-      <h3 class="sub">בירה <span class="sub__latin">Beer</span></h3>
+      <h3 class="sub">בירה <span class="sub__latin" lang="en">Beer</span></h3>
       <ul class="items">
-        <li class="item"><h3 class="item__name">ויינשטפן</h3><span class="item__price">30 ₪</span><p class="item__desc">בקבוק 330 מ״ל</p></li>
-        <li class="item"><h3 class="item__name">ויינשטפן</h3><span class="item__price">36 ₪</span><p class="item__desc">בקבוק 500 מ״ל</p></li>
+        <li class="item"><h4 class="item__name">ויינשטפן</h4><span class="item__price">30 ₪</span><p class="item__desc">בקבוק 330 מ״ל</p></li>
+        <li class="item"><h4 class="item__name">ויינשטפן</h4><span class="item__price">36 ₪</span><p class="item__desc">בקבוק 500 מ״ל</p></li>
       </ul>
     </section>
 
@@ -402,7 +416,7 @@ a:hover{color:var(--tomato)}
     </div>
 
   </div>
-</main>
+</div>
 
 <section class="cta" id="menu-cta" aria-label="הזמנה">
   <div class="wrap">
@@ -415,7 +429,9 @@ a:hover{color:var(--tomato)}
   </div>
 </section>
 
-<div id="site-footer"></div>
+</main>
+
+<div id="site-footer"><a href="/accessibility/">הצהרת נגישות</a></div>
 <script src="../assets/footer.js"></script>
 
 <script>
@@ -438,6 +454,7 @@ a:hover{color:var(--tomato)}
       var on = sections[i] === current;
       var was = a.classList.contains("is-active");
       a.classList.toggle("is-active", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
       if (on && !was) {
         revealPill(a);
         if (window.vicoTrack) window.vicoTrack("menu_category_view", { category: sections[i].id });

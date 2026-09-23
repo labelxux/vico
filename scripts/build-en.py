@@ -70,8 +70,8 @@ T = {
 
     # ---- atmosphere ----
     "אצל VICO": "At VICO",
-    "באים לפיצה,<br>נשארים לעוד כוס.": "Come for the pizza,<br>stay for another glass.",
-    "VICO היא האיטלקייה של השכונה. מקום לקפוץ אליו למשולש, לפתוח שולחן עם פסטה ופיצה, או להישאר לעוד בקבוק יין בערב. מהצהריים עם הילדים ועד הלילה בטרסה.": "VICO is the neighborhood's Italian — the place to grab a slice, share a table of pasta and pizza, or linger over one more bottle of wine. From lunch with the kids to late nights on the terrace.",
+    "פיצה, פסטה וכל מה שביניהן.": "Pizza, pasta and everything in between.",
+    "VICO היא האיטלקייה של השכונה. קופצים למשולש, פותחים שולחן, מזמינים משהו טעים וכוס יין — ומשם אנחנו אתכם. עם הילדים בצהריים, עם החברים בערב, או פשוט כשבא לכם לאכול טוב!": "VICO is the neighborhood's Italian. Drop in for a slice, grab a table, order something delicious and a glass of wine — we'll take it from there. With the kids at lunch, with friends in the evening, or whenever you just feel like eating well!",
     "גלריית VICO": "VICO gallery",
 
     # ---- bar ----
@@ -126,6 +126,7 @@ T = {
     "פתיחת המיקום במפות Google": "Open the location in Google Maps",
     "מפה מאוירת: VICO באבן עזרא 17, הרצליה, עם סימון חניונים סמוכים": "Illustrated map: VICO at 17 Even Ezra, Herzliya, with nearby parking",
     "פתיחה במפות ←": "Open in Maps →",
+    'פתיחה במפות <span aria-hidden="true">←</span>': 'Open in Maps <span aria-hidden="true">→</span>',
     "א׳–ה׳ 12:00–23:00": "Sun–Thu 12:00–23:00",
     "כתובת": "Address",
     "שעות": "Hours",
@@ -156,6 +157,7 @@ T = {
     "רעבים בבית?": "Hungry at home?",
     "כל המנות זמינות גם ל־Takeaway. מזמינים אונליין, אוספים חם.": "Everything on the menu is available to go. Order online, pick up hot.",
     "להזמנה ←": "Order →",
+    'להזמנה <span aria-hidden="true">←</span>': 'Order <span aria-hidden="true">→</span>',
     "קטגוריות תפריט": "Menu categories",
     "ראשונות": "Starters",
     "סלטים": "Salads",
@@ -223,6 +225,15 @@ T = {
     "שלחו וואטסאפ": "Message us on WhatsApp",
     "%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%AA%D7%A2%D7%A0%D7%99%D7%99%D7%9F%2F%D7%AA%20%D7%9C%D7%A2%D7%91%D7%95%D7%93%20%D7%91-VICO": "Hi%2C%20I%27d%20love%20to%20join%20the%20VICO%20team",
     "₪": "₪",
+
+    # ---- accessibility helpers (skip link, screen-reader-only text) ----
+    "דלג לתוכן הראשי": "Skip to main content",
+    "עצירת הגלריה": "Pause gallery",
+    "הפעלת הגלריה": "Play gallery",
+    "> בטלפון 09-861-5866<": "> by phone, 09-861-5866<",
+    "יינות: מחיר לכוס ולבקבוק בש״ח": "Wines: price per glass and per bottle, in ILS",
+    "לא מוגש בכוס": "Not served by the glass",
+    "הצהרת נגישות": "Accessibility statement (Hebrew)",
 }
 
 PAGES = [
@@ -239,12 +250,12 @@ LATIN_FONTS = """<link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" />
 <style>
 :root{--font-body:"DM Sans","Kedem Sans ML AAA",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
-h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.tonight__eyebrow,.tonight__title,.signup__eyebrow,.signup__title,
+h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.signup__eyebrow,.signup__title,
 .hero__eyebrow,.hero__title,.h2,.insta__handle,.visit__facts dt,.visit__map-cap,.dish__badge,.bar__wines strong,.takeaway__list li,
 .site-header__nav a,.site-header__drawer a,.site-mobilebar .btn,.footer__links a,.footer__contact-label,
-.intro__title,.intro__card h2,.catnav a,.cat__title,.item__name,.item__price,.sub,.wine__head span,.wine__group,.wine__row span,.cta h2,.jobs__kicker,.jobs__title
+.intro__title,.intro__card h2,.catnav a,.cat__title,.item__name,.item__price,.sub,.wine th,.wine td,.cta h2,.carousel__toggle,.skip-link,.jobs__kicker,.jobs__title
 {font-family:"Kedem Sans ML AAA",sans-serif}
-.lead,.feel__body,.dish__desc,.cocktail__desc,.perk__desc,.perks__note,.signup__sub,.tonight__list li,.visit__facts dd,.takeaway__phone,.hero__sub,
+.lead,.feel__body,.dish__desc,.cocktail__desc,.perk__desc,.perks__note,.signup__sub,.visit__facts dd,.takeaway__phone,.hero__sub,
 .item__desc,.intro__card p,.intro__meta,.note p,.cta p,.jobs__text,.signup__legal,.footer__meta div,.footer__contact-row a,.footer__contact-row span,.footer__legal a
 {letter-spacing:0}
 </style>"""

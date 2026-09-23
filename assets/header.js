@@ -19,19 +19,20 @@
   var EN = /^en\b/i.test(document.documentElement.lang);
   var P = EN ? "/en" : "";
   var S = EN ? {
-    menu: "Menu", order: "Takeaway", about: "About", bar: "The Bar", club: "Club", contact: "Contact",
+    menu: "Menu", about: "About", bar: "The Bar", club: "Club", contact: "Contact",
     orderBtn: "Order Takeaway", orderNow: "Order now", menuShort: "Menu", nav: "Main navigation",
     mobileNav: "Mobile navigation", openNav: "Open navigation", quick: "Quick actions", home: "VICO — home",
+    newWin: "opens in a new tab",
     lang: "עב", langTitle: "עברית", langHref: location.pathname.replace(/^\/en(\/|$)/, "/") + location.hash
   } : {
-    menu: "תפריט", order: "איסוף עצמי", about: "אצלנו", bar: "הבר", club: "מועדון", contact: "צור קשר",
+    menu: "תפריט", about: "אצל ויקו", bar: "מה שותים?", club: "המועדון", contact: "צור קשר",
     orderBtn: "הזמן Takeaway", orderNow: "הזמינו עכשיו", menuShort: "תפריט", nav: "ניווט ראשי",
     mobileNav: "ניווט נייד", openNav: "פתיחת ניווט", quick: "פעולות מהירות", home: "VICO — לעמוד הבית",
+    newWin: "נפתח בחלון חדש",
     lang: "EN", langTitle: "English", langHref: "/en" + location.pathname + location.hash
   };
   var LINKS = [
     { href: P + "/menu/", label: S.menu },
-    { href: ORDER_URL, label: S.order, external: true, noIcon: true },
     { href: P + "/#vico-atmosphere", label: S.about },
     { href: P + "/#vico-bar", label: S.bar },
     { href: P + "/#vico-signup", label: S.club },
@@ -53,23 +54,23 @@
       '</a>' +
       '<nav class="site-header__nav" aria-label="' + S.nav + '">' +
         LINKS.map(function (l) { return linkHtml(l); }).join("") +
-        '<a class="site-header__lang" href="' + S.langHref + '" lang="' + (EN ? "he" : "en") + '" title="' + S.langTitle + '" data-track="lang_switch">' + S.lang + '</a>' +
+        '<a class="site-header__lang" href="' + S.langHref + '" lang="' + (EN ? "he" : "en") + '" hreflang="' + (EN ? "he" : "en") + '" aria-label="' + S.langTitle + '" data-track="lang_switch">' + S.lang + '</a>' +
       '</nav>' +
       '<div class="site-header__actions">' +
         '<a class="btn btn--primary btn--md site-header__order-btn" href="' + ORDER_URL + '" target="_blank" rel="noopener">' + S.orderBtn + '</a>' +
-        '<button type="button" class="site-header__burger" aria-label="' + S.openNav + '" aria-expanded="false" data-burger>' +
+        '<button type="button" class="site-header__burger" aria-label="' + S.openNav + '" aria-expanded="false" aria-controls="site-drawer" data-burger>' +
           '<span></span><span></span><span></span>' +
         '</button>' +
       '</div>' +
     '</header>' +
-    '<nav class="site-header__drawer" data-drawer hidden aria-label="' + S.mobileNav + '" data-loc="drawer">' +
+    '<nav class="site-header__drawer" id="site-drawer" data-drawer hidden aria-label="' + S.mobileNav + '" data-loc="drawer">' +
       LINKS.map(function (l) { return linkHtml(l); }).join("") +
-      '<a class="site-header__lang" href="' + S.langHref + '" lang="' + (EN ? "he" : "en") + '" data-track="lang_switch">' + S.lang + '</a>' +
+      '<a class="site-header__lang" href="' + S.langHref + '" lang="' + (EN ? "he" : "en") + '" hreflang="' + (EN ? "he" : "en") + '" data-track="lang_switch">' + S.langTitle + '</a>' +
     '</nav>' +
-    '<div class="site-mobilebar" aria-label="' + S.quick + '" data-loc="mobilebar">' +
+    '<nav class="site-mobilebar" aria-label="' + S.quick + '" data-loc="mobilebar">' +
       '<a class="btn btn--primary btn--md site-mobilebar__order" href="' + ORDER_URL + '" target="_blank" rel="noopener">' + S.orderNow + '</a>' +
       '<a class="btn btn--secondary btn--md site-mobilebar__menu" href="' + P + '/menu/">' + S.menuShort + '</a>' +
-    '</div>';
+    '</nav>';
 
   document.body.classList.add("has-mobilebar");
 
@@ -80,8 +81,11 @@
     var mobilebar = document.querySelector(".site-mobilebar");
     if (!hero || !mobilebar || !("IntersectionObserver" in window)) return;
     mobilebar.classList.add("is-hidden");
+    mobilebar.inert = true; // hidden bar must not take keyboard focus
     new IntersectionObserver(function (entries) {
-      mobilebar.classList.toggle("is-hidden", entries[0].isIntersecting);
+      var hide = entries[0].isIntersecting;
+      mobilebar.classList.toggle("is-hidden", hide);
+      mobilebar.inert = hide;
     }, { rootMargin: "0px 0px -40% 0px" }).observe(hero);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", watchHero);
@@ -90,18 +94,34 @@
   var burger = document.querySelector("[data-burger]");
   var drawer = document.querySelector("[data-drawer]");
   if (burger && drawer) {
-    burger.addEventListener("click", function () {
-      var open = drawer.hasAttribute("hidden");
+    var setOpen = function (open) {
       if (open) { drawer.removeAttribute("hidden"); } else { drawer.setAttribute("hidden", ""); }
       burger.setAttribute("aria-expanded", String(open));
       burger.classList.toggle("is-open", open);
-    });
+    };
+    burger.addEventListener("click", function () { setOpen(drawer.hasAttribute("hidden")); });
     drawer.addEventListener("click", function (ev) {
-      if (ev.target.tagName === "A") {
-        drawer.setAttribute("hidden", "");
-        burger.setAttribute("aria-expanded", "false");
-        burger.classList.remove("is-open");
-      }
+      if (ev.target.closest("a")) setOpen(false);
+    });
+    // Esc closes the drawer and hands focus back to the burger.
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && !drawer.hasAttribute("hidden")) { setOpen(false); burger.focus(); }
     });
   }
+
+  // Tell screen-reader users which links open a new window (header, page and footer).
+  function markNewWindowLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[target="_blank"]'), function (a) {
+      if (a.hasAttribute("data-newwin")) return;
+      a.setAttribute("data-newwin", "");
+      var label = a.getAttribute("aria-label");
+      if (label) { a.setAttribute("aria-label", label + " (" + S.newWin + ")"); return; }
+      var note = document.createElement("span");
+      note.className = "sr-only";
+      note.textContent = " (" + S.newWin + ")";
+      a.appendChild(note);
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", markNewWindowLinks);
+  else markNewWindowLinks();
 })();

@@ -74,3 +74,25 @@ convention when no photography is supplied). To use real photos, replace each
 - The photos that had been dropped into the original design's image slots live
   in an oversized sidecar that couldn't be pulled through the import channel;
   branded placeholders stand in for them (see above).
+
+## Accessibility
+
+Target: SI 5568 Part 1 / WCAG 2.0 AA, with no overlay widget. See [AUDIT.md](AUDIT.md)
+(baseline findings) and [ACCESSIBILITY_CHECKLIST.md](ACCESSIBILITY_CHECKLIST.md) (pass/fail
+and remaining manual tests). The statement lives at `/accessibility/`.
+
+- Text colours: use `--tomato-ink` / `--sage-ink` for text and button fills. `--tomato` and
+  `--sage-green` fail 4.5:1 and are for decoration only.
+- Every page starts with `<a class="skip-link" href="#main-content">` and wraps its content in
+  `<main id="main-content" tabindex="-1">`.
+- After editing Hebrew copy, run `python3 scripts/build-en.py`. New Hebrew strings need an
+  entry in its `T` table.
+
+```bash
+npm install && npx playwright install chromium
+npm run test:a11y      # Playwright + axe: fails on serious/critical violations
+npm run pa11y          # needs `npm run serve` in another terminal
+npm run lighthouse
+```
+
+CI runs the same checks on every push and PR (`.github/workflows/a11y.yml`).

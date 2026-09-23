@@ -1,0 +1,18 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": ".",
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/menu/index.html",
+        "http://localhost/accessibility/index.html"
+      ],
+      "numberOfRuns": 1,
+      "settings": { "onlyCategories": ["accessibility"], "chromeFlags": "--no-sandbox" }
+    },
+    "assert": {
+      "assertions": { "categories:accessibility": ["error", { "minScore": 0.95 }] }
+    },
+    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+  }
+}

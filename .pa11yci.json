@@ -1,0 +1,18 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "timeout": 60000,
+    "wait": 1000,
+    "hideElements": "script[src*='googletagmanager']",
+    "chromeLaunchConfig": { "args": ["--no-sandbox"] }
+  },
+  "urls": [
+    "http://localhost:8791/",
+    "http://localhost:8791/menu/",
+    "http://localhost:8791/jobs/",
+    "http://localhost:8791/accessibility/",
+    "http://localhost:8791/en/",
+    "http://localhost:8791/en/menu/"
+  ]
+}

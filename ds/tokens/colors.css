@@ -3,6 +3,11 @@
 --white:#ffffff;
 --black:#000000;
 --deep-green-ink:rgb(16,47,31);
+/* WCAG AA text shades of the brand accents (≥4.5:1 on cream, pink and white;
+   white text on --tomato-ink is 5.2:1). Use these for text, small labels and
+   button fills; keep --tomato / --sage-green for decoration (✦, borders, shadows). */
+--tomato-ink:#c9363a;
+--sage-ink:#59726b;
 /* semantic aliases */
 --surface-page:var(--cream);
 --surface-card:var(--white);
@@ -11,12 +16,12 @@
 --surface-tint-strong:var(--rose);
 --text-primary:var(--deep-green);
 --text-inverse:var(--cream);
---text-muted:var(--sage-green);
+--text-muted:var(--sage-ink);
 --brand-primary:var(--deep-green);
 --brand-primary-ink:var(--deep-green-ink);
 --brand-accent:var(--tomato);
 --brand-secondary:var(--sage-green);
 --border-subtle:var(--light-sage);
 --border-strong:var(--deep-green);
---focus-ring:var(--tomato);
+--focus-ring:var(--tomato-ink);
 }

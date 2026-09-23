@@ -1,3 +1,20 @@
+/* ===== Accessibility primitives (shared by every page) ===== */
+.skip-link{
+  position:absolute;top:8px;inset-inline-start:8px;z-index:100;
+  padding:12px 20px;border-radius:var(--radius-pill);
+  background:var(--cream);color:var(--deep-green);font:800 16px/1 var(--font-body);text-decoration:none;
+  box-shadow:var(--shadow-pop);
+  transform:translateY(-200%);
+}
+.skip-link:focus{transform:none;outline:3px solid var(--tomato-ink);outline-offset:2px}
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+main:focus{outline:none}
+
+/* Visible keyboard focus everywhere; light ring on dark surfaces. */
+:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+.site-header,.site-header__drawer,.hero,.takeaway,.signup,.footer,.intro,.cta{--focus-ring:var(--cream)}
+.site-mobilebar{--focus-ring:var(--tomato-ink)}
+
 /* ===== External-link icon (shared) ===== */
 .ext-icon{width:.85em;height:.85em;flex:0 0 auto;margin-inline-start:.35em;vertical-align:-.08em;
   stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
@@ -69,7 +86,8 @@
   border-top:var(--stroke-thin) solid var(--light-sage);
   transition:transform var(--dur-med,260ms) var(--ease-standard,ease),opacity var(--dur-med,260ms) ease;
 }
-.site-mobilebar.is-hidden{transform:translateY(110%);opacity:0;pointer-events:none}
+.site-mobilebar.is-hidden{transform:translateY(110%);opacity:0;pointer-events:none;visibility:hidden;
+  transition:transform var(--dur-med,260ms) var(--ease-standard,ease),opacity var(--dur-med,260ms) ease,visibility 0s linear var(--dur-med,260ms)}
 .site-mobilebar__order{flex:1 1 auto}
 .site-mobilebar__menu{flex:0 0 auto}
 
@@ -84,4 +102,13 @@
   .site-header__drawer{top:62px}
   .site-mobilebar{display:flex}
   body.has-mobilebar{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
+}
+
+/* Short viewports (≥200% zoom, phones in landscape): don't pin bars over the content. */
+@media (max-height:500px){
+  .site-header--solid{position:relative}
+  .site-header--solid + .site-header__drawer{position:absolute}
+  /* order + menu stay reachable from the drawer and the page itself */
+  .site-mobilebar{display:none !important}
+  body.has-mobilebar{padding-bottom:0}
 }

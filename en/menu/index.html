@@ -112,11 +112,11 @@ body{font-family:var(--font-body);color:var(--deep-green);background:var(--cream
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img{max-width:100%;display:block}
 a{color:var(--deep-green)}
-a:hover{color:var(--tomato)}
+a:hover{color:var(--tomato-ink)}
 [hidden]{display:none !important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
 
-.btn{--btn-bg:var(--tomato);--btn-fg:var(--white);display:inline-flex;align-items:center;justify-content:center;gap:8px;
+.btn{--btn-bg:var(--tomato-ink);--btn-fg:var(--white);display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-family:var(--font-body);font-weight:800;line-height:1;letter-spacing:.01em;border:none;border-radius:var(--radius-pill);
   background:var(--btn-bg);color:var(--btn-fg);cursor:pointer;text-decoration:none;white-space:nowrap;
   transition:filter var(--dur-fast,140ms) ease,transform var(--dur-fast,140ms) ease;box-shadow:0 8px 22px rgba(239,64,69,.28)}
@@ -131,17 +131,18 @@ a:hover{color:var(--tomato)}
 .btn--ghost-light:hover{--btn-bg:var(--cream);--btn-fg:var(--deep-green);filter:none}
 
 .wrap{max-width:860px;margin:0 auto;padding:0 24px}
-.kicker{font:700 13px/1 var(--font-body);letter-spacing:.14em;color:var(--tomato);text-transform:uppercase}
+.kicker{font:700 13px/1 var(--font-body);letter-spacing:.14em;color:var(--tomato-ink);text-transform:uppercase}
 
 /* ===== Intro ===== */
 .intro{background:var(--deep-green);color:var(--cream);padding:clamp(40px,7vw,72px) 0 clamp(36px,6vw,60px)}
 .intro__grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
 .intro__card{border-radius:var(--radius-lg);padding:clamp(22px,3.4vw,32px);display:flex;flex-direction:column;gap:12px;align-items:flex-start;justify-content:space-between;min-height:150px}
 .intro__card--here{background:rgba(254,243,235,.06);border:var(--stroke-thin) solid rgba(175,193,187,.32)}
-.intro__card--home{background:var(--tomato);color:var(--white)}
+.intro__card--home{background:var(--tomato-ink);color:var(--white)}
 .intro__card h2{margin:0;font:900 clamp(22px,3.4vw,30px)/1.1 var(--font-body)}
-.intro__card p{margin:0;font:400 16px/1.5 var(--font-body);opacity:.9}
-.intro__card--home .btn{--btn-bg:var(--cream);--btn-fg:var(--tomato);box-shadow:none}
+.intro__card p{margin:0;font:400 16px/1.5 var(--font-body)}
+.intro__card--here p{opacity:.9}
+.intro__card--home .btn{--btn-bg:var(--cream);--btn-fg:var(--tomato-ink);box-shadow:none}
 .intro__card--home .btn:hover{filter:brightness(.96)}
 .intro__title{margin:0 0 20px;font:900 clamp(34px,7vw,64px)/1.02 var(--font-body);letter-spacing:-.015em}
 .intro__meta{margin:0 0 26px;font:400 16px/1.5 var(--font-body);color:var(--light-sage)}
@@ -167,6 +168,8 @@ a:hover{color:var(--tomato)}
 .catnav a:hover{border-color:var(--deep-green);color:var(--deep-green)}
 .catnav a.is-active{background:var(--deep-green);color:var(--cream);border-color:var(--deep-green)}
 @media (max-width:640px){.catnav{top:62px}html{scroll-padding-top:124px}}
+/* short viewports (200%+ zoom, landscape phones): nothing sticky, so content keeps the screen */
+@media (max-height:500px){.catnav{position:static}html{scroll-padding-top:0}}
 
 /* ===== Menu sections ===== */
 .menu{padding:clamp(24px,4vw,40px) 0 clamp(72px,10vw,110px)}
@@ -174,27 +177,28 @@ a:hover{color:var(--tomato)}
 .cat__head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:clamp(14px,2.4vw,22px);
   padding-bottom:12px;border-bottom:2px solid var(--deep-green)}
 .cat__title{margin:0;font:900 clamp(28px,5vw,44px)/1 var(--font-body);letter-spacing:-.01em}
-.cat__latin{font:400 clamp(16px,2.4vw,22px)/1 var(--font-serif);font-style:italic;color:var(--sage-green);direction:ltr}
+.cat__latin{font:400 clamp(16px,2.4vw,22px)/1 var(--font-serif);font-style:italic;color:var(--sage-ink);direction:ltr}
 .items{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
 .item{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:var(--stroke-thin) solid var(--light-sage)}
 .item:last-child{border-bottom:0}
 .item__name{margin:0;grid-column:1;grid-row:1;font:900 clamp(17px,2.4vw,20px)/1.25 var(--font-body);color:var(--deep-green)}
-.item__price{font:700 clamp(16px,2.2vw,19px)/1.25 var(--font-body);color:var(--tomato);white-space:nowrap;grid-column:2;grid-row:1;text-align:start}
-.item__desc{margin:0;grid-column:1 / -1;font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
-.item__tag{display:inline-block;margin-inline-start:8px;font:700 10px/1 var(--font-body);letter-spacing:.18em;text-transform:uppercase;
-  color:var(--tomato);vertical-align:middle}
+.item__price{font:700 clamp(16px,2.2vw,19px)/1.25 var(--font-body);color:var(--tomato-ink);white-space:nowrap;grid-column:2;grid-row:1;text-align:start}
+.item__desc{margin:0;grid-column:1 / -1;font:400 15px/1.5 var(--font-body);color:var(--sage-ink)}
+.item__tag{display:inline-block;margin-inline-start:8px;padding:5px 9px 4px;border-radius:var(--radius-pill);
+  background:var(--tomato-ink);color:var(--white);font:800 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;
+  vertical-align:.25em;white-space:nowrap}
 
 /* bar sub-sections */
 .sub{margin:clamp(28px,4vw,40px) 0 10px;font:900 clamp(20px,3vw,26px)/1.1 var(--font-body);color:var(--deep-green);display:flex;align-items:baseline;gap:10px}
-.sub__latin{font:400 16px/1 var(--font-serif);font-style:italic;color:var(--sage-green);direction:ltr}
-.wine{display:flex;flex-direction:column}
-.wine__head,.wine__row{display:grid;grid-template-columns:1fr 64px 64px;gap:12px;align-items:baseline;padding:11px 0;border-bottom:var(--stroke-thin) solid var(--light-sage)}
-.wine__head{border-bottom:2px solid var(--deep-green);padding-bottom:8px}
-.wine__head span{font:700 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--sage-green);text-align:center}
-.wine__group{padding:16px 0 4px;font:700 12px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--tomato)}
-.wine__row span:first-child{font:700 clamp(16px,2.2vw,18px)/1.3 var(--font-body);color:var(--deep-green)}
-.wine__row span:not(:first-child){font:700 16px/1.3 var(--font-body);color:var(--tomato);text-align:center;direction:ltr}
-.wine__row:last-child{border-bottom:0}
+.sub__latin{font:400 16px/1 var(--font-serif);font-style:italic;color:var(--sage-ink);direction:ltr}
+.wine{width:100%;border-collapse:collapse}
+.wine th,.wine td{padding:11px 0;border-bottom:var(--stroke-thin) solid var(--light-sage);vertical-align:baseline;text-align:start;font-weight:700}
+.wine thead th{padding:11px 0 8px;border-bottom:2px solid var(--deep-green);font:700 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--sage-ink);text-align:center}
+.wine thead th:not(:first-child){width:76px}
+.wine__group th{padding:16px 0 4px;border-bottom:0;font:700 12px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--tomato-ink)}
+.wine tbody th[scope="row"]{font:700 clamp(16px,2.2vw,18px)/1.3 var(--font-body);color:var(--deep-green)}
+.wine td{font:700 16px/1.3 var(--font-body);color:var(--tomato-ink);text-align:center;direction:ltr}
+.wine tbody:last-child tr:last-child > *{border-bottom:0}
 .cocktails{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .cocktail{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;padding:12px;border-radius:var(--radius-lg);background:var(--white);border:var(--stroke-thin) solid var(--light-sage)}
 .cocktail img{width:96px;height:96px;border-radius:var(--radius-md);object-fit:cover}
@@ -226,20 +230,23 @@ a:hover{color:var(--tomato)}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" />
 <style>
 :root{--font-body:"DM Sans","Kedem Sans ML AAA",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
-h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.tonight__eyebrow,.tonight__title,.signup__eyebrow,.signup__title,
+h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.signup__eyebrow,.signup__title,
 .hero__eyebrow,.hero__title,.h2,.insta__handle,.visit__facts dt,.visit__map-cap,.dish__badge,.bar__wines strong,.takeaway__list li,
 .site-header__nav a,.site-header__drawer a,.site-mobilebar .btn,.footer__links a,.footer__contact-label,
-.intro__title,.intro__card h2,.catnav a,.cat__title,.item__name,.item__price,.sub,.wine__head span,.wine__group,.wine__row span,.cta h2,.jobs__kicker,.jobs__title
+.intro__title,.intro__card h2,.catnav a,.cat__title,.item__name,.item__price,.sub,.wine th,.wine td,.cta h2,.carousel__toggle,.skip-link,.jobs__kicker,.jobs__title
 {font-family:"Kedem Sans ML AAA",sans-serif}
-.lead,.feel__body,.dish__desc,.cocktail__desc,.perk__desc,.perks__note,.signup__sub,.tonight__list li,.visit__facts dd,.takeaway__phone,.hero__sub,
+.lead,.feel__body,.dish__desc,.cocktail__desc,.perk__desc,.perks__note,.signup__sub,.visit__facts dd,.takeaway__phone,.hero__sub,
 .item__desc,.intro__card p,.intro__meta,.note p,.cta p,.jobs__text,.signup__legal,.footer__meta div,.footer__contact-row a,.footer__contact-row span,.footer__legal a
 {letter-spacing:0}
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div id="site-header" data-variant="solid"></div>
 <script src="../../assets/header.js"></script>
+
+<main id="main-content" tabindex="-1">
 
 <!-- ===== Intro ===== -->
 <section class="intro" id="intro" aria-labelledby="menu-title">
@@ -259,7 +266,7 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
           <h2>Hungry at home?</h2>
           <p>Everything on the menu is available to go. Order online, pick up hot.</p>
         </div>
-        <a class="btn btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">Order →</a>
+        <a class="btn btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">Order <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -278,24 +285,24 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
   </div>
 </nav>
 
-<main class="menu">
+<div class="menu">
   <div class="wrap">
 
     <section class="cat" id="antipasti" aria-labelledby="t-antipasti">
-      <div class="cat__head"><h2 class="cat__title" id="t-antipasti">Starters</h2><span class="cat__latin">Antipasti</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-antipasti">Starters</h2><span class="cat__latin" lang="it">Antipasti</span></div>
       <ul class="items">
         <li class="item"><h3 class="item__name">VICO's Focaccia</h3><span class="item__price">32 ₪</span><p class="item__desc">Warm focaccia with olive oil and balsamic, garlic confit candies and tomato salsa</p></li>
         <li class="item"><h3 class="item__name">Mint Zucchini</h3><span class="item__price">32 ₪</span><p class="item__desc">Zucchini, shaved parmesan, pine nuts, mint, lemon and olive oil</p></li>
-        <li class="item"><h3 class="item__name">Arancini Rosa</h3><span class="item__price">48 ₪</span><p class="item__desc">Three arancini, rosa sauce, parmesan and herbs</p></li>
+        <li class="item"><h3 class="item__name">Arancini Rosa <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">48 ₪</span><p class="item__desc">Three arancini, rosa sauce, parmesan and herbs</p></li>
       </ul>
     </section>
 
     <section class="cat" id="insalate" aria-labelledby="t-insalate">
-      <div class="cat__head"><h2 class="cat__title" id="t-insalate">Salads</h2><span class="cat__latin">Insalate</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-insalate">Salads</h2><span class="cat__latin" lang="it">Insalate</span></div>
       <ul class="items">
         <li class="item"><h3 class="item__name">Little Green</h3><span class="item__price">32 ₪</span><p class="item__desc">Lettuce, red onion, radish and feta with a vinaigrette</p></li>
         <li class="item"><h3 class="item__name">Caesar</h3><span class="item__price">52 ₪</span><p class="item__desc">Baby lettuce, croutons, parmesan and Caesar dressing</p></li>
-        <li class="item"><h3 class="item__name">Panzanella</h3><span class="item__price">54 ₪</span><p class="item__desc">Maggie tomatoes, cucumber, red onion, basil, toasted focaccia and mozzarella</p></li>
+        <li class="item"><h3 class="item__name">Panzanella <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">54 ₪</span><p class="item__desc">Maggie tomatoes, cucumber, red onion, basil, toasted focaccia and mozzarella</p></li>
       </ul>
     </section>
 
@@ -305,20 +312,20 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
     </div>
 
     <section class="cat" id="pizza" aria-labelledby="t-pizza">
-      <div class="cat__head"><h2 class="cat__title" id="t-pizza">Pizza</h2><span class="cat__latin">Pizza</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-pizza">Pizza</h2><span class="cat__latin" lang="it">Pizza</span></div>
       <ul class="items">
-        <li class="item"><h3 class="item__name">Margherita</h3><span class="item__price">62 ₪</span><p class="item__desc">Tomato sauce, mozzarella and basil</p></li>
+        <li class="item"><h3 class="item__name">Margherita <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">62 ₪</span><p class="item__desc">Tomato sauce, mozzarella and basil</p></li>
         <li class="item"><h3 class="item__name">Spicy</h3><span class="item__price">68 ₪</span><p class="item__desc">Tomato sauce, mozzarella, chili and jalapeño, garlic confit and arugula</p></li>
-        <li class="item"><h3 class="item__name">Greek</h3><span class="item__price">68 ₪</span><p class="item__desc">Tomato sauce, mozzarella, Bulgarian feta, Kalamata olives, onion and fresh za'atar</p></li>
+        <li class="item"><h3 class="item__name">Greek <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">68 ₪</span><p class="item__desc">Tomato sauce, mozzarella, Bulgarian feta, Kalamata olives, onion and fresh za'atar</p></li>
         <li class="item"><h3 class="item__name">Onion</h3><span class="item__price">72 ₪</span><p class="item__desc">Onion cream, mozzarella, spring onion, pickled onion and crispy onion</p></li>
         <li class="item"><h3 class="item__name">Black</h3><span class="item__price">74 ₪</span><p class="item__desc">Black dough, cream sauce, mozzarella, button and shimeji mushrooms, truffle oil</p></li>
       </ul>
     </section>
 
     <section class="cat" id="pasta" aria-labelledby="t-pasta">
-      <div class="cat__head"><h2 class="cat__title" id="t-pasta">Pasta</h2><span class="cat__latin">Pasta</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-pasta">Pasta</h2><span class="cat__latin" lang="it">Pasta</span></div>
       <ul class="items">
-        <li class="item"><h3 class="item__name">The Classic</h3><span class="item__price">48 ₪</span><p class="item__desc">Fresh pasta with your choice of sauce: tomato, rosa or cream</p></li>
+        <li class="item"><h3 class="item__name">The Classic <span class="item__tag" lang="en">Popular</span></h3><span class="item__price">48 ₪</span><p class="item__desc">Fresh pasta with your choice of sauce: tomato, rosa or cream</p></li>
         <li class="item"><h3 class="item__name">Aglio e Olio</h3><span class="item__price">52 ₪</span><p class="item__desc">Fresh pasta, cherry tomatoes, Kalamata olives, garlic and olive oil</p></li>
         <li class="item"><h3 class="item__name">Greens & Ricotta</h3><span class="item__price">63 ₪</span><p class="item__desc">Fresh pasta, leek, green beans, spinach, ricotta, parmesan and lemon</p></li>
         <li class="item"><h3 class="item__name">Gorgonzola Gnocchi</h3><span class="item__price">68 ₪</span><p class="item__desc">Potato gnocchi, cream and gorgonzola</p></li>
@@ -333,15 +340,15 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
     </div>
 
     <section class="cat" id="bambini" aria-labelledby="t-bambini">
-      <div class="cat__head"><h2 class="cat__title" id="t-bambini">Kids</h2><span class="cat__latin">Bambini</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-bambini">Kids</h2><span class="cat__latin" lang="it">Bambini</span></div>
       <ul class="items">
-        <li class="item"><h3 class="item__name" dir="ltr" style="text-align:start">Pasta Piccola</h3><span class="item__price">36 ₪</span><p class="item__desc">A small portion of pasta with your choice of sauce (tomato, rosa or cream), veggies and a drink</p></li>
-        <li class="item"><h3 class="item__name" dir="ltr" style="text-align:start">Pizza Piccola</h3><span class="item__price">42 ₪</span><p class="item__desc">Half a Margherita, veggies and a drink</p></li>
+        <li class="item"><h3 class="item__name" dir="ltr" lang="it" style="text-align:start">Pasta Piccola</h3><span class="item__price">36 ₪</span><p class="item__desc">A small portion of pasta with your choice of sauce (tomato, rosa or cream), veggies and a drink</p></li>
+        <li class="item"><h3 class="item__name" dir="ltr" lang="it" style="text-align:start">Pizza Piccola</h3><span class="item__price">42 ₪</span><p class="item__desc">Half a Margherita, veggies and a drink</p></li>
       </ul>
     </section>
 
     <section class="cat" id="dolci" aria-labelledby="t-dolci">
-      <div class="cat__head"><h2 class="cat__title" id="t-dolci">Desserts</h2><span class="cat__latin">Dolci</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-dolci">Desserts</h2><span class="cat__latin" lang="it">Dolci</span></div>
       <ul class="items">
         <li class="item"><h3 class="item__name">Nutella Rolls</h3><span class="item__price">44 ₪</span><p class="item__desc">Warm Nutella rolls straight from the oven, with whipped cream</p></li>
         <li class="item"><h3 class="item__name">Classic Cheesecake</h3><span class="item__price">46 ₪</span></li>
@@ -354,25 +361,32 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
     </div>
 
     <section class="cat" id="bar" aria-labelledby="t-bar">
-      <div class="cat__head"><h2 class="cat__title" id="t-bar">The Bar</h2><span class="cat__latin">Bar</span></div>
+      <div class="cat__head"><h2 class="cat__title" id="t-bar">The Bar</h2><span class="cat__latin" lang="en">Bar</span></div>
 
-      <h3 class="sub">Wine <span class="sub__latin">Wine</span></h3>
-      <div class="wine">
-        <div class="wine__head"><span></span><span>Glass</span><span>Bottle</span></div>
-        <div class="wine__group">White</div>
-        <div class="wine__row"><span>Mony Shesek White</span><span>32</span><span>119</span></div>
-        <div class="wine__row"><span>Adir Blush Blanc</span><span>42</span><span>149</span></div>
-        <div class="wine__group">Red</div>
-        <div class="wine__row"><span>Mony Petit Verdot</span><span>32</span><span>119</span></div>
-        <div class="wine__row"><span>Adir Cabernet Sauvignon</span><span>42</span><span>149</span></div>
-        <div class="wine__row"><span>Drimia Sahar Red</span><span></span><span>155</span></div>
-        <div class="wine__row"><span>Adir Petite Sirah</span><span></span><span>219</span></div>
-        <div class="wine__group">Rosé</div>
-        <div class="wine__row"><span>Mony Caladoc Rosé</span><span>32</span><span>119</span></div>
-        <div class="wine__row"><span>Adir Rosé</span><span>42</span><span>149</span></div>
-      </div>
+      <h3 class="sub">Wine <span class="sub__latin" lang="en">Wine</span></h3>
+      <table class="wine">
+        <caption class="sr-only">Wines: price per glass and per bottle, in ILS</caption>
+        <thead><tr><th scope="col"><span class="sr-only">Wine</span></th><th scope="col">Glass</th><th scope="col">Bottle</th></tr></thead>
+        <tbody>
+          <tr class="wine__group"><th scope="rowgroup" colspan="3">White</th></tr>
+          <tr><th scope="row">Mony Shesek White</th><td>32</td><td>119</td></tr>
+          <tr><th scope="row">Adir Blush Blanc</th><td>42</td><td>149</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="wine__group"><th scope="rowgroup" colspan="3">Red</th></tr>
+          <tr><th scope="row">Mony Petit Verdot</th><td>32</td><td>119</td></tr>
+          <tr><th scope="row">Adir Cabernet Sauvignon</th><td>42</td><td>149</td></tr>
+          <tr><th scope="row">Drimia Sahar Red</th><td><span class="sr-only">Not served by the glass</span></td><td>155</td></tr>
+          <tr><th scope="row">Adir Petite Sirah</th><td><span class="sr-only">Not served by the glass</span></td><td>219</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="wine__group"><th scope="rowgroup" colspan="3">Rosé</th></tr>
+          <tr><th scope="row">Mony Caladoc Rosé</th><td>32</td><td>119</td></tr>
+          <tr><th scope="row">Adir Rosé</th><td>42</td><td>149</td></tr>
+        </tbody>
+      </table>
 
-      <h3 class="sub">Cocktails <span class="sub__latin">Cocktails</span></h3>
+      <h3 class="sub">Cocktails <span class="sub__latin" lang="en">Cocktails</span></h3>
       <ul class="cocktails">
         <li class="cocktail">
           <img src="../../assets/cocktail-fuoco.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
@@ -404,10 +418,10 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
         </li>
       </ul>
 
-      <h3 class="sub">Beer <span class="sub__latin">Beer</span></h3>
+      <h3 class="sub">Beer <span class="sub__latin" lang="en">Beer</span></h3>
       <ul class="items">
-        <li class="item"><h3 class="item__name">Weihenstephan</h3><span class="item__price">30 ₪</span><p class="item__desc">330 ml bottle</p></li>
-        <li class="item"><h3 class="item__name">Weihenstephan</h3><span class="item__price">36 ₪</span><p class="item__desc">500 ml bottle</p></li>
+        <li class="item"><h4 class="item__name">Weihenstephan</h4><span class="item__price">30 ₪</span><p class="item__desc">330 ml bottle</p></li>
+        <li class="item"><h4 class="item__name">Weihenstephan</h4><span class="item__price">36 ₪</span><p class="item__desc">500 ml bottle</p></li>
       </ul>
     </section>
 
@@ -416,7 +430,7 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
     </div>
 
   </div>
-</main>
+</div>
 
 <section class="cta" id="menu-cta" aria-label="Order">
   <div class="wrap">
@@ -429,7 +443,9 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
   </div>
 </section>
 
-<div id="site-footer"></div>
+</main>
+
+<div id="site-footer"><a href="/accessibility/">Accessibility statement (Hebrew)</a></div>
 <script src="../../assets/footer.js"></script>
 
 <script>
@@ -452,6 +468,7 @@ h1,h2,h3,.kicker,.btn,.arrow-link,.dish__name,.cocktail__name,.perk__title,.toni
       var on = sections[i] === current;
       var was = a.classList.contains("is-active");
       a.classList.toggle("is-active", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
       if (on && !was) {
         revealPill(a);
         if (window.vicoTrack) window.vicoTrack("menu_category_view", { category: sections[i].id });

@@ -4,3 +4,9 @@
 .claude/
 
 assets/_original/
+
+# accessibility test tooling
+node_modules/
+test-results/
+playwright-report/
+.lighthouseci/

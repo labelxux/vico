@@ -108,7 +108,7 @@ body{
 }
 img{max-width:100%;display:block}
 a{color:var(--deep-green)}
-a:hover{color:var(--tomato)}
+a:hover{color:var(--tomato-ink)}
 [hidden]{display:none !important}
 
 /* ---------- Motion ---------- */
@@ -122,7 +122,7 @@ a:hover{color:var(--tomato)}
 
 /* ---------- Design-system components ---------- */
 .btn{
-  --btn-bg:var(--tomato);
+  --btn-bg:var(--tomato-ink);
   --btn-fg:var(--white);
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-family:var(--font-body);font-weight:800;line-height:1;
@@ -159,7 +159,7 @@ a:hover{color:var(--tomato)}
 /* ---------- Layout helpers ---------- */
 .section{position:relative}
 .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-.kicker{font:700 clamp(13px,2vw,15px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato);text-transform:uppercase}
+.kicker{font:700 clamp(13px,2vw,15px)/1 var(--font-body);letter-spacing:.14em;color:var(--tomato-ink);text-transform:uppercase}
 .h2{margin:0;font-family:var(--font-body);font-weight:900;color:var(--deep-green);
   font-size:clamp(30px,5.6vw,54px);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
 .lead{margin:0;font:400 clamp(17px,2.2vw,20px)/1.65 var(--font-body);color:var(--deep-green);max-width:620px}
@@ -167,18 +167,22 @@ a:hover{color:var(--tomato)}
 .section-head--center{align-items:center;text-align:center}
 .arrow-link{display:inline-flex;align-items:center;gap:8px;font:800 17px/1 var(--font-body);color:var(--deep-green);text-decoration:none;
   border-bottom:2px solid var(--tomato);padding-bottom:4px}
-.arrow-link:hover{color:var(--tomato)}
+.arrow-link:hover{color:var(--tomato-ink)}
 .arrow-link svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;transform:scaleX(-1)}
 
 /* ===== 01 · Hero ===== */
 .hero{
   position:relative;min-height:100dvh;display:flex;flex-direction:column;
   background:var(--deep-green);overflow:hidden;
+  padding-top:84px; /* keeps the copy clear of the overlay header when zoomed in */
 }
-.hero__media{position:absolute;inset:0;animation:vico-drift 22s ease-in-out infinite alternate;background:var(--deep-green)}
+@media (max-width:640px){.hero{padding-top:64px}}
+/* one short settle (≤5s) rather than an endless loop — WCAG 2.2.2 */
+.hero__media{position:absolute;inset:0;animation:vico-drift 5s var(--ease-standard,ease) both;background:var(--deep-green)}
 .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 .hero__scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(19,57,50,.42) 0%,rgba(19,57,50,.06) 40%,rgba(19,57,50,.72) 100%)}
+  /* dark enough under the headline and sub-copy for ≥4.5:1 over the brightest part of the photo */
+  background:linear-gradient(180deg,rgba(19,57,50,.5) 0%,rgba(19,57,50,.12) 30%,rgba(19,57,50,.55) 50%,rgba(19,57,50,.8) 70%,rgba(19,57,50,.88) 100%)}
 .hero__content{
   position:relative;z-index:2;margin-top:auto;
   padding:0 24px calc(64px + env(safe-area-inset-bottom));
@@ -200,15 +204,14 @@ a:hover{color:var(--tomato)}
 .dish__media img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-med,260ms) var(--ease-standard,ease)}
 .dish:hover .dish__media img{transform:scale(1.04)}
 .dish__badge{position:absolute;top:12px;inset-inline-start:12px;padding:7px 12px;border-radius:var(--radius-pill);
-  background:var(--tomato);color:var(--white);font:800 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;direction:ltr}
-.dish__name{font:900 clamp(17px,2vw,20px)/1.2 var(--font-body)}
-.dish__desc{margin:0;font:400 14px/1.45 var(--font-body);color:var(--sage-green)}
+  background:var(--tomato-ink);color:var(--white);font:800 11px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;direction:ltr}
+.dish__name{margin:0;font:900 clamp(17px,2vw,20px)/1.2 var(--font-body)}
+.dish__desc{margin:0;font:400 14px/1.45 var(--font-body);color:var(--sage-ink)}
 .dishes__cta{margin-top:clamp(36px,5vw,56px);display:flex;justify-content:center}
 @media (max-width:900px){.dishes__grid{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:640px){
   .dishes__grid{grid-template-columns:repeat(2,1fr);gap:14px 12px}
   .dish__media{border-radius:var(--radius-md)}
-  .dish__desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 }
 
 /* ===== 03 · Takeaway ===== */
@@ -247,40 +250,28 @@ a:hover{color:var(--tomato)}
 .carousel__item img{width:100%;height:100%;object-fit:cover;display:block}
 .carousel.is-scrollable{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .carousel.is-scrollable::-webkit-scrollbar{display:none}
+.carousel__toggle{position:absolute;bottom:14px;right:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border:0;border-radius:var(--radius-pill);background:var(--cream);color:var(--deep-green);
+  font:800 14px/1 var(--font-body);cursor:pointer;box-shadow:var(--shadow-pop)}
+.carousel__toggle svg{width:14px;height:14px;fill:currentColor}
+.carousel__toggle:hover{background:var(--white)}
 
 /* ===== 04b · Bar ===== */
 .bar{background:var(--cream);padding:clamp(80px,12vw,140px) 0 clamp(72px,10vw,120px);overflow:hidden}
 .bar__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,72px);align-items:center}
 .bar__copy{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
 .bar__wines{margin:4px 0 6px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-.bar__wines li{font:400 15px/1.5 var(--font-body);color:var(--sage-green)}
-.bar__wines strong{display:inline-block;min-width:44px;font:700 12px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--tomato);margin-inline-end:6px}
+.bar__wines li{font:400 15px/1.5 var(--font-body);color:var(--sage-ink)}
+.bar__wines strong{display:inline-block;min-width:44px;font:700 12px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--tomato-ink);margin-inline-end:6px}
 .bar__photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 40%;border-radius:var(--radius-xl);box-shadow:var(--shadow-card)}
 .cocktails{margin:clamp(40px,6vw,64px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,24px)}
 .cocktail{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:22px 18px 26px;border-radius:var(--radius-lg);
   background:var(--white);border:var(--stroke-thin) solid var(--light-sage)}
 .cocktail img{width:160px;height:160px;max-width:100%;flex:0 0 auto;object-fit:cover;border-radius:var(--radius-md);margin-bottom:6px}
-.cocktail__name{font:900 17px/1.2 var(--font-body);color:var(--deep-green);letter-spacing:.03em}
-.cocktail__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--sage-green)}
+.cocktail__name{margin:0;font:900 17px/1.2 var(--font-body);color:var(--deep-green);letter-spacing:.03em}
+.cocktail__desc{margin:0;font:400 14px/1.5 var(--font-body);color:var(--sage-ink)}
 @media (max-width:900px){.cocktails{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:860px){.bar__grid{grid-template-columns:1fr}.bar__photo img{aspect-ratio:4/3}}
-
-/* ===== 05 · Today / Tonight ===== */
-.tonight{background:var(--pink-salmaon);padding:clamp(64px,9vw,104px) 0}
-.tonight__card{
-  max-width:900px;margin:0 auto;background:var(--cream);border-radius:var(--radius-xl);
-  padding:clamp(28px,4.5vw,52px);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;
-  box-shadow:var(--shadow-card);
-}
-.tonight__copy{display:flex;flex-direction:column;gap:12px}
-.tonight__eyebrow{font:700 13px/1 var(--font-body);letter-spacing:.3em;color:var(--tomato);text-transform:uppercase;direction:ltr;text-align:start}
-.tonight__title{margin:0;font:900 clamp(26px,4vw,40px)/1.1 var(--font-body);color:var(--deep-green)}
-.tonight__list{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
-.tonight__list li{font:400 17px/1.4 var(--font-body);color:var(--deep-green);display:flex;gap:10px;align-items:baseline}
-.tonight__list li::before{content:"✦";color:var(--tomato);font-size:12px;flex:0 0 auto}
-.tonight__list li strong{font-weight:900}
-.tonight__side{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:200px}
-@media (max-width:640px){.tonight__card{grid-template-columns:1fr}.tonight__side{flex-direction:row;flex-wrap:wrap}.tonight__side .btn{flex:1 1 auto}}
 
 /* ===== 06 · Club ===== */
 .signup{position:relative;background:var(--deep-green);color:var(--cream);padding:clamp(80px,12vw,130px) 24px;overflow:hidden}
@@ -297,7 +288,7 @@ a:hover{color:var(--tomato)}
 @media (max-width:560px){.perks{grid-template-columns:1fr}}
 .perks__note{margin:4px 0 0;text-align:center;font:400 14px/1.5 var(--font-body);color:var(--light-sage)}
 .signup__toggle{display:flex;justify-content:center;margin-top:6px}
-.signup__legal{margin:0;font:400 12px/1.5 var(--font-body);color:var(--sage-green)}
+.signup__legal{margin:0;font:400 12px/1.5 var(--font-body);color:var(--light-sage)}
 .signup__legal a{color:var(--light-sage);text-underline-offset:3px}
 .signup__legal a:hover{color:var(--cream)}
 
@@ -306,23 +297,23 @@ a:hover{color:var(--tomato)}
 .visit__grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(32px,5vw,64px);align-items:center}
 .visit__copy{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
 .visit__facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 18px;align-items:baseline}
-.visit__facts dt{font:700 12px/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage-green)}
+.visit__facts dt{font:700 12px/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--sage-ink)}
 .visit__facts dd{margin:0;font:400 17px/1.4 var(--font-body);color:var(--deep-green)}
 .visit__facts dd a{text-decoration:none;font-weight:700}
-.visit__facts dd a:hover{color:var(--tomato)}
-.visit__facts dd small{font:400 13px/1.4 var(--font-body);color:var(--sage-green)}
+.visit__facts dd a:hover{color:var(--tomato-ink)}
+.visit__facts dd small{font:400 13px/1.4 var(--font-body);color:var(--sage-ink)}
 .visit__cta{display:flex;gap:10px;flex-wrap:wrap}
 .visit__map{display:block;border-radius:var(--radius-xl);overflow:hidden;border:var(--stroke-thin) solid var(--light-sage);box-shadow:var(--shadow-card);background:var(--cream)}
 .visit__map img{width:100%;height:auto}
 .visit__map-cap{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;font:700 13px/1 var(--font-body);color:var(--deep-green);background:var(--white)}
-.visit__map-cap span:last-child{color:var(--tomato)}
+.visit__map-cap span:last-child{color:var(--tomato-ink)}
 @media (max-width:860px){.visit__grid{grid-template-columns:1fr}}
 
 /* ===== 08 · Instagram ===== */
 .insta{background:var(--cream);padding:0 0 clamp(72px,10vw,120px)}
 .insta__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px}
 .insta__handle{font:800 17px/1 var(--font-body);color:var(--deep-green);text-decoration:none;direction:ltr;border-bottom:2px solid var(--tomato);padding-bottom:4px}
-.insta__handle:hover{color:var(--tomato)}
+.insta__handle:hover{color:var(--tomato-ink)}
 .insta__grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
 .insta__grid a{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--radius-md);background:var(--deep-green)}
 .insta__grid img{width:100%;height:100%;object-fit:cover;transition:transform var(--dur-med,260ms) var(--ease-standard,ease)}
@@ -333,8 +324,11 @@ a:hover{color:var(--tomato)}
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
 <div id="site-header" data-variant="overlay"></div>
 <script src="assets/header.js"></script>
+
+<main id="main-content" tabindex="-1">
 
 <!-- ============ 01 · Hero ============ -->
 <section class="hero section" id="vico-hero" aria-label="VICO — האיטלקייה השכונתית שלכם">
@@ -364,43 +358,43 @@ a:hover{color:var(--tomato)}
 
     <div class="dishes__grid">
       <a class="dish" href="/menu/#pasta">
-        <div class="dish__media"><img src="assets/dish-pasta-nera.jpg" alt="פסטה שחורה עם פטריות ושמן כמהין" loading="lazy" decoding="async" width="900" height="900"></div>
-        <div class="dish__name">פסטה שחורה</div>
+        <div class="dish__media"><img src="assets/dish-pasta-nera.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></div>
+        <h3 class="dish__name">פסטה שחורה</h3>
         <p class="dish__desc">פסטה טרייה שחורה, שמנת, פטריות, פרמזן ושמן כמהין</p>
       </a>
       <a class="dish" href="/menu/#antipasti">
-        <div class="dish__media"><img src="assets/dish-arancini.jpg" alt="ארנצ׳יני ברוטב רוזה" loading="lazy" decoding="async" width="900" height="900"></div>
-        <div class="dish__name">ארנצ׳יני רוזה</div>
+        <div class="dish__media"><img src="assets/dish-arancini.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></div>
+        <h3 class="dish__name">ארנצ׳יני רוזה</h3>
         <p class="dish__desc">שלושה ארנצ׳יני, רוטב רוזה, פרמזן ועשבי תיבול</p>
       </a>
       <a class="dish" href="/menu/#pizza">
-        <div class="dish__media"><img src="assets/gallery-img-3.jpg" alt="פיצה חריפה עם רוקט וצ׳ילי" loading="lazy" decoding="async" width="1100" height="1100"></div>
-        <div class="dish__name">פיצה חריפה</div>
+        <div class="dish__media"><img src="assets/gallery-img-3.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></div>
+        <h3 class="dish__name">פיצה חריפה</h3>
         <p class="dish__desc">רוטב עגבניות, מוצרלה, צ׳ילי וחלפיניו, שום קונפי ורוקט</p>
       </a>
       <a class="dish" href="/menu/#pasta">
-        <div class="dish__media"><img src="assets/gallery-img-4.jpg" alt="פסטה ירוקים וריקוטה" loading="lazy" decoding="async" width="1100" height="1100"></div>
-        <div class="dish__name">ירוקים וריקוטה</div>
+        <div class="dish__media"><img src="assets/gallery-img-4.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></div>
+        <h3 class="dish__name">ירוקים וריקוטה</h3>
         <p class="dish__desc">פסטה טרייה, כרשה, שעועית ירוקה, תרד, ריקוטה, פרמזן ולימון</p>
       </a>
       <a class="dish" href="/menu/#pizza">
-        <div class="dish__media"><img src="assets/gallery-img-9.jpg" alt="פיצת בצלים" loading="lazy" decoding="async" width="1100" height="1100"></div>
-        <div class="dish__name">פיצה בצלים</div>
+        <div class="dish__media"><img src="assets/gallery-img-9.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></div>
+        <h3 class="dish__name">פיצה בצלים</h3>
         <p class="dish__desc">קרם בצל, מוצרלה, בצל ירוק, בצל מוחמץ ובצל פריך</p>
       </a>
       <a class="dish" href="/menu/#insalate">
-        <div class="dish__media"><img src="assets/dish-caesar.jpg" alt="סלט קיסר" loading="lazy" decoding="async" width="900" height="900"></div>
-        <div class="dish__name">סלט קיסר</div>
+        <div class="dish__media"><img src="assets/dish-caesar.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></div>
+        <h3 class="dish__name">סלט קיסר</h3>
         <p class="dish__desc">לבבות חסה, קרוטונים, פרמזן ורוטב קיסר</p>
       </a>
       <a class="dish" href="/menu/#pasta">
-        <div class="dish__media"><img src="assets/dish-gnocchi.jpg" alt="ניוקי גורגונזולה" loading="lazy" decoding="async" width="900" height="900"></div>
-        <div class="dish__name">ניוקי גורגונזולה</div>
+        <div class="dish__media"><img src="assets/dish-gnocchi.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></div>
+        <h3 class="dish__name">ניוקי גורגונזולה</h3>
         <p class="dish__desc">ניוקי תפוח אדמה, שמנת וגורגונזולה</p>
       </a>
-      <a class="dish dish--soon" href="/menu/#antipasti">
-        <div class="dish__media"><img src="assets/dish-beet.jpg" alt="סוכריות סלק — קרפצ׳יו סלק ממולא גבינת עזים" loading="lazy" decoding="async" width="900" height="900"><span class="dish__badge">Coming soon</span></div>
-        <div class="dish__name">סוכריות סלק</div>
+      <a class="dish" href="/menu/#antipasti">
+        <div class="dish__media"><img src="assets/dish-beet.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></div>
+        <h3 class="dish__name">סוכריות סלק</h3>
         <p class="dish__desc">קרפצ׳יו סלק ממולא גבינת עזים, בליווי רוקט ובלסמי</p>
       </a>
     </div>
@@ -416,7 +410,7 @@ a:hover{color:var(--tomato)}
   <div class="wrap">
     <div class="takeaway__grid">
       <div class="takeaway__copy">
-        <div class="kicker">Takeaway</div>
+        <div class="kicker" lang="en">Takeaway</div>
         <h2 class="h2" id="takeaway-title">VICO אצלכם בבית.</h2>
         <p class="lead">פיצה מהטאבון, פסטה טרייה, סלטים וכל מה שטוב ליד — אורזים חם ומחכים לכם באבן עזרא 17.</p>
         <ul class="takeaway__list">
@@ -442,11 +436,12 @@ a:hover{color:var(--tomato)}
   <div class="feel__copy">
     <img class="feel__art" src="assets/cheers.png" alt="" loading="lazy" decoding="async" />
     <div class="kicker">אצל VICO</div>
-    <h2 class="h2" id="feel-title">באים לפיצה,<br>נשארים לעוד כוס.</h2>
-    <p class="feel__body">VICO היא האיטלקייה של השכונה. מקום לקפוץ אליו למשולש, לפתוח שולחן עם פסטה ופיצה, או להישאר לעוד בקבוק יין בערב. מהצהריים עם הילדים ועד הלילה בטרסה.</p>
+    <h2 class="h2" id="feel-title">פיצה, פסטה וכל מה שביניהן.</h2>
+    <p class="feel__body">VICO היא האיטלקייה של השכונה. קופצים למשולש, פותחים שולחן, מזמינים משהו טעים וכוס יין — ומשם אנחנו אתכם. עם הילדים בצהריים, עם החברים בערב, או פשוט כשבא לכם לאכול טוב!</p>
   </div>
 
   <div class="carousel" id="gallery" role="group" aria-label="גלריית VICO">
+    <button class="carousel__toggle" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><span>עצירת הגלריה</span></button>
     <div class="carousel__track">
       <figure class="carousel__item"><img src="assets/atmo-7.jpg" alt="" loading="lazy" decoding="async"></figure>
       <figure class="carousel__item"><img src="assets/atmo-9.jpg" alt="" loading="lazy" decoding="async"></figure>
@@ -466,7 +461,7 @@ a:hover{color:var(--tomato)}
   <div class="wrap">
     <div class="bar__grid">
       <div class="bar__copy">
-        <div class="kicker">Wine Terrace</div>
+        <div class="kicker" lang="en">Wine Terrace</div>
         <h2 class="h2" id="bar-title">כוס יין. קוקטייל. ועוד אחד.</h2>
         <p class="lead">יינות ישראליים בכוס או בבקבוק, בירה קרה מהבקבוק וארבעה קוקטיילים שהבר שלנו רוקח בכל ערב. הטרסה מחכה.</p>
         <ul class="bar__wines">
@@ -484,53 +479,32 @@ a:hover{color:var(--tomato)}
     <ul class="cocktails">
       <li class="cocktail">
         <img src="assets/cocktail-fuoco.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
-        <div class="cocktail__name" dir="ltr">FUOCO!</div>
+        <h3 class="cocktail__name" dir="ltr">FUOCO!</h3>
         <p class="cocktail__desc">טקילה בצ׳ילי, פסיפלורה והדרים. טרופי, חמצמץ עם קיק חריף!</p>
       </li>
       <li class="cocktail">
         <img src="assets/cocktail-dolce-vita.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
-        <div class="cocktail__name" dir="ltr">LA DOLCE VITA</div>
+        <h3 class="cocktail__name" dir="ltr">LA DOLCE VITA</h3>
         <p class="cocktail__desc">וודקה, סמבוק, ענבי מרלו ולימון. פרחוני, פירותי ומרענן</p>
       </li>
       <li class="cocktail">
         <img src="assets/cocktail-memories.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
-        <div class="cocktail__name">זיכרונות מיפן</div>
+        <h3 class="cocktail__name">זיכרונות מיפן</h3>
         <p class="cocktail__desc">ג׳ין וסאקה, דובדבן, יוזו ולימון. פירותי, חמצמץ ורענן</p>
       </li>
       <li class="cocktail">
         <img src="assets/cocktail-amaro-amore.jpg" alt="" loading="lazy" decoding="async" width="600" height="600">
-        <div class="cocktail__name" dir="ltr">AMARO AMORE</div>
+        <h3 class="cocktail__name" dir="ltr">AMARO AMORE</h3>
         <p class="cocktail__desc">ג׳ין, קמפרי והדרים. מריר, הדרי ומאוזן</p>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- ============ 05 · Today / Tonight ============ -->
-<section class="tonight section" id="vico-tonight" aria-labelledby="tonight-title" data-mode="day">
-  <div class="wrap">
-    <div class="tonight__card">
-      <div class="tonight__copy">
-        <div class="tonight__eyebrow" data-tonight="eyebrow">Today at VICO</div>
-        <h2 class="tonight__title" id="tonight-title" data-tonight="title">היום ב־VICO</h2>
-        <ul class="tonight__list" data-tonight="list">
-          <li><strong>פיצה מהטאבון</strong> — מרגריטה, חריפה, יוונית, בצלים ושחורה</li>
-          <li><strong>פסטה טרייה</strong> — מהקלאסית ועד ניוקי גורגונזולה</li>
-          <li><strong>Bambini</strong> — מנות ילדים עם ירקות ושתייה</li>
-        </ul>
-      </div>
-      <div class="tonight__side">
-        <a class="btn btn--primary btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">הזמינו עכשיו</a>
-        <a class="btn btn--secondary btn--md" href="/menu/">לתפריט</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ 06 · VICO'S Friends ============ -->
 <section class="signup section" id="vico-signup" aria-labelledby="signup-title">
   <div class="signup__wrap">
-    <div class="signup__eyebrow">VICO'S Friends</div>
+    <div class="signup__eyebrow" lang="en">VICO'S Friends</div>
     <h2 class="signup__title" id="signup-title">כבר חברים?</h2>
     <p class="signup__sub">הצטרפו למועדון החברים שלנו וקבלו הטבות, פינוקים ועדכונים על כל מה שקורה אצלנו.</p>
 
@@ -566,7 +540,7 @@ a:hover{color:var(--tomato)}
     <div class="visit__grid">
       <div class="visit__copy">
         <div class="section-head">
-          <div class="kicker">Visit VICO</div>
+          <div class="kicker" lang="en">Visit VICO</div>
           <h2 class="h2" id="visit-title">נתראה בשכונה.</h2>
         </div>
         <dl class="visit__facts">
@@ -578,13 +552,13 @@ a:hover{color:var(--tomato)}
         </dl>
         <div class="visit__cta">
           <a class="btn btn--primary btn--md" href="https://waze.com/ul?ll=32.1691253,34.8355557&navigate=yes" target="_blank" rel="noopener">ניווט ב־Waze</a>
-          <a class="btn btn--secondary btn--md" href="tel:+97298615866">הזמנת מקום</a>
+          <a class="btn btn--secondary btn--md" href="tel:+97298615866">הזמנת מקום<span class="sr-only"> בטלפון 09-861-5866</span></a>
           <a class="btn btn--secondary btn--md" href="https://tabitisrael.co.il/tabit-order?siteName=vico&step=enter" target="_blank" rel="noopener">Takeaway אונליין</a>
         </div>
       </div>
       <a class="visit__map" href="https://maps.app.goo.gl/E5HKvH8AC47fy9RW8" target="_blank" rel="noopener" aria-label="פתיחת המיקום במפות Google">
         <img src="assets/vico-minimap.png" alt="מפה מאוירת: VICO באבן עזרא 17, הרצליה, עם סימון חניונים סמוכים" loading="lazy" decoding="async" width="1434" height="947">
-        <div class="visit__map-cap"><span>אבן עזרא 17, הרצליה</span><span>פתיחה במפות ←</span></div>
+        <div class="visit__map-cap"><span>אבן עזרא 17, הרצליה</span><span>פתיחה במפות <span aria-hidden="true">←</span></span></div>
       </a>
     </div>
   </div>
@@ -597,50 +571,37 @@ a:hover{color:var(--tomato)}
       <div class="kicker">מהשכונה</div>
       <a class="insta__handle" href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener">@vico.restaurant</a>
     </div>
-    <div class="insta__grid">
-      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-gnocchi.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
-      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/gallery-img-1.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></a>
-      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-pan.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
-      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/gallery-img-6.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></a>
-      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-plating.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
-      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" aria-label="VICO באינסטגרם"><img src="assets/insta-pasta.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+    <div class="insta__grid" aria-hidden="true">
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" tabindex="-1"><img src="assets/insta-gnocchi.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" tabindex="-1"><img src="assets/gallery-img-1.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" tabindex="-1"><img src="assets/insta-pan.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" tabindex="-1"><img src="assets/gallery-img-6.jpg" alt="" loading="lazy" decoding="async" width="1100" height="1100"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" tabindex="-1"><img src="assets/insta-plating.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
+      <a href="https://www.instagram.com/vico.restaurant" target="_blank" rel="noopener" tabindex="-1"><img src="assets/insta-pasta.jpg" alt="" loading="lazy" decoding="async" width="900" height="900"></a>
     </div>
   </div>
 </section>
 
+</main>
+
 <!-- ============ Footer ============ -->
-<div id="site-footer"></div>
+<div id="site-footer"><a href="/accessibility/">הצהרת נגישות</a></div>
 <script src="assets/footer.js"></script>
 
 <script>
 (function(){
   "use strict";
 
-  // ---- Today / Tonight: swap copy after 17:00 local time ----
-  (function () {
-    var hour = new Date().getHours();
-    if (hour < 17 && hour >= 6) return;
-    var eyebrow = document.querySelector('[data-tonight="eyebrow"]');
-    var title = document.querySelector('[data-tonight="title"]');
-    var list = document.querySelector('[data-tonight="list"]');
-    if (!eyebrow || !title || !list) return;
-    document.getElementById("vico-tonight").setAttribute("data-mode", "night");
-    eyebrow.textContent = "Tonight at VICO";
-    title.textContent = "הערב ב־VICO";
-    list.innerHTML =
-      '<li><strong>קוקטיילים</strong> — FUOCO!, La Dolce Vita, זיכרונות מיפן ו־Amaro Amore</li>' +
-      '<li><strong>יין</strong> — מוני ואדיר בכוס או בבקבוק, ובירה קרה ליד</li>' +
-      '<li><strong>אנטיפסטי לחלוקה</strong> — הפוקאצ׳ה של VICO, זוקיני נענע וארנצ׳יני רוזה</li>';
-  })();
-
   // ---- seamless auto-scrolling gallery ----
   (function () {
     var carousel = document.querySelector(".carousel");
     var track = carousel && carousel.querySelector(".carousel__track");
+    var toggle = carousel && carousel.querySelector(".carousel__toggle");
     if (!track) return;
 
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       carousel.classList.add("is-scrollable");
+      carousel.tabIndex = 0; // keyboard-scrollable
       return;
     }
 
@@ -657,13 +618,13 @@ a:hover{color:var(--tomato)}
     }
 
     var period = build();
-    var x = 0, last = null, paused = false;
+    var x = 0, last = null, paused = false, stopped = false;
     var PX_PER_SEC = 42;
 
     function frame(ts) {
       if (last === null) last = ts;
       var dt = (ts - last) / 1000; last = ts;
-      if (!paused) {
+      if (!paused && !stopped) {
         x -= PX_PER_SEC * dt;
         if (x <= -period) x += period;
         track.style.transform = "translateX(" + x + "px)";
@@ -674,6 +635,18 @@ a:hover{color:var(--tomato)}
 
     carousel.addEventListener("mouseenter", function () { paused = true; });
     carousel.addEventListener("mouseleave", function () { paused = false; });
+
+    // WCAG 2.2.2: a visible, keyboard-operable way to stop the motion.
+    if (toggle) {
+      var label = toggle.querySelector("span");
+      var icon = toggle.querySelector("path");
+      toggle.hidden = false;
+      toggle.addEventListener("click", function () {
+        stopped = !stopped;
+        label.textContent = stopped ? "הפעלת הגלריה" : "עצירת הגלריה";
+        icon.setAttribute("d", stopped ? "M7 4l13 8-13 8z" : "M6 5h4v14H6zM14 5h4v14h-4z");
+      });
+    }
 
     var rt;
     window.addEventListener("resize", function () {

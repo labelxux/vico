@@ -19,5 +19,5 @@
 .footer__contact-row a:hover{color:var(--cream)}
 .footer__contact-row .footer__sep{color:var(--rose);font-size:10px;opacity:.8}
 .footer__legal{display:flex;gap:8px 18px;justify-content:center;flex-wrap:wrap}
-.footer__legal a{font:400 12px/1.5 var(--font-body);color:var(--sage-green);text-underline-offset:3px}
+.footer__legal a{font:400 12px/1.5 var(--font-body);color:var(--light-sage);text-underline-offset:3px}
 .footer__legal a:hover{color:var(--cream)}
